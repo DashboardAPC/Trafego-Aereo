@@ -8,8 +8,8 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - Estado: Esperando todos finalizarem a preparação do ambiente de trabalho
 
 # Integrantes
-- André Emanuel
-- Camile Oliveira
+- André Emanuel (Hunter104)
+- Camile Oliveira (Camile1234)
 - André Luís
 - Guilherme Camona
 - Bernardo Barros
@@ -18,4 +18,4 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - Paulo RMR ?
 - Lara ?
 - Duarte ?
-- I-ricardo ?
+- Ricardo (l-ricardo)
