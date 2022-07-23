@@ -11,7 +11,7 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - André Emanuel (Hunter104)
 - Camile Oliveira (Camile1234)
 - André Luís
-- Guilherme Camona
+- Guilherme (Guiizon)
 - Bernardo Barros
 - Ana Luísa
 - João ?
