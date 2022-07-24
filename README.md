@@ -17,5 +17,5 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - João ?
 - Paulo RMR ?
 - Lara ?
-- Duarte ?
+- Duarte ? (smmstakes)
 - Ricardo (l-ricardo)
