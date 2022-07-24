@@ -1,9 +1,4 @@
-import plotly.express as px
-import plotly.graph_objects as go
-import csv
+import pandas as pd
 
-with open('obitos-confirmados-covid-19.csv') as arquivo:
-    leitorcsv = csv.reader(arquivo)
-    cabecalho = []
-    cabecalho = next(leitorcsv)
-    print(cabecalho)
+df = pd.read_csv('obitos-confirmados-covid-19.csv')
+print(df['MUNICIPIO_RESIDENCIA'].value_counts())
