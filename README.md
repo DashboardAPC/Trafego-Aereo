@@ -14,7 +14,7 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - Guilherme (Guiizon)
 - Bernardo Barros
 - Ana Luísa
-- João ?
+- João (joaoseisei)
 - Paulo RMR ?
 - Lara ?
 - Duarte ? (smmstakes)
