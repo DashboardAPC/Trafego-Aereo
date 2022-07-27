@@ -16,6 +16,5 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - Ana Luísa
 - João (joaoseisei)
 - Paulo RMR ?
-- Lara ?
 - Duarte ? (smmstakes)
 - Ricardo (l-ricardo)
