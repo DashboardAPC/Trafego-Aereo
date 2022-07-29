@@ -10,7 +10,7 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 # Integrantes
 - André Emanuel (Hunter104)
 - Camile Oliveira (Camile1234)
-- André Luís
+- André Luís (Andre-galvao)
 - Guilherme (Guiizon)
 - Bernardo Barros
 - Ana Luísa
