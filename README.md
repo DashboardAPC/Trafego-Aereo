@@ -13,7 +13,7 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - André Luís (Andre-galvao)
 - Guilherme (Guiizon)
 - Bernardo Barros
-- Ana Luísa
+- Ana Luísa (animaniacs003)
 - João (joaoseisei)
 - Paulo RMR ?
 - Duarte ? (smmstakes)
