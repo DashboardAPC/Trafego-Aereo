@@ -19,7 +19,7 @@ Enquanto escrevia isso acabei de achar o script e esse tem o nome do personagem 
 Tambem tem o https://www.kaggle.com/datasets/ruchi798/among-us-dataset mas ele eh pior no quesito tamanho amostara ja que sao so 29 jogadores mas registrando 100 partidas de cada.
 
 ## Voos no aeroportos
-- **Voos nos aeroportos - Brasil** (https://gov.br/anac/pt-br/assuntos/dados-e-estatisticas/dados-estatisticos
+- **Voos nos aeroportos - Brasil:** https://gov.br/anac/pt-br/assuntos/dados-e-estatisticas/dados-estatisticos
 - **Ideias:** Fazer um mapa com os destinos mais desejados, colocar estatisticas sobre as bagagem paga e nao paga.
 - **OBS:** Tambem existe a posssibilidade de analizar os voos dometicos dos EUA.
 Os dados do BR no site da anac estao em arquivos separados por ano, entao teriamos um trabalho de arrumar o dataset.
