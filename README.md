@@ -2,10 +2,10 @@
 Esse é o nosso projeto final da disciplina de APC, onde criaremos um dashboard:  
 Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunto de dados sobre um certo tema
 
-# Estado - 23/07/2022:
+# Estado - 30/07/2022:
 - Tema: Não escolhido
-- Progresso: Não inciado
-- Estado: Esperando todos finalizarem a preparação do ambiente de trabalho
+- Progresso: Escolhendo de tema
+- Estado: Esperando todos finalizarem a preparação do ambiente de trabalho e selecionando um dataset
 
 # Integrantes
 - André Emanuel (Hunter104)
@@ -16,5 +16,5 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - Ana Luísa (animaniacs003)
 - João (joaoseisei)
 - Paulo RMR ?
-- Duarte ? (smmstakes)
+- Duarte (smmstakes)
 - Ricardo (l-ricardo)
