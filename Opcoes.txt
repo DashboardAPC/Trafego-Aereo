@@ -1,0 +1,34 @@
+Todas as falas de GoT: https://www.kaggle.com/datasets/gunnvant/game-of-thrones-srt
+Tamanho:757kB
+Ideias: Podemos fazer um dashboad que exibe as palavras mais faladas em cada temporada, 
+episiodio ou na serie inteira. Mostrar o numero do episodio, a minutagem e mais qualquer 
+dado que parecer interressante e tambem  adicionar uma opcao para o usuario entrar a palavra 
+ou frase que ele quer saber as estatisticas.
+OBS: Falas todas em ingles, o dataset esta formatado em dicionario python (.json), 
+provavelmente precisariamos ter filtros para palavras como 'of', 'the', 'a', etc... 
+Adicionalmente se fizermos um dash com esse tema temos muitos outros datasets 
+disponiveis como por exemplo a quantidade de aparicoes na serie e a avaliacao Imdb 
+dos episodios 
+Tambem tem esse (https://www.kaggle.com/datasets/rezaghari/game-of-thrones?select=characters_v4.csv) 
+com MUITA informacao tipo arvore genealogica, localizacao etc.
+Enquanto escrevia isso acabei de achar o script e esse tem o nome do personagem que disse a fala 
+junto em (https://www.kaggle.com/datasets/albenft/game-of-thrones-script-all-seasons)
+--------------------------------------------------
+Estatisticas da Gameplay de AmongUs: https://www.kaggle.com/datasets/mrisdal/among-us-gameplay
+Tamanho: 290kB
+Ideias: Podemos elencar a taxa de sucesso dos jogadores e mostrar o que faz um jogador bom de 
+impostor, um bom jogador de tripulante, tem informacoes sobre os votos entao podemos mostrar 
+quais jogadores votaram certo e quais votarram errado, etc...
+OBS: Acho que esse tema � o mais facil pra gente fazer ja que podemos pegar emprestado os 
+elementos do proprio jogo pra fazer um dashboard bunitinho e a gente nao teria muito trabalho 
+isso. O principal problema pra mim � que sao varios daddos mas a mostra � bem pequena se eu 
+nao to cego mais ou menos 300 jogadores so. Nao sei se isso seria um problema para o professor.
+Tambem tem o https://www.kaggle.com/datasets/ruchi798/among-us-dataset mas ele sao � pior na 
+amostragem da pesquisa ja que sao so 29 jogadores mas registrando 100 partidas de cada.
+--------------------------------------------------
+Voos nos aeroportos - Brasil (https://gov.br/anac/pt-br/assuntos/dados-e-estatisticas/dados-estatisticos 
+ou https://www.kaggle.com/datasets/ramirobentes/flights-in-brazil) o 1� link da pagina do governo 
+esta mais completo.
+Ideias: Fazer um mapa com os destinos mais desejados, colocar estatisticas sobre as bagagem paga e nao paga
+OBS::Tambem existe a posssibilidade de analizar os voos dometicos dos EUA. Os dados do BR no site da anac estao 
+em arquivos separados por ano, entao teriamos um trabalho de arrumar o dataset
