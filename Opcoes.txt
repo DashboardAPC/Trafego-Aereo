@@ -1,3 +1,7 @@
+Esse arquivo contem as opcoes de dataset/tema que foram discutidas no grupo.
+Sinta-se livre para modificar/ adicionar ideias/ ou novas opcoes.
+
+--------------------------------------------------
 Todas as falas de GoT: https://www.kaggle.com/datasets/gunnvant/game-of-thrones-srt
 Tamanho:757kB
 Ideias: Podemos fazer um dashboad que exibe as palavras mais faladas em cada temporada, 
