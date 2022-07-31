@@ -4,4 +4,5 @@ print('André Em.')
 print('Ricardo tem acesso e esta testando o commit direto no master')
 print("teste matheus pelo vscode")
 print("Matheus pode modificar o codigo")
+print('teste do discord')
 
