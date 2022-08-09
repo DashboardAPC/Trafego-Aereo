@@ -6,19 +6,18 @@ import os
 #Estrutura do to_dict
 # {cabecalho:{id:valor}}
 
-def filtrar(tabela, filtros):
+def filtrar(tabela, filtros) -> pd.DataFrame: 
     resultado={}
+    tabela = tabela.to_dict()
     for cabecalho in  tabela:
         if cabecalho in filtros:
             resultado[cabecalho]=tabela[cabecalho]
-    
-    return resultado
+    resultado_pd = pd.DataFrame(resultado)
+    return resultado_pd
 
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
-voos_dict = voos.to_dict()
-voos_por_estado_dict = filtrar(voos_dict,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
-voos_por_estado = pd.DataFrame(voos_por_estado_dict)
+voos_por_estado = filtrar(voos,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
 print(voos_por_estado)
 
 #print(filtrar_estados(voos_dict,['DECOLAGENS','AEROPORTO DE DESTINO (UF)']))
