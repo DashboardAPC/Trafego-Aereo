@@ -17,4 +17,4 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - João (joaoseisei)-221008150
 - Paulo RMR (paulomedrado)
 - Duarte (smmstakes)
-- Ricardo (l-ricardo)
+- Ricardo (l-ricardo)-221007653
