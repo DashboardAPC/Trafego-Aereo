@@ -10,9 +10,9 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 # Integrantes
 - André Emanuel (Hunter104)
 - Camile Oliveira (Camile1234)
-- André Luís (Andre-galvao)
-- Guilherme (Guiizon)
-- Bernardo Barros (BBBX9000)
+- André Luís (Andre-galvao) 221038776
+- Guilherme (Guiizon) 221008070
+- Bernardo Barros (BBBX9000) 221007887
 - Ana Luísa (animaniacs003)
 - João (joaoseisei)
 - Paulo RMR (paulomedrado)
