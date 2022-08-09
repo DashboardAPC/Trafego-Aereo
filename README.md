@@ -9,12 +9,12 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 
 # Integrantes
 - André Emanuel (Hunter104)
-- Camile Oliveira (Camile1234)
+- Camile Oliveira (Camile1234)-221007949
 - André Luís (Andre-galvao)
 - Guilherme (Guiizon)
 - Bernardo Barros (BBBX9000)
 - Ana Luísa (animaniacs003)
-- João (joaoseisei)
+- João (joaoseisei)-221008150
 - Paulo RMR (paulomedrado)
 - Duarte (smmstakes)
 - Ricardo (l-ricardo)
