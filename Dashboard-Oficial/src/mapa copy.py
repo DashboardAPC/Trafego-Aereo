@@ -17,7 +17,9 @@ def filtrar(tabela, filtros) -> pd.DataFrame:
 
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
+
 voos_por_estado = filtrar(voos,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
+print(voos)
 print(voos_por_estado)
 
 #print(filtrar_estados(voos_dict,['DECOLAGENS','AEROPORTO DE DESTINO (UF)']))
