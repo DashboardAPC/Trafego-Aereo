@@ -2,6 +2,9 @@
 Esse é o nosso projeto final da disciplina de APC, onde criaremos um dashboard:  
 Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunto de dados sobre um certo tema
 
+# Link Colab
+https://colab.research.google.com/drive/1FO2L4gdxXRkwE-IJ-qrFXnfIl78jaxJo?usp=sharin
+
 # Estado - 04/08/2022:
 - Tema: Trafego aéreo no Brasil
 - Progresso: Tema decidido, dataset escolhido e duplas divididas
