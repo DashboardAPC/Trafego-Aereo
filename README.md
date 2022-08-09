@@ -15,6 +15,6 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 - Bernardo Barros (BBBX9000)
 - Ana Luísa (animaniacs003)
 - João (joaoseisei)-221008150
-- Paulo RMR (paulomedrado)
+- Paulo Renato Medrado Roque (paulomedrado) - 221035068
 - Duarte (smmstakes)
 - Ricardo (l-ricardo)-221007653
