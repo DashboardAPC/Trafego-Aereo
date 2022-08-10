@@ -13,14 +13,19 @@ def filtrar(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame:
     """
     tabela = tabela.to_dict()
     colunas_a_remover=[]
+
+    #Checar quais colunas não estão no filtro
     for coluna in tabela:
-        coluna_lida = tabela[coluna]
         if not coluna in filtros:
             colunas_a_remover.append(coluna)
-
+        
+    #Remover todas as colunas com o nome na lista
     for coluna in colunas_a_remover:
         tabela.pop(coluna)
+    
+    #Transformar tabela em um dataframe novamente
     return pd.DataFrame(tabela)
+
 
 def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
     """Retira todas as linhas que contenham qualquer valor NaN de uma tabela
