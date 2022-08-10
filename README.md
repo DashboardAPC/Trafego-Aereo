@@ -18,6 +18,6 @@ https://drive.google.com/drive/folders/1uz9_jNG7j6kJX22uqrpEaa55G0lcCKhO?usp=sha
 - Bernardo Barros (BBBX9000) 221007887
 - Ana Luísa (animaniacs003)
 - João (joaoseisei)-221008150
-- Paulo RMR (paulomedrado)
+- Paulo Renato Medrado Roque (paulomedrado) - 221035068
 - Duarte (smmstakes)
 - Ricardo (l-ricardo)-221007653
