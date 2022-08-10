@@ -13,9 +13,9 @@ https://drive.google.com/drive/folders/1uz9_jNG7j6kJX22uqrpEaa55G0lcCKhO?usp=sha
 # Integrantes
 - André Emanuel (Hunter104)
 - Camile Oliveira (Camile1234)-221007949
-- André Luís (Andre-galvao)
-- Guilherme (Guiizon)
-- Bernardo Barros (BBBX9000)
+- André Luís (Andre-galvao) 221038776
+- Guilherme (Guiizon) 221008070
+- Bernardo Barros (BBBX9000) 221007887
 - Ana Luísa (animaniacs003)
 - João (joaoseisei)-221008150
 - Paulo RMR (paulomedrado)
