@@ -1,6 +1,11 @@
 import pandas as pd
 import math
 
+def soma(tabela: pd.Dataframe, coluna_soma: str) -> pd.DataFrame:
+    tabela = tabela.to_dict
+    for cabecalho in tabela:
+        coluna = 
+
 def filtrar(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame: 
     """Função feita para filtrar colunas em Dataframes
 
