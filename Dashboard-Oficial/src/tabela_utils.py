@@ -1,7 +1,14 @@
 import pandas as pd
 import math
 
-def max(tabela: pd.DataFrame)
+def maximo(tabela: pd.DataFrame, cabecalho_max: str) -> float:
+    tabela=tabela.to_dict()
+    maximo = 0
+    for index in tabela[cabecalho_max]:
+        valor_linha = tabela[cabecalho_max][index]
+        if valor_linha>maximo:
+            maximo=valor_linha
+    return maximo
 
 def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho_a_somar: str) -> pd.DataFrame:
     tabela = tabela.to_dict()
