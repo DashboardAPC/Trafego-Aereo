@@ -1,27 +1,16 @@
+
 import pandas as pd
 import plotly.express as  px
 import json
-import os
+import tabela_utils
 
-#Estrutura do to_dict
-# {cabecalho:{id:valor}}
-
-def filtrar(tabela, filtros):
-    resultado={}
-    for cabecalho in  tabela:
-        if cabecalho in filtros:
-            resultado[cabecalho]=tabela[cabecalho]
-    
-    return resultado
 
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
-voos_dict = voos.to_dict()
-voos_por_estado_dict = filtrar(voos_dict,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
-voos_por_estado = pd.DataFrame(voos_por_estado_dict)
-print(voos_por_estado)
 
-#print(filtrar_estados(voos_dict,['DECOLAGENS','AEROPORTO DE DESTINO (UF)']))
+voos_por_estado = tabela_utils.filtrar(voos,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
+vpe_nao_nulos = tabela_utils.retirar_nulos(voos_por_estado)
+
 #mapa = px.choropleth(dados_pd, 
  #                   geojson=estados_brasileiros, 
  #                   locations='Estados', 
