@@ -1,10 +1,30 @@
 import pandas as pd
 import math
 
-def soma(tabela: pd.Dataframe, coluna_soma: str) -> pd.DataFrame:
-    tabela = tabela.to_dict
-    for cabecalho in tabela:
-        coluna = 
+def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho_a_somar: str) -> pd.DataFrame:
+    tabela = tabela.to_dict()
+    tabela_resultado={cabecalho_categoria:{},cabecalho_a_somar:{}}
+    coluna_a_somar = tabela[cabecalho_a_somar]
+    coluna_categoria = tabela[cabecalho_categoria]
+    soma={}
+    for index in coluna_categoria:
+        valor_linha = coluna_categoria[index]
+        if valor_linha in soma:
+            soma[valor_linha]+=coluna_a_somar[index]
+        else:
+            soma[valor_linha]=coluna_a_somar[index]
+
+    linhas=len(soma)
+    i=1
+    for categoria in soma:
+        tabela_resultado[cabecalho_categoria][i] = categoria
+        tabela_resultado[cabecalho_a_somar][i] = soma[categoria]
+        i+=1
+
+    return pd.DataFrame(tabela_resultado)
+        
+            
+
 
 def filtrar(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame: 
     """Função feita para filtrar colunas em Dataframes

@@ -10,6 +10,7 @@ voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', enco
 
 voos_por_estado = tabela_utils.filtrar(voos,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
 vpe_nao_nulos = tabela_utils.retirar_nulos(voos_por_estado)
+print(tabela_utils.soma_por_categoria(vpe_nao_nulos, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'))
 
 #mapa = px.choropleth(dados_pd, 
  #                   geojson=estados_brasileiros, 
