@@ -1,6 +1,8 @@
 import pandas as pd
 import math
 
+def max(tabela: pd.DataFrame)
+
 def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho_a_somar: str) -> pd.DataFrame:
     tabela = tabela.to_dict()
     tabela_resultado={cabecalho_categoria:{},cabecalho_a_somar:{}}

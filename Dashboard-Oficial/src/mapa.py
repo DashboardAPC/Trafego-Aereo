@@ -10,13 +10,13 @@ voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', enco
 
 voos_por_estado = tabela_utils.filtrar(voos,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
 vpe_nao_nulos = tabela_utils.retirar_nulos(voos_por_estado)
-print(tabela_utils.soma_por_categoria(vpe_nao_nulos, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'))
+decolagens_por_estado = tabela_utils.soma_por_categoria(vpe_nao_nulos, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
 
-#mapa = px.choropleth(dados_pd, 
- #                   geojson=estados_brasileiros, 
- #                   locations='Estados', 
- #                   color='amor', 
- #                   range_color=(0,1), 
- #                   hover_data =['Estados'], 
- #                   scope='south america')
-#mapa.show()
+mapa = px.choropleth(decolagens_por_estado, 
+                    geojson=estados_brasileiros, 
+                    locations='AEROPORTO DE DESTINO (UF)', 
+                    color='DECOLAGENS', 
+                    range_color=(0,200000), 
+                    hover_data =['AEROPORTO DE DESTINO (UF)'], 
+                    scope='south america')
+mapa.show()
