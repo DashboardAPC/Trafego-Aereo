@@ -31,10 +31,12 @@ def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho
         pd.DataFrame: Dataframe com os dados calculados
     """
     tabela = tabela.to_dict()
+
     tabela_resultado={cabecalho_categoria:{},cabecalho_a_somar:{}}
     coluna_a_somar = tabela[cabecalho_a_somar]
     coluna_categoria = tabela[cabecalho_categoria]
     soma={}
+    
     for index in coluna_categoria:
         valor_linha = coluna_categoria[index]
         if valor_linha in soma:
