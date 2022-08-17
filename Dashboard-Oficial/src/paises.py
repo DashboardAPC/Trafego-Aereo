@@ -12,7 +12,6 @@ print('Filtrando anos...')
 dados_anos = tabela_utils.filtrar_linha(dados_sem_nulos, 'ANO', ['2013', '2014'])
 print('Filtrando mês...')
 mes_6 = tabela_utils.filtrar_linha(dados_anos, 'MÊS', ['6'])
-
-#filtrando a tabela eliminando todos os dados que não precisaremos
-
-print(mes_6)
+print('Filtrando países...')
+dados_paises = tabela_utils.filtrar_linha(mes_6, 'AEROPORTO DE ORIGEM (PAÍS)', ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'REINO UNIDO', 'EMIRADOS ÁRABES UNIDOS'] )
+print(dados_paises)
