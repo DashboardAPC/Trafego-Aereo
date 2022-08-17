@@ -62,13 +62,6 @@ def fatiar(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.D
             tabela[corte].pop(linha)
     return pd.DataFrame(tabela)
 
-#FAZ TUDO  FAZ TUDO
-def faztudo(tabela : pd.DataFrame):
-    tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
-    tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])
-    tabela = (tabela['DECOLAGENS'].to_list())
-    return tabela
-
 dados = pd.read_csv('https://raw.githubusercontent.com/DashboardAPC/DashboardAPC/master/Dashboard-Oficial/data/ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
 filtrado = filtrar(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
@@ -93,9 +86,10 @@ ano2015ff = (ano2015f['DECOLAGENS'].to_list())
 anototal = ano2013ff + ano2014ff + ano2015ff
 
 grafico = pd.DataFrame({
-    "Mês": meses,
+    "Mês": ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',"Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',"Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
     "Decolagens": anototal,
-    "Ano": anos
+    "Ano": ['2013','2013','2013','2013','2013','2013','2013','2013','2013','2013','2013','2013','2014','2014','2014','2014','2014','2014','2014','2014','2014','2014','2014','2014','2015','2015','2015','2015','2015','2015','2015','2015','2015','2015','2015','2015',]
 })
-fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', range_y=[80000,100000])
+
+fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", range_y=[80000,100000])
 fig.show()

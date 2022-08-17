@@ -1,6 +1,19 @@
 import pandas as pd
 import math
 
+#FATIA FATIA FATIA FATIA
+def fatiar(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
+    tabela = tabela.to_dict()
+    fatiador = []
+    linha = tabela[cabeçalho_selecionado]
+    for id in linha:
+        if linha[id] != alvo:
+            fatiador.append(id)
+    for linha in fatiador:
+        for corte in tabela:
+            tabela[corte].pop(linha)
+    return pd.DataFrame(tabela)
+
 def maximo(tabela: pd.DataFrame, cabecalho_max: str) -> float:
     """Calcula o valor máximo de uma coluna
 
