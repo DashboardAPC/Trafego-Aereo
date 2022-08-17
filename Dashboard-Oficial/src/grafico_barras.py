@@ -32,6 +32,5 @@ grafico = pd.DataFrame({
     "Decolagens": anototal,
     "Ano": anos
 })
-
 fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', range_y=[80000,100000])
 fig.show()
