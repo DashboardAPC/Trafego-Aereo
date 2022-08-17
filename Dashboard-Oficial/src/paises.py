@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 import tabela_utils
+import plotly.express as px
 
 
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep= ';', encoding= 'latin')
