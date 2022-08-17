@@ -103,3 +103,4 @@ def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
             tabela[cabecalho].pop(linha)
 
     return pd.DataFrame(tabela)
+
