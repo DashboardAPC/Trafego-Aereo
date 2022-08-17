@@ -33,5 +33,5 @@ grafico = pd.DataFrame({
     "Ano": ['2013','2013','2013','2013','2013','2013','2013','2013','2013','2013','2013','2013','2014','2014','2014','2014','2014','2014','2014','2014','2014','2014','2014','2014','2015','2015','2015','2015','2015','2015','2015','2015','2015','2015','2015','2015',]
 })
 
-fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group")
+fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', range_y=[80000,100000])
 fig.show()
