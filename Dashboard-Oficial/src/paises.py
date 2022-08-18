@@ -1,9 +1,12 @@
 import math
-from re import A
 import pandas as pd
 import tabela_utils
 import plotly.express as px
 
+def faztudo(tabela : pd.DataFrame):
+    tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])
+    tabela = (tabela['DECOLAGENS'].to_list())
+    return tabela
 
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep= ';', encoding= 'latin')
 print('Filtrando colunas...')
@@ -26,24 +29,17 @@ dados_2014 = tabela_utils.filtrar_linha(dados_paises, 'ANO', ['2014'])
 print('Somando...')
 soma_2014 = tabela_utils.soma_por_categoria(dados_2014, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
 
-def faztudo(tabela : pd.DataFrame):
-    tabela = tabela_utils.soma_por_categoria(dados_2014, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
-    tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])
-    tabela = (tabela['DECOLAGENS'].to_list())
-    return tabela
 ano2013 = faztudo(soma_2013)
 ano2014 = faztudo(soma_2014)
-print(ano2013)
-print(ano2014)
-aeroporto = ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'REINO UNIDO', 'EMIRADOS ÁRABES UNIDOS']*2
+
+aeroporto = ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'REINO UNIDO', 'EMIRADOS ÁRABES UNIDOS','ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'MÉXICO', 'REINO UNIDO', 'EMIRADOS ÁRABES UNIDOS',]
 decolagens = ano2013 + ano2014
-anos = ['2013',]*5 +['2014',]*5 
+anos = ('2013',)*5 + ('2014',)*5
 
 grafico = pd.DataFrame({
-    "Mês": aeroporto,
+    "Países": aeroporto,
     "Decolagens": decolagens,
     "Ano": anos
 })
-
-fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark')
+fig = px.bar(grafico, x="Países", y="Decolagens", color="Ano", pattern_shape_sequence=[".", "x", "+"], color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', title='Voos por pais durante a copa')
 fig.show()
