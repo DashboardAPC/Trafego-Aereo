@@ -11,14 +11,16 @@ def faztudo(tabela : pd.DataFrame):
     return tabela
 
 dados = pd.read_csv('https://raw.githubusercontent.com/DashboardAPC/DashboardAPC/master/Dashboard-Oficial/data/ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
+print('Filtrando os dados...')
 filtrado = tabela_utils.filtrar(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
+print('Retirando os nulos...')
 semnulo = tabela_utils.retirar_nulos(filtrado)
-
 ano1 = tabela_utils.fatiar(semnulo, 'ANO', 2013)
 ano2 = tabela_utils.fatiar(semnulo, 'ANO', 2014)
 ano3 = tabela_utils.fatiar(semnulo, 'ANO', 2015)
 
+print('Fazendo mágica...')
 ano2013 = faztudo(ano1)
 ano2014 = faztudo(ano2)
 ano2015 = faztudo(ano3)
@@ -32,5 +34,5 @@ grafico = pd.DataFrame({
     "Decolagens": anototal,
     "Ano": anos
 })
-fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', range_y=[80000,100000])
+fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', range_y=[80000,100000], title= 'Total de decolagens por mês')
 fig.show()
