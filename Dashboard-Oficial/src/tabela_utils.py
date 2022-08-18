@@ -1,6 +1,22 @@
 import pandas as pd
 import math
 
+def filtrar_linha(tabela: pd.DataFrame, coluna: str, filtro:list):
+    tabela = tabela.to_dict()
+    linhas = tabela[coluna]
+    linhas_a_apagar=[]
+
+    for index in linhas:
+        valor = linhas[index]
+        if not str(valor) in filtro:
+            linhas_a_apagar.append(index)
+    
+    for linha in linhas_a_apagar:
+        for cabecalho in tabela:
+            tabela[cabecalho].pop(linha)
+    
+    return pd.DataFrame(tabela)
+
 def maximo(tabela: pd.DataFrame, cabecalho_max: str) -> float:
     """Calcula o valor máximo de uma coluna
 
