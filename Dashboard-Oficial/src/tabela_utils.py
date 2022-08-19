@@ -1,4 +1,5 @@
 from cmath import isnan
+from tkinter.font import families
 import pandas as pd
 import math
 from collections  import defaultdict
@@ -34,41 +35,28 @@ def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho
     Returns:
         pd.DataFrame: Dataframe com os dados calculados
     """
-    # tabela = tabela.to_dict()
+    tabela = tabela.to_dict()
 
-    # tabela_resultado={cabecalho_categoria:{},cabecalho_a_somar:{}}
-    # coluna_a_somar = tabela[cabecalho_a_somar]
-    # coluna_categoria = tabela[cabecalho_categoria]
-    # soma={}
+    tabela_resultado={cabecalho_categoria:{},cabecalho_a_somar:{}}
+    coluna_a_somar = tabela[cabecalho_a_somar]
+    coluna_categoria = tabela[cabecalho_categoria]
+    soma={}
     
-    # for index in coluna_categoria:
-    #     valor_linha = coluna_categoria[index]
-    #     if valor_linha in soma:
-    #         soma[valor_linha]+=coluna_a_somar[index]
-    #     else:
-    #         soma[valor_linha]=coluna_a_somar[index]
+    for index in coluna_categoria:
+        valor_linha = coluna_categoria[index]
+        if valor_linha in soma:
+            soma[valor_linha]+=coluna_a_somar[index]
+        else:
+            soma[valor_linha]=coluna_a_somar[index]
 
-    # linhas=len(soma)
-    # i=1
-    # for categoria in soma:
-    #     tabela_resultado[cabecalho_categoria][i] = categoria
-    #     tabela_resultado[cabecalho_a_somar][i] = soma[categoria]
-    #     i+=1
+    linhas=len(soma)
+    i=1
+    for categoria in soma:
+        tabela_resultado[cabecalho_categoria][i] = categoria
+        tabela_resultado[cabecalho_a_somar][i] = soma[categoria]
+        i+=1
 
-    linhas = tabela.values.tolist()
-    cabecalhos = tabela.columns.to_list()
-    cat_index = cabecalhos.index(cabecalho_categoria)
-    valor_index = cabecalhos.index(cabecalho_a_somar)
-
-    resultado=defaultdict(float)
-    for linha in linhas:
-        resultado[linha[cat_index]]+=linha[valor_index]
-
-    resultado_lista=[]
-    for cat in resultado:
-        resultado_lista.append([cat,resultado[cat]])
-
-    return pd.DataFrame(resultado_lista, columns=[cabecalhos[cat_index],cabecalhos[valor_index]])
+    return pd.DataFrame(tabela_resultado)
         
             
 
