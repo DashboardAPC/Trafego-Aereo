@@ -20,7 +20,7 @@ nome (nickname do github) - matrícula
 - Ana Luísa (animaniacs003)
 - João (joaoseisei)-221008150
 - Paulo Renato Medrado Roque (paulomedrado) - 221035068
-- Duarte (smmstakes)
+- Duarte (smmstakes) - 211062277
 - Ricardo (l-ricardo)-221007653  
 
 ## Arquivos importantes
