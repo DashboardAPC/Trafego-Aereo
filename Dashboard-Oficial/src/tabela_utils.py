@@ -68,7 +68,6 @@ def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho
     for cat in resultado:
         resultado_lista.append([cat,resultado[cat]])
 
-
     return pd.DataFrame(resultado_lista, columns=[cabecalhos[cat_index],cabecalhos[valor_index]])
         
             

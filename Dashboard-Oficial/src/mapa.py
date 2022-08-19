@@ -20,7 +20,6 @@ voos = tabela_utils.retirar_nulos(voos)
 
 print('Somando por categoria...')
 voos = tabela_utils.soma_por_categoria(voos, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
-print(voos)
 
 print('Calculando valor máximo...')
 maximo_decolagens = tabela_utils.maximo(voos, 'DECOLAGENS')
