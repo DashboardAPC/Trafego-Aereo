@@ -41,12 +41,12 @@ nome (nickname do github) - matrícula
 
 ## Quantidade de vôos
 
-[Esse mapa](Dashboard-Oficial\src\grafico_barras.py) demonstra claramente certas tendências quanto a quantidade de voôs no brasil, principalmente os picos em 2014, devido à copa do mundo.
+[Esse mapa](Dashboard-Oficial/src/grafico_barras.py) demonstra claramente certas tendências quanto a quantidade de voôs no brasil, principalmente os picos em 2014, devido à copa do mundo.
 
 ## Preferência de linhas aéreas
 
-[Esse mapa](Dashboard-Oficial\src\setores.py) evidencia as preferências de linhas aéreas em todos os vôos relacionados ao brasil, mostrado claramente a tendência de uso das linhas nacionais.
+[Esse mapa](Dashboard-Oficial/src/setores.py) evidencia as preferências de linhas aéreas em todos os vôos relacionados ao brasil, mostrado claramente a tendência de uso das linhas nacionais.
 
 ## Países
 
-[Esse mapa](Dashboard-Oficial\src\paises.py) nos comunica sobre quais países de um grupo seleto tem mais vôos com destino ao Brasil.
+[Esse mapa](Dashboard-Oficial/src/paises.py) nos comunica sobre quais países de um grupo seleto tem mais vôos com destino ao Brasil.
