@@ -3,10 +3,6 @@
 Esse é o nosso projeto final da disciplina de APC, onde criaremos um dashboard:  
 Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunto de dados sobre um certo tema
 
-## Link Colab
-
-<https://drive.google.com/drive/folders/1uz9_jNG7j6kJX22uqrpEaa55G0lcCKhO?usp=sharing>
-
 ## Dados
 
 - Tema: Trafego aéreo no Brasil
