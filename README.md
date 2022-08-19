@@ -29,9 +29,9 @@ nome (nickname do github) - matrícula
 
 ## Arquivos importantes
 
-- [Vôos de 2013 até 2015](Dashboard-Oficial\data\ANAC20XX-13-14-15.csv), dados coletados do site da ANAC e processados conforme nossas necessidades
-- [Polígonos dos estados do brasil em forma de GeoJson](Dashboard-Oficial\data\brasil_estados.json), utilizado para a formação gráfica do mapa
-- [Utilidades de tabela](Dashboard-Oficial\src\tabela_utils.py), arquivo com funções que escrevemos que são comums para vários integrantes, evitando a repetição de código
+- [Vôos de 2013 até 2015](Dashboard-Oficial/data/ANAC20XX-13-14-15.csv), dados coletados do site da ANAC e processados conforme nossas necessidades
+- [Polígonos dos estados do brasil em forma de GeoJson](Dashboard-Oficial/data/brasil_estados.json), utilizado para a formação gráfica do mapa
+- [Utilidades de tabela](Dashboard-Oficial/src/tabela_utils.py), arquivo com funções que escrevemos que são comums para vários integrantes, evitando a repetição de código
 
 # Gráficos
 
