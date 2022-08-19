@@ -20,6 +20,19 @@ def filtrar_linha(tabela: pd.DataFrame, coluna: str, filtro:list):
     
     return pd.DataFrame(tabela)
 
+#FATIA FATIA FATIA FATIA
+def fatiar(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
+    tabela = tabela.to_dict()
+    fatiador = []
+    linha = tabela[cabeçalho_selecionado]
+    for id in linha:
+        if linha[id] != alvo:
+            fatiador.append(id)
+    for linha in fatiador:
+        for corte in tabela:
+            tabela[corte].pop(linha)
+    return pd.DataFrame(tabela)
+
 def maximo(tabela: pd.DataFrame, cabecalho_max: str) -> float:
     """Calcula o valor máximo de uma coluna
 
@@ -119,6 +132,7 @@ def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: Uma tabela com os valores nulos retirados
     """
 
+
     linhas = tabela.values.tolist()
     cabecalhos = tabela.columns.to_list()
     linhas_resultado=[]
@@ -135,3 +149,4 @@ def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
             linhas_resultado.append(linha)
     
     return pd.DataFrame(linhas_resultado, columns=cabecalhos)
+
