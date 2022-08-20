@@ -32,9 +32,10 @@ print('Removendo valores invalidos...') # Feedback
 tabela_de_pesos = tabela_utils.retirar_nulos(tabela_de_pesos)
 
 print('Separando anos...') # Feedback
-peso_2013 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2014','2015'])
-peso_2014 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2013','2015'])
-peso_2015 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2013','2014'])
+peso_2013 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2013.0'])
+peso_2014 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2014.0'])
+peso_2015 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2015.0'])
+# TODO Ver por que o retirar nulos esta transformando os numeros de ano em float
 
 print('Filtrando fora coluna ano...') # Feedback
 peso_2013_pre_soma = tabela_utils.filtrar(peso_2013, ['CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
@@ -50,8 +51,6 @@ peso_2015_somado = soma_generica_colunas(peso_2015_pre_soma)
 
 # -------------------------------- Futuro dropdown do Dashboard (Substituir) --------------------------------
 print('De que ano gostaria de ver o grafico pizza? Digite 2013, 2014 ou 2015')
-# TODO todo esse loop poderia ser substituido por uma funcao mais flexivel que suporte um caso de nao ser so 3 anos talvez adaptando o dataset peso_XXXX pra manter a informacao do ano.
-
 while True:
     ano_desejado = input()
     if ano_desejado == '2013':
@@ -80,19 +79,21 @@ tabela_entrada_pizza = tabela_entrada_pizza.transpose()
 pizza = px.pie(tabela_entrada_pizza,
         values = 1,
         names = 0,
-        width = 960,
-        height = 540,
         hole = .4,
-        template = 'simple_white',
-        title = 'Percentual de peso transportado pelos avioes no Brasil de de 2013 à 2015'
+        template = 'plotly_dark',
+        color_discrete_sequence = px.colors.qualitative.Prism,
+        title = 'Percentual de peso transportado pelos aviões no Brasil em ' + ano_desejado
         )
 
 
 # ---------------------------------- Umas frescura pra uma pizza bunitinha ----------------------------------
-pizza.update_traces(textinfo = "label+percent", 
-        insidetextfont=dict(color="white")
+pizza.update_traces(
+        text =  ['CARGA PAGA','CARGA GRÁTIS','CORREIO','BAGAGEM'],
+        textinfo = "text + percent", 
+        textposition = 'outside',
+        hovertemplate = '%{value} Kg',
+        marker = dict(line = dict(color = 'rgb(17, 17, 17)', width = 3)),
         )
-
 
 # ---------------------------------------- Mostrando gráfico de pizza ----------------------------------------
 pizza.show()
