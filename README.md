@@ -10,18 +10,18 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 
 ## Integrantes
 
-nome (nickname do github) - matrícula
+Nome (nickname do github) - Matrícula
 
 - André Emanuel (Hunter104) - 221007813
-- Camile Oliveira (Camile1234)-221007949
-- André Luís (Andre-galvao) 221038776
-- Guilherme (Guiizon) 221008070
-- Bernardo Barros (BBBX9000) 221007887
-- Ana Luísa (animaniacs003)
-- João (joaoseisei)-221008150
+- Camile Oliveira (Camile1234) - 221007949
+- André Luís (Andre-galvao) - 221038776
+- Guilherme (Guiizon) - 221008070
+- Bernardo Barros (BBBX9000) - 221007887
+- Ana Luísa (animaniacs003) - ?????????
+- João (joaoseisei) - 221008150
 - Paulo Renato Medrado Roque (paulomedrado) - 221035068
 - Duarte (smmstakes) - 211062277
-- Ricardo (l-ricardo)-221007653  
+- Ricardo (l-ricardo) - 221007653  
 
 ## Arquivos importantes
 
@@ -46,3 +46,7 @@ nome (nickname do github) - matrícula
 ## Países
 
 [Esse mapa](Dashboard-Oficial/src/paises.py) nos comunica sobre quais países de um grupo seleto tem mais vôos com destino ao Brasil.
+
+## Tipos de carga
+
+[Esse mapa](Dashboard-Oficial/src/pizza_malas.py) desmostra a relação de proporcinalidade entre o peso de carga/bagagem/correio transportados pelos aviões em cada ano.
