@@ -1,22 +1,7 @@
-# ---------------------------- Grafico de Pizza sobre peso carregado pelos avioes ----------------------------
+# ----------------------------------------- Importando bibliotecas -----------------------------------------
 import pandas as pd
 import plotly.express as px
 import tabela_utils
-
-# ---------------------------------------------- Funcoes uteis ----------------------------------------------
-def soma_generica_colunas(tabela: pd.DataFrame) -> pd.DataFrame:
-    tabela_cabecalho = tabela.columns.tolist() # Transformando o cabeçalho do dataframe pra lista
-    tabela_valores = tabela.values.tolist() # Transformando os valores do dataframe pra lista
-    
-    lista_somas = [] # Lista onde serão armazenadas as respostas da soma de cada coluna
-    for coluna in range(len(tabela_cabecalho)): # Fazendo uma repetição pra cada coluna do cabeçalho
-        soma_coluna = 0
-        for linha in range(len(tabela_valores)):
-            soma_coluna += tabela_valores[linha][coluna]    
-        lista_somas.append(soma_coluna)
-
-    resultado = [tabela_cabecalho, lista_somas]
-    return pd.DataFrame(resultado)
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
@@ -43,9 +28,9 @@ peso_2014_pre_soma = tabela_utils.filtrar(peso_2014, ['CARGA PAGA (KG)','CARGA G
 peso_2015_pre_soma = tabela_utils.filtrar(peso_2015, ['CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
 
 print('Somando tudo...') # Feedback
-peso_2013_somado = soma_generica_colunas(peso_2013_pre_soma)
-peso_2014_somado = soma_generica_colunas(peso_2014_pre_soma)
-peso_2015_somado = soma_generica_colunas(peso_2015_pre_soma)
+peso_2013_somado = tabela_utils.soma_generica_colunas(peso_2013_pre_soma)
+peso_2014_somado = tabela_utils.soma_generica_colunas(peso_2014_pre_soma)
+peso_2015_somado = tabela_utils.soma_generica_colunas(peso_2015_pre_soma)
 
 # TODO transformar todas as funcoes a cima em uma unica que chama as outras
 

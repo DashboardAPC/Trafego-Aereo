@@ -1,6 +1,46 @@
 import pandas as pd
 import math
 
+def soma_generica_colunas(tabela: pd.DataFrame) -> pd.DataFrame:
+    tabela_cabecalho = tabela.columns.tolist() # Transformando o cabeçalho do dataframe pra lista
+    tabela_valores = tabela.values.tolist() # Transformando os valores do dataframe pra lista
+    
+    lista_somas = [] # Lista onde serão armazenadas as respostas da soma de cada coluna
+    for coluna in range(len(tabela_cabecalho)): # Fazendo uma repetição pra cada coluna do cabeçalho
+        soma_coluna = 0
+        for linha in range(len(tabela_valores)):
+            soma_coluna += tabela_valores[linha][coluna]    
+        lista_somas.append(soma_coluna)
+
+    resultado = [tabela_cabecalho, lista_somas]
+    return pd.DataFrame(resultado)
+
+def outros(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
+    tabela = tabela.to_dict()
+    fatiador = []
+    linha = tabela[cabeçalho_selecionado]
+    for id in linha:
+        if linha[id] < alvo:
+            fatiador.append(id)
+    for linha in fatiador:
+        for corte in tabela:
+            tabela[corte].pop(linha)
+    return pd.DataFrame(tabela)
+
+def outros2(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
+    tabela = tabela.to_dict()
+    fatiador = []
+    linha = tabela[cabeçalho_selecionado]
+    for id in linha:
+        if linha[id] > alvo:
+            fatiador.append(id)
+    for linha in fatiador:
+        for corte in tabela:
+            tabela[corte].pop(linha)
+    return pd.DataFrame(tabela)
+
+# TODO funcoes outros e outros2 podem ser misturadas com a adicao de um parametro opcional
+
 def filtrar_linha(tabela: pd.DataFrame, coluna: str, filtro:list):
     tabela = tabela.to_dict()
     linhas = tabela[coluna]
