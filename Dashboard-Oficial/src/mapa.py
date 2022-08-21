@@ -22,7 +22,7 @@ dados = tabela_utils.filtrar(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
 print('Retirando valores nulos...') # Feedback
 dados = tabela_utils.retirar_nulos(dados)
 
-print('Somando por categoria...')
+print('Somando por categoria...') # Feedback
 dados = tabela_utils.soma_por_categoria(dados, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
 
 print('Calculando valor máximo...') # Feedback
@@ -36,7 +36,7 @@ mapa = px.choropleth(dados,
                     geojson = estados_brasileiros, 
                     locations = 'AEROPORTO DE DESTINO (UF)', 
                     color = 'DECOLAGENS', 
-                    range_color = (0,maximo_decolagens/4), 
+                    range_color = (0,maximo_decolagens/4), # Resolve problema de SP ser o unico estado colorido
                     hover_data = ['AEROPORTO DE DESTINO (UF)'], 
                     scope = 'south america',
                     color_continuous_scale = 'purp'
