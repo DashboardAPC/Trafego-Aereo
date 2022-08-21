@@ -7,15 +7,15 @@ Um painel com vários gráficos e medidas com o intuito de demonstrar um conjunt
 ## Integrantes
 | Matrícula | Nome | Nick no GitHub |
 |-----------|------|------------------|
-| 221007813 | André Emanuel | Hunter104 |
-| 221038776 | André Luís | Andre-galvao |
-| ????????? | Ana Luísa | animaniacs003 |
-| 221007887 | Bernardo Barros | BBBX9000 |
-| 221007949 | Camile Oliveira | Camile1234 |
-| 211062277 | Duarte | smmstakes |
-| 221008070 | Guilherme | Guiizon |
-| 221008150 | João | joaoseisei |
+| 221007626 | Ana Luisa Santana Dantas | animaniacs003 |
+| 221007813 | Andre Emanuel Bispo da Silva | Hunter104 |
+| 221038776 | Andre Luis Bispo Galvao de Souza | Andre-galvao |
+| 221007887 | Bernardo Barros Blanco | BBBX9000 |
+| 221007949 | Camile Barbosa Gonzaga de Oliveira | Camile1234 |
+| 221008070 | Guilherme Resende Carmona | Guiizon |
+| 221008150 | Joao Antonio Ginuino Carvalho | joaoseisei |
 | 221007653 | Luciano Ricardo da Silva Júnior | l-ricardo |
+| 211062277 | Matheus Duarte da Silva | smmstakes |
 | 221035068 | Paulo Renato Medrado Roque | paulomedrado |
 
 
