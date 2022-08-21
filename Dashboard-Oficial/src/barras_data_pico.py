@@ -56,7 +56,7 @@ fig = px.bar(grafico,
             barmode = "group", 
             color_discrete_sequence = px.colors.qualitative.Prism, 
             template = 'plotly_dark', 
-            range_y = [80000,100000], 
+            range_y = [80000, 100000], 
             title = 'Total de decolagens por mês'
             )
 
