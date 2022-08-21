@@ -1,13 +1,22 @@
+# ----------------------------------------- Importando bibliotecas -----------------------------------------
 import pandas as pd
 import plotly.express as px
 import tabela_utils
 
+
+# ------------------------------------------- Funções Específicas -------------------------------------------
 def faztudo(tabela : pd.DataFrame):
     tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])
     tabela = (tabela['DECOLAGENS'].to_list())
     return tabela
+
+
+# ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('Lendo as informações...')
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep= ';', encoding= 'latin')
+
+
+# --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando colunas...')
 colunas_filtradas = tabela_utils.filtrar(dados, ['ANO', 'MÊS', 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS'])
 print('Retirando nulos...')
@@ -27,26 +36,34 @@ print('Filtrando o ano de 2014...')
 dados_2014 = tabela_utils.filtrar_linha(dados_paises, 'ANO', ['2014'])
 print('Somando...')
 soma_2014 = tabela_utils.soma_por_categoria(dados_2014, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
-
 ano2013 = faztudo(soma_2013)
 ano2014 = faztudo(soma_2014)
 print(soma_2013)
 print(soma_2014)
-
 aeroporto = ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'CHILE', 'EMIRADOS ÁRABES UNIDOS','ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'CHILE', 'MÉXICO', 'EMIRADOS ÁRABES UNIDOS']
 decolagens = ano2013 + ano2014
 anos = ['2013']*5 + ['2014']*5
-
 grafico = pd.DataFrame({
     "Países": aeroporto,
     "Decolagens": decolagens,
     "Ano": anos
 })
-fig = px.histogram(grafico, x="Países", y="Decolagens",
-            color='Ano', 
-            color_discrete_sequence=px.colors.qualitative.Prism,
-            barmode='group',
-            histfunc='avg',
-            title = 'Voos por país durante a copa',
-            template='plotly_dark')
+
+
+# ----------------------------------------- Criando gráfico de barras -----------------------------------------
+print('Produzindo gráfico...') # Feedback
+fig = px.histogram(grafico, 
+                    x = "Países", 
+                    y = "Decolagens",
+                    color = 'Ano', 
+                    color_discrete_sequence = px.colors.qualitative.Prism,
+                    barmode = 'group',
+                    histfunc = 'avg', # TODO ver o que esse avg é
+                    title = 'Voos por país durante a copa',
+                    template ='plotly_dark'
+                    )
+
+
+# ---------------------------------------- Mostrando gráfico de barras ----------------------------------------
+print('Mostrando gráfico...') # Feedback
 fig.show()

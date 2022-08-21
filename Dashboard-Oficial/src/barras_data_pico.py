@@ -1,15 +1,22 @@
+# ----------------------------------------- Importando bibliotecas -----------------------------------------
 import pandas as pd
 import plotly.express as px
 import tabela_utils
 
-#FAZ TUDO  FAZ TUDO
+
+# ------------------------------------------- Funções Específicas -------------------------------------------
 def faztudo(tabela : pd.DataFrame):
     tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
     tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])
     tabela = (tabela['DECOLAGENS'].to_list())
     return tabela
 
-dados = pd.read_csv('https://raw.githubusercontent.com/DashboardAPC/DashboardAPC/master/Dashboard-Oficial/data/ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
+
+# ---------------------------------------------- Lendo dataset ----------------------------------------------
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
+
+# --------------------------------------- Manipulando dados necessarios---------------------------------------
+
 print('Filtrando os dados...')
 filtrado = tabela_utils.filtrar(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
@@ -28,10 +35,27 @@ meses = ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'A
 anototal = ano2013 + ano2014 + ano2015 #total de decolagens por ano
 anos = ['2013',]*12 +['2014',]*12 + ['2015',]*12 #anos vezes numero de meses
 
+
 grafico = pd.DataFrame({
     "Mês": meses,
     "Decolagens": anototal,
     "Ano": anos
 })
-fig = px.bar(grafico, x="Mês", y="Decolagens", color="Ano", barmode="group", color_discrete_sequence=px.colors.qualitative.Prism, template='plotly_dark', range_y=[80000,100000], title= 'Total de decolagens por mês')
+
+
+# ----------------------------------------- Criando gráfico de barras -----------------------------------------
+print('Produzindo gráfico...') # Feedback
+fig = px.bar(grafico, 
+            x = "Mês", 
+            y = "Decolagens", 
+            color = "Ano", 
+            barmode = "group", 
+            color_discrete_sequence = px.colors.qualitative.Prism, 
+            template = 'plotly_dark', 
+            range_y = [80000,100000], 
+            title = 'Total de decolagens por mês'
+            )
+
+# ---------------------------------------- Mostrando gráfico de barras ----------------------------------------
+print('Mostrando gráfico...') # Feedback
 fig.show()
