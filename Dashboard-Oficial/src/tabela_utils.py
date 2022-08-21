@@ -1,6 +1,5 @@
 import pandas as pd
 import math
-from collections  import defaultdict
 
 def filtrar_linha(tabela: pd.DataFrame, coluna: str, filtro:list):
     tabela = tabela.to_dict()
@@ -147,4 +146,3 @@ def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
             linhas_resultado.append(linha)
     
     return pd.DataFrame(linhas_resultado, columns=cabecalhos)
-

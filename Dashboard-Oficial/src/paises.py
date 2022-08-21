@@ -50,4 +50,3 @@ fig = px.histogram(grafico, x="Países", y="Decolagens",
             title = 'Voos por país durante a copa',
             template='plotly_dark')
 fig.show()
-

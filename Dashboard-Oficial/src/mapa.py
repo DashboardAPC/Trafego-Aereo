@@ -2,7 +2,6 @@ import pandas as pd
 import plotly.express as  px
 import json
 import tabela_utils
-from timeit import default_timer as timer
 
 
 print('Lendo geometria...')
