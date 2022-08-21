@@ -1,6 +1,6 @@
-import tabela_utils
 import pandas as pd
 import plotly.express as px
+import tabela_utils
 
 def fatiar(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
     tabela = tabela.to_dict()

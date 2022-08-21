@@ -1,6 +1,6 @@
 import pandas as pd
-import tabela_utils
 import plotly.express as px
+import tabela_utils
 
 def faztudo(tabela : pd.DataFrame):
     tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])

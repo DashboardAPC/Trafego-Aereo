@@ -1,7 +1,7 @@
 import pandas as pd
-import plotly.express as  px
-import json
+import plotly.express as px
 import tabela_utils
+import json
 
 
 print('Lendo geometria...')
