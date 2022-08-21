@@ -34,13 +34,13 @@ Analisar e compreender o comportamento de voôs no Brasil durante os anos de 201
 [Esse gráfico](Dashboard-Oficial/src/mapa.py) é um mapa mostrando quais foram os estados de destino mais famosos durante o período escolhido, sendo possível notar diferenças socioeconômicas entre outros detalhes por estado.
 
 ## Preferência de linhas aéreas (Gráfico de Pizza)
-[Esse gráfico](Dashboard-Oficial/src/setores.py) evidencia as preferências de linhas aéreas em todos os vôos relacionados ao brasil, mostrado claramente a tendência de uso das linhas nacionais.
+[Esse gráfico](Dashboard-Oficial/src/pizza_preferencia_empresa.py) evidencia as preferências de linhas aéreas em todos os vôos relacionados ao brasil, mostrado claramente a tendência de uso das linhas nacionais.
 
 ## Tipos de carga (Gráfico de Pizza)
-[Esse gráfico](Dashboard-Oficial/src/pizza_malas.py) desmostra a relação de proporcinalidade entre o peso de carga/bagagem/correio transportados pelos aviões em cada ano.
+[Esse gráfico](Dashboard-Oficial/src/pizza_tipo_carga.py) desmostra a relação de proporcinalidade entre o peso de carga/bagagem/correio transportados pelos aviões em cada ano.
 
 ## Países de origem (Gráfico de Barras)
-[Esse gráfico](Dashboard-Oficial/src/paises.py) nos comunica sobre quais países de um grupo seleto tem mais vôos com destino ao Brasil.
+[Esse gráfico](Dashboard-Oficial/src/barras_paises_origem.py) nos comunica sobre quais países de um grupo seleto tem mais vôos com destino ao Brasil.
 
 ## Quantidade de vôos (Gráfico de Barras)
-[Esse gráfico](Dashboard-Oficial/src/grafico_barras.py) demonstra claramente certas tendências quanto a quantidade de voôs no brasil, principalmente os picos em 2014, devido à copa do mundo.
+[Esse gráfico](Dashboard-Oficial/src/barras_data_pico.py) demonstra claramente certas tendências quanto a quantidade de voôs no brasil, principalmente os picos em 2014, devido à copa do mundo.
