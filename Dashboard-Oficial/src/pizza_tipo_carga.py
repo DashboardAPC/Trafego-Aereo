@@ -11,7 +11,7 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando dados colunas necessarias do dataset...') # Feedback
-tabela_de_pesos = tabela_utils.filtrar(dados, ['ANO','CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
+tabela_de_pesos = tabela_utils.filtrar(dados, ['ANO', 'CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
 print('Removendo valores invalidos...') # Feedback
 tabela_de_pesos = tabela_utils.retirar_nulos(tabela_de_pesos)
@@ -23,9 +23,9 @@ peso_2015 = tabela_utils.filtrar_linha(tabela_de_pesos, 'ANO', ['2015.0'])
 # TODO Ver por que o retirar nulos esta transformando os numeros de ano em float
 
 print('Filtrando fora coluna ano...') # Feedback
-peso_2013_pre_soma = tabela_utils.filtrar(peso_2013, ['CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
-peso_2014_pre_soma = tabela_utils.filtrar(peso_2014, ['CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
-peso_2015_pre_soma = tabela_utils.filtrar(peso_2015, ['CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
+peso_2013_pre_soma = tabela_utils.filtrar(peso_2013, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+peso_2014_pre_soma = tabela_utils.filtrar(peso_2014, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+peso_2015_pre_soma = tabela_utils.filtrar(peso_2015, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
 print('Somando tudo...') # Feedback
 peso_2013_somado = tabela_utils.soma_generica_colunas(peso_2013_pre_soma)
@@ -72,7 +72,7 @@ pizza = px.pie(tabela_entrada_pizza,
                 )
 
 pizza.update_traces(
-        text =  ['CARGA PAGA','CARGA GRÁTIS','CORREIO','BAGAGEM'],
+        text =  ['CARGA PAGA', 'CARGA GRÁTIS', 'CORREIO', 'BAGAGEM'],
         textinfo = "text + percent", 
         textposition = 'outside',
         hovertemplate = '%{value} Kg',

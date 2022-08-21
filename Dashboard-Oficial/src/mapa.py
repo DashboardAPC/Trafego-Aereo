@@ -17,21 +17,21 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando colunas...') # Feedback
-voos = tabela_utils.filtrar(dados,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
+dados = tabela_utils.filtrar(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
 
 print('Retirando valores nulos...') # Feedback
-voos = tabela_utils.retirar_nulos(voos)
+dados = tabela_utils.retirar_nulos(dados)
 
 print('Somando por categoria...')
-voos = tabela_utils.soma_por_categoria(voos, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
+dados = tabela_utils.soma_por_categoria(dados, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
 
 print('Calculando valor máximo...') # Feedback
-maximo_decolagens = tabela_utils.maximo(voos, 'DECOLAGENS')
+maximo_decolagens = tabela_utils.maximo(dados, 'DECOLAGENS')
 
 
 # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
 print('Produzindo mapa...') # Feedback
-mapa = px.choropleth(voos,
+mapa = px.choropleth(dados,
                     template = 'plotly_dark',
                     geojson = estados_brasileiros, 
                     locations = 'AEROPORTO DE DESTINO (UF)', 

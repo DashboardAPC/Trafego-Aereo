@@ -25,11 +25,10 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-df=tabela_utils.filtrar(dados,['ANO', 'EMPRESA (NOME)','PASSAGEIROS PAGOS'])
-df=tabela_utils.retirar_nulos(df)
+df = tabela_utils.filtrar(dados, ['ANO', 'EMPRESA (NOME)','PASSAGEIROS PAGOS'])
+df = tabela_utils.retirar_nulos(df)
 df = tabela_utils.soma_por_categoria(df, 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS')
 df = tirazero(df) # TODO remover ja que é inutil
-
 df1 = tabela_utils.outros(df, 'PASSAGEIROS PAGOS', 1500000)
 df2 = tabela_utils.outros2(df, 'PASSAGEIROS PAGOS', 1500000) # TODO pq isso esta sendo feito se df2 nao é usada em lugar nenhum
 print(df)

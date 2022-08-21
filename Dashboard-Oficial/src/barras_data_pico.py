@@ -32,9 +32,9 @@ ano2013 = faztudo(ano1)
 ano2014 = faztudo(ano2)
 ano2015 = faztudo(ano3)
 
-meses = ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro', ]*3 #somar o numero de anos
+meses = ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']*3 #somar o numero de anos
 anototal = ano2013 + ano2014 + ano2015 #total de decolagens por ano
-anos = ['2013',]*12 +['2014',]*12 + ['2015',]*12 #anos vezes numero de meses
+anos = ['2013']*12 +['2014']*12 + ['2015']*12 #anos vezes numero de meses
 
 
 grafico = pd.DataFrame({
