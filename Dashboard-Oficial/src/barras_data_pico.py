@@ -13,20 +13,21 @@ def faztudo(tabela : pd.DataFrame):
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
+print('Lendo dataset...') # Feedback
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
+
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-
-print('Filtrando os dados...')
+print('Filtrando os dados...') # Feedback
 filtrado = tabela_utils.filtrar(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
-print('Retirando os nulos...')
+print('Retirando os nulos...') # Feedback
 semnulo = tabela_utils.retirar_nulos(filtrado)
 ano1 = tabela_utils.fatiar(semnulo, 'ANO', 2013)
 ano2 = tabela_utils.fatiar(semnulo, 'ANO', 2014)
 ano3 = tabela_utils.fatiar(semnulo, 'ANO', 2015)
 
-print('Fazendo mágica...')
+print('Fazendo mágica...') # Feedback
 ano2013 = faztudo(ano1)
 ano2014 = faztudo(ano2)
 ano2015 = faztudo(ano3)

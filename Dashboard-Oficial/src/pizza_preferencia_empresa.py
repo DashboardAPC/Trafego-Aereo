@@ -20,11 +20,12 @@ def tirazero(tabela: pd.DataFrame):  # TODO remover ja que é inutil
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-df=pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv',sep=';', encoding='latin')
+print('Lendo dataset...') # Feedback
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-df=tabela_utils.filtrar(df,['ANO', 'EMPRESA (NOME)','PASSAGEIROS PAGOS'])
+df=tabela_utils.filtrar(dados,['ANO', 'EMPRESA (NOME)','PASSAGEIROS PAGOS'])
 df=tabela_utils.retirar_nulos(df)
 df = tabela_utils.soma_por_categoria(df, 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS')
 df = tirazero(df) # TODO remover ja que é inutil
@@ -36,7 +37,7 @@ print(df)
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
 print('Produzindo gráfico...') # Feedback
-setores=px.pie(df1, 
+setores = px.pie(df1, 
                 names = 'EMPRESA (NOME)',
                 values = 'PASSAGEIROS PAGOS', 
                 color_discrete_sequence = px.colors.qualitative.Prism, 

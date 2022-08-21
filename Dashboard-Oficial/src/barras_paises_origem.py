@@ -12,8 +12,8 @@ def faztudo(tabela : pd.DataFrame):
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-print('Lendo as informações...')
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep= ';', encoding= 'latin')
+print('Lendo dataset...') # Feedback
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------

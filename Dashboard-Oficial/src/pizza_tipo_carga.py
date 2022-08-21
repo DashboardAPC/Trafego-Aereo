@@ -6,12 +6,12 @@ import tabela_utils
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('Lendo dataset...') # Feedback
-voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin') #Encoding sendo usado para evitar problemas com acentuacao
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando dados colunas necessarias do dataset...') # Feedback
-tabela_de_pesos = tabela_utils.filtrar(voos, ['ANO','CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
+tabela_de_pesos = tabela_utils.filtrar(dados, ['ANO','CARGA PAGA (KG)','CARGA GRÁTIS (KG)','CORREIO (KG)','BAGAGEM (KG)'])
 
 print('Removendo valores invalidos...') # Feedback
 tabela_de_pesos = tabela_utils.retirar_nulos(tabela_de_pesos)
@@ -76,7 +76,7 @@ pizza.update_traces(
         textinfo = "text + percent", 
         textposition = 'outside',
         hovertemplate = '%{value} Kg',
-        marker = dict(line = dict(color = 'rgb(17, 17, 17)', width = 3)),
+        marker = dict(line = dict(color = 'rgb(17, 17, 17)', width = 3))
         )
 
 

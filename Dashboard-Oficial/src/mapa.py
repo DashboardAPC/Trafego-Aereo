@@ -6,26 +6,26 @@ import json
 
 
 # --------------------------------------- Criando geometria do Brasil ---------------------------------------
-print('Lendo geometria...')
+print('Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-print('Lendo dados...')
-voos = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep=';', encoding='latin')
+print('Lendo dataset...') # Feedback
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-print('Filtrando colunas...')
-voos = tabela_utils.filtrar(voos,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
+print('Filtrando colunas...') # Feedback
+voos = tabela_utils.filtrar(dados,['AEROPORTO DE DESTINO (UF)','DECOLAGENS'])
 
-print('Retirando valores nulos...')
+print('Retirando valores nulos...') # Feedback
 voos = tabela_utils.retirar_nulos(voos)
 
 print('Somando por categoria...')
 voos = tabela_utils.soma_por_categoria(voos, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
 
-print('Calculando valor máximo...')
+print('Calculando valor máximo...') # Feedback
 maximo_decolagens = tabela_utils.maximo(voos, 'DECOLAGENS')
 
 
