@@ -1,6 +1,6 @@
 # ---------------------------- Grafico de Pizza sobre peso carregado pelos avioes ----------------------------
 import pandas as pd
-import plotly.express as  px
+import plotly.express as px
 import tabela_utils
 
 # ---------------------------------------------- Funcoes uteis ----------------------------------------------

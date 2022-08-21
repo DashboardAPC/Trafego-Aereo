@@ -1,4 +1,3 @@
-import math
 import pandas as pd
 import tabela_utils
 import plotly.express as px
@@ -34,9 +33,9 @@ ano2014 = faztudo(soma_2014)
 print(soma_2013)
 print(soma_2014)
 
-aeroporto = ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'CHILE', 'EMIRADOS ÁRABES UNIDOS','ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'CHILE', 'MÉXICO', 'EMIRADOS ÁRABES UNIDOS',]
+aeroporto = ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'CHILE', 'EMIRADOS ÁRABES UNIDOS','ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'CHILE', 'MÉXICO', 'EMIRADOS ÁRABES UNIDOS']
 decolagens = ano2013 + ano2014
-anos = ('2013',)*5 + ('2014',)*5
+anos = ['2013']*5 + ['2014']*5
 
 grafico = pd.DataFrame({
     "Países": aeroporto,
@@ -44,9 +43,11 @@ grafico = pd.DataFrame({
     "Ano": anos
 })
 fig = px.histogram(grafico, x="Países", y="Decolagens",
-             color='Ano', barmode='group',
-             histfunc='avg',
+            color='Ano', 
+            color_discrete_sequence=px.colors.qualitative.Prism,
+            barmode='group',
+            histfunc='avg',
             title = 'Voos por país durante a copa',
-             template='plotly_dark')
+            template='plotly_dark')
 fig.show()
 
