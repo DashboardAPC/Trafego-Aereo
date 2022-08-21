@@ -12,7 +12,7 @@ estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('Lendo dataset...') # Feedback
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------

@@ -13,7 +13,7 @@ def faztudo(tabela : pd.DataFrame):
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('Lendo dataset...') # Feedback
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
@@ -31,17 +31,14 @@ mes_6 = tabela_utils.filtrar_linha(dados_anos, 'MÊS', ['6'])
 
 print('Filtrando países...') # Feedback
 dados_paises = tabela_utils.filtrar_linha(mes_6, 'AEROPORTO DE ORIGEM (PAÍS)', ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'CHILE', 'EMIRADOS ÁRABES UNIDOS'] )
-# print(dados_paises)
 
 print('Filtrando o ano de 2013 e somando...') # Feedback
 dados_2013 = tabela_utils.filtrar_linha(dados_paises, 'ANO', ['2013'])
 soma_2013 = tabela_utils.soma_por_categoria(dados_2013, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
-# print(soma_2013)
 
 print('Filtrando o ano de 2014 e somando...') # Feedback
 dados_2014 = tabela_utils.filtrar_linha(dados_paises, 'ANO', ['2014'])
 soma_2014 = tabela_utils.soma_por_categoria(dados_2014, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
-# print(soma_2014)
 
 print('Passando dataframes pelo faztudo...') # Feedback
 ano_2013 = faztudo(soma_2013)

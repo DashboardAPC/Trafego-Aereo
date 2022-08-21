@@ -21,30 +21,30 @@ def tirazero(tabela: pd.DataFrame):  # TODO remover ja que é inutil
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('Lendo dataset...') # Feedback
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando os dados...') # Feedback
-df = tabela_utils.filtrar(dados, ['ANO', 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS'])
+dados = tabela_utils.filtrar(dados, ['ANO', 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS'])
 
 print('Retirando os nulos...') # Feedback
-df = tabela_utils.retirar_nulos(df)
+dados = tabela_utils.retirar_nulos(dados)
 
 print('Somando por categoria...') # Feedback
-df = tabela_utils.soma_por_categoria(df, 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS')
+dados = tabela_utils.soma_por_categoria(dados, 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS')
 
-df = tirazero(df) # TODO remover ja que é inutil
+dados = tirazero(dados) # TODO remover ja que é inutil
 
 print('Separando empresas com contribuição ínfima...') # Feedback
-df1 = tabela_utils.outros(df, 'PASSAGEIROS PAGOS', 1500000)
-df2 = tabela_utils.outros2(df, 'PASSAGEIROS PAGOS', 1500000) # TODO pq isso esta sendo feito se df2 nao é usada em lugar nenhum
-print(df)
+dados_1 = tabela_utils.outros(dados, 'PASSAGEIROS PAGOS', 1500000)
+dados_2 = tabela_utils.outros2(dados, 'PASSAGEIROS PAGOS', 1500000) # TODO pq isso esta sendo feito se df2 nao é usada em lugar nenhum
+print(dados)
 
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
 print('Produzindo gráfico...') # Feedback
-setores = px.pie(df1, 
+setores = px.pie(dados_1, 
                 names = 'EMPRESA (NOME)',
                 values = 'PASSAGEIROS PAGOS', 
                 color_discrete_sequence = px.colors.qualitative.Prism, 

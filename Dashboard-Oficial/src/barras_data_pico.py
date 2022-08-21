@@ -14,7 +14,7 @@ def faztudo(tabela : pd.DataFrame):
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('Lendo dataset...') # Feedback
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding sendo usado para evitar problemas com acentuação
+dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
@@ -22,25 +22,27 @@ print('Filtrando os dados...') # Feedback
 filtrado = tabela_utils.filtrar(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
 print('Retirando os nulos...') # Feedback
-semnulo = tabela_utils.retirar_nulos(filtrado)
-ano1 = tabela_utils.fatiar(semnulo, 'ANO', 2013)
-ano2 = tabela_utils.fatiar(semnulo, 'ANO', 2014)
-ano3 = tabela_utils.fatiar(semnulo, 'ANO', 2015)
+sem_nulo = tabela_utils.retirar_nulos(filtrado)
+
+print('Separando anos...') # Feedback
+ano_1 = tabela_utils.fatiar(sem_nulo, 'ANO', 2013)
+ano_2 = tabela_utils.fatiar(sem_nulo, 'ANO', 2014)
+ano_3 = tabela_utils.fatiar(sem_nulo, 'ANO', 2015)
 
 print('Fazendo mágica...') # Feedback
-ano2013 = faztudo(ano1)
-ano2014 = faztudo(ano2)
-ano2015 = faztudo(ano3)
+ano_2013 = faztudo(ano_1)
+ano_2014 = faztudo(ano_2)
+ano_2015 = faztudo(ano_3)
 
 
 # --------------------------------------------- Criando Dataframe ---------------------------------------------
-anototal = ano2013 + ano2014 + ano2015
+ano_total = ano_2013 + ano_2014 + ano_2015
 meses = ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']*3
 anos = ['2013']*12 +['2014']*12 + ['2015']*12
 
 grafico = pd.DataFrame({
     "Mês": meses,
-    "Decolagens": anototal,
+    "Decolagens": ano_total,
     "Ano": anos
 })
 
