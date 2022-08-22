@@ -7,7 +7,7 @@ import tabela_utils
 # ------------------------------------------- Funções Específicas -------------------------------------------
 def faztudo(tabela : pd.DataFrame):
     tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
-    tabela = tabela_utils.filtrar(tabela, ['DECOLAGENS'])
+    tabela = tabela_utils.filtrar_colunas(tabela, ['DECOLAGENS'])
     tabela = (tabela['DECOLAGENS'].to_list())
     return tabela
 
@@ -19,7 +19,7 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando os dados...') # Feedback
-filtrado = tabela_utils.filtrar(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
+filtrado = tabela_utils.filtrar_colunas(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
 print('Retirando os nulos...') # Feedback
 sem_nulo = tabela_utils.retirar_nulos(filtrado)

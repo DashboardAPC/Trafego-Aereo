@@ -11,21 +11,21 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando dados colunas necessarias do dataset...') # Feedback
-dados = tabela_utils.filtrar(dados, ['ANO', 'CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+dados = tabela_utils.filtrar_colunas(dados, ['ANO', 'CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
 print('Removendo valores invalidos...') # Feedback
 dados = tabela_utils.retirar_nulos(dados)
 
 print('Separando anos...') # Feedback
-peso_2013 = tabela_utils.filtrar_linha(dados, 'ANO', ['2013.0'])
-peso_2014 = tabela_utils.filtrar_linha(dados, 'ANO', ['2014.0'])
-peso_2015 = tabela_utils.filtrar_linha(dados, 'ANO', ['2015.0'])
+peso_2013 = tabela_utils.filtrar_linhas(dados, 'ANO', ['2013.0'])
+peso_2014 = tabela_utils.filtrar_linhas(dados, 'ANO', ['2014.0'])
+peso_2015 = tabela_utils.filtrar_linhas(dados, 'ANO', ['2015.0'])
 # TODO Ver por que o retirar nulos esta transformando os numeros de ano em float
 
 print('Filtrando fora coluna ano...') # Feedback
-peso_2013 = tabela_utils.filtrar(peso_2013, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
-peso_2014 = tabela_utils.filtrar(peso_2014, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
-peso_2015 = tabela_utils.filtrar(peso_2015, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+peso_2013 = tabela_utils.filtrar_colunas(peso_2013, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+peso_2014 = tabela_utils.filtrar_colunas(peso_2014, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+peso_2015 = tabela_utils.filtrar_colunas(peso_2015, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
 print('Somando tudo...') # Feedback
 peso_2013_somado = tabela_utils.soma_generica_colunas(peso_2013)

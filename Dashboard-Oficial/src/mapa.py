@@ -17,7 +17,7 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
 print('Filtrando colunas...') # Feedback
-dados = tabela_utils.filtrar(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
+dados = tabela_utils.filtrar_colunas(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
 
 print('Retirando valores nulos...') # Feedback
 dados = tabela_utils.retirar_nulos(dados)

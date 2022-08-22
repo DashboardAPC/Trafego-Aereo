@@ -3,7 +3,7 @@ import pandas as pd
 import math
 
 # ------------------------------------------------ Funções ------------------------------------------------
-def filtrar(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame: 
+def filtrar_colunas(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame: 
     """Filtra colunas mantendo apenas as especificadas no argumento 'filtros'
 
     Args:
@@ -35,7 +35,7 @@ def filtrar(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame:
 
 
 
-def filtrar_linha(tabela: pd.DataFrame, coluna: str, filtro: list) -> pd.DataFrame:
+def filtrar_linhas(tabela: pd.DataFrame, coluna: str, filtro: list) -> pd.DataFrame:
     """Filtra linhas mantendo apenas as especificadas no argumento 'filtro'
     
     Args:
@@ -196,7 +196,7 @@ def maximo(tabela: pd.DataFrame, cabecalho_max: str) -> float:
 
 
 
-def outros(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
+def remover_pequenos(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
     """Mantem na tabela apenas valores acima do limite estabelecido pelo parametro 'alvo'
 
     Args:
@@ -223,7 +223,7 @@ def outros(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.D
 
 
 # ------------------------------------------ Funções sob analize ------------------------------------------
-def outros2(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame: # TODO funcoes outros e outros2 podem ser mescladas com a adicao de um parametro opcional
+def manter_pequenos(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame: # TODO funcoes outros e outros2 podem ser mescladas com a adicao de um parametro opcional
     """Mantem na tabela apenas valores abaixo do limite estabelecido pelo parametro alvo
 
     Args:
@@ -245,4 +245,19 @@ def outros2(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.
         for corte in tabela:
             tabela[corte].pop(linha)
    
+    return pd.DataFrame(tabela)
+
+
+
+def tirazero(tabela: pd.DataFrame):  # TODO remover ja que é inutil
+    tabela = tabela.to_dict()
+    apagar=[]
+    for cabecalho in tabela:
+        linhas = tabela[cabecalho]
+        for index in linhas:
+            if linhas[index] == 0:
+                apagar.append(index)
+    for linha in apagar:
+        for coluna in tabela:
+            tabela[coluna].pop(linha)
     return pd.DataFrame(tabela)
