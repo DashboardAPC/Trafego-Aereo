@@ -39,7 +39,6 @@ dados = tirazero(dados) # TODO remover ja que é inutil
 print('Separando empresas com contribuição ínfima...') # Feedback
 dados_1 = tabela_utils.outros(dados, 'PASSAGEIROS PAGOS', 1500000)
 dados_2 = tabela_utils.outros2(dados, 'PASSAGEIROS PAGOS', 1500000) # TODO pq isso esta sendo feito se df2 nao é usada em lugar nenhum
-print(dados)
 
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
