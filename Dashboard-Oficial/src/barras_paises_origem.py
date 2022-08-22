@@ -65,7 +65,7 @@ fig = px.histogram(grafico,
                     color = 'Ano', 
                     color_discrete_sequence = px.colors.qualitative.Prism,
                     barmode = 'group',
-                    histfunc = 'avg', # TODO ver o que esse avg é
+                    histfunc = 'avg',
                     title = 'Voos por país durante a copa',
                     template ='plotly_dark'
                     )

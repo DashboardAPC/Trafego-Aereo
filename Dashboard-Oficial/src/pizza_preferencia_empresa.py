@@ -20,7 +20,7 @@ print('Somando por categoria...') # Feedback
 dados = tabela_utils.soma_por_categoria(dados, 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS')
 
 print('Separando empresas com contribuição ínfima...') # Feedback
-dados = tabela_utils.remover_pequenos(dados, 'PASSAGEIROS PAGOS', 1500000)
+dados = tabela_utils.remover_insignificantes(dados, 'PASSAGEIROS PAGOS', 1500000)
 
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------

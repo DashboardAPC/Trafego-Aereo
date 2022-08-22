@@ -15,23 +15,23 @@ def filtrar_colunas(tabela: pd.DataFrame, filtros: list) -> pd.DataFrame:
     """
     linhas = tabela.values.tolist()
     cabecalhos = tabela.columns.to_list()
-    indexes=[]
-    resultado=[]
+    indexes = []
+    resultado = []
 
-    cabecalhos_filtrados=[]
+    cabecalhos_filtrados = []
     for cabecalho in cabecalhos:
         if cabecalho in filtros:
             indexes.append(cabecalhos.index(cabecalho))
             cabecalhos_filtrados.append(cabecalho)
     
-    linha_filtrada=[]
+    linha_filtrada = []
     for linha in linhas:
-        linha_filtrada=[]
+        linha_filtrada = []
         for index in indexes:
             linha_filtrada.append(linha[index])
         resultado.append(linha_filtrada)
 
-    return pd.DataFrame(resultado, columns=cabecalhos_filtrados)
+    return pd.DataFrame(resultado, columns = cabecalhos_filtrados)
 
 
 
@@ -100,7 +100,7 @@ def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho
         pd.DataFrame: Dataframe com os dados calculados
     """
     tabela = tabela.to_dict()
-    tabela_resultado = {cabecalho_categoria:{},cabecalho_a_somar:{}}
+    tabela_resultado = {cabecalho_categoria: {}, cabecalho_a_somar: {}}
     coluna_a_somar = tabela[cabecalho_a_somar]
     coluna_categoria = tabela[cabecalho_categoria]
     soma = {}
@@ -108,17 +108,15 @@ def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho
     for index in coluna_categoria:
         valor_linha = coluna_categoria[index]
         if valor_linha in soma:
-            soma[valor_linha]+=coluna_a_somar[index]
+            soma[valor_linha] += coluna_a_somar[index]
         else:
-            soma[valor_linha]=coluna_a_somar[index]
-
-    linhas = len(soma) # TODO variavel nao sendo usada
-    i=1
+            soma[valor_linha] = coluna_a_somar[index]
+    i = 1
     
     for categoria in soma:
         tabela_resultado[cabecalho_categoria][i] = categoria
         tabela_resultado[cabecalho_a_somar][i] = soma[categoria]
-        i+=1
+        i += 1
 
     return pd.DataFrame(tabela_resultado)
 
@@ -191,7 +189,7 @@ def maximo(tabela: pd.DataFrame, cabecalho_max: str) -> float:
 
 
 
-def remover_pequenos(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
+def remover_insignificantes(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame:
     """Mantem na tabela apenas valores acima do limite estabelecido pelo parametro 'alvo'
 
     Args:
