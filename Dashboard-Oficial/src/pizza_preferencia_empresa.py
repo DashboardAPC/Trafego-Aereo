@@ -29,7 +29,8 @@ setores = px.pie(dados,
                 names = 'EMPRESA (NOME)',
                 values = 'PASSAGEIROS PAGOS', 
                 color_discrete_sequence = px.colors.qualitative.Prism, 
-                template = 'plotly_dark'
+                template = 'plotly_dark',
+                title = 'Empresas aéreas preferidas pelo consumidor'
                 )
 
 
