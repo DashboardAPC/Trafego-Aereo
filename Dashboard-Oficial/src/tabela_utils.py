@@ -62,32 +62,6 @@ def filtrar_linhas(tabela: pd.DataFrame, coluna: str, filtro: list) -> pd.DataFr
 
 
 
-def fatiar(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame: # TODO Faz a mesma coisa que filtrar linha, analizar possivel mescla
-    """Filtra linhas mantendo apenas as com valores especificados no argumento 'alvo'
-    
-    Args:
-        tabela (pd.DataFrame): Tabela a ser operada
-        cabeçalho_selecionado (str): Coluna que contem os valores alvo
-        alvo (int): Linhas que contem os inteiros que devem permanecer na tabela
-    Returns:
-        pd.DataFrame: Tabela apenas com linhas que contem o valor alvo no cabeçalho_selecionado
-    """
-    tabela = tabela.to_dict()
-    fatiador = []
-    linha = tabela[cabeçalho_selecionado]
-    
-    for id in linha:
-        if linha[id] != alvo:
-            fatiador.append(id)
-    
-    for linha in fatiador:
-        for corte in tabela:
-            tabela[corte].pop(linha)
-    
-    return pd.DataFrame(tabela)
-
-
-
 def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
     """Retira todas as linhas da tabela que contenham um valor NaN 
 
@@ -239,46 +213,4 @@ def remover_pequenos(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: in
         for corte in tabela:
             tabela[corte].pop(linha)
    
-    return pd.DataFrame(tabela)
-
-
-
-# ------------------------------------------ Funções sob analize ------------------------------------------
-def manter_pequenos(tabela: pd.DataFrame, cabeçalho_selecionado: str, alvo: int) -> pd.DataFrame: # TODO funcoes outros e outros2 podem ser mescladas com a adicao de um parametro opcional
-    """Mantem na tabela apenas valores abaixo do limite estabelecido pelo parametro alvo
-
-    Args:
-        tabela (pd.DataFrame): Tabela a ser operada
-        cabeçalho_selecionado (str): Coluna que contem os valores a serem analizados
-        alvo (int): Valor maximo que sera mantido na tabela
-    Returns:
-        pd.DataFrame: Tabela com apenas linhas com valores inferiores ao alvo
-    """
-    tabela = tabela.to_dict()
-    fatiador = []
-    linha = tabela[cabeçalho_selecionado]
-    
-    for id in linha:
-        if linha[id] > alvo:
-            fatiador.append(id)
-    
-    for linha in fatiador:
-        for corte in tabela:
-            tabela[corte].pop(linha)
-   
-    return pd.DataFrame(tabela)
-
-
-
-def tirazero(tabela: pd.DataFrame):  # TODO remover ja que é inutil
-    tabela = tabela.to_dict()
-    apagar=[]
-    for cabecalho in tabela:
-        linhas = tabela[cabecalho]
-        for index in linhas:
-            if linhas[index] == 0:
-                apagar.append(index)
-    for linha in apagar:
-        for coluna in tabela:
-            tabela[coluna].pop(linha)
     return pd.DataFrame(tabela)
