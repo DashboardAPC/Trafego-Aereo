@@ -38,7 +38,7 @@ ano_2015 = faztudo(ano_3)
 # --------------------------------------------- Criando Dataframe ---------------------------------------------
 ano_total = ano_2013 + ano_2014 + ano_2015
 meses = ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']*3
-anos = ['2013']*12 +['2014']*12 + ['2015']*12
+anos = ['2013']*12 + ['2014']*12 + ['2015']*12
 
 grafico = pd.DataFrame({
     "Mês": meses,
