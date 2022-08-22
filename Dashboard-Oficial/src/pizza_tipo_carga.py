@@ -28,9 +28,14 @@ peso_2014 = tabela_utils.filtrar_colunas(peso_2014, ['CARGA PAGA (KG)', 'CARGA G
 peso_2015 = tabela_utils.filtrar_colunas(peso_2015, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
 print('Somando tudo...') # Feedback
-peso_2013_somado = tabela_utils.soma_generica_colunas(peso_2013)
-peso_2014_somado = tabela_utils.soma_generica_colunas(peso_2014)
-peso_2015_somado = tabela_utils.soma_generica_colunas(peso_2015)
+peso_2013 = tabela_utils.soma_generica_colunas(peso_2013)
+peso_2014 = tabela_utils.soma_generica_colunas(peso_2014)
+peso_2015 = tabela_utils.soma_generica_colunas(peso_2015)
+
+print('Transpondo tabelas...') # Feedback
+peso_2013 = tabela_utils.transposicao_eixos(peso_2013, ['Tipo de peso', 'KG'])
+peso_2014 = tabela_utils.transposicao_eixos(peso_2014, ['Tipo de peso', 'KG'])
+peso_2015 = tabela_utils.transposicao_eixos(peso_2015, ['Tipo de peso', 'KG'])
 # TODO transformar todas as funcoes a cima em uma unica que chama as outras
 
 
@@ -39,28 +44,23 @@ print('De que ano gostaria de ver o grafico pizza? Digite 2013, 2014 ou 2015')
 while True:
     ano_desejado = input()
     if ano_desejado == '2013':
-        tabela_entrada_pizza = peso_2013_somado
+        tabela_entrada_pizza = peso_2013
         break
     elif ano_desejado == '2014':
-        tabela_entrada_pizza = peso_2014_somado
+        tabela_entrada_pizza = peso_2014
         break
     elif ano_desejado == '2015':
-        tabela_entrada_pizza = peso_2015_somado
+        tabela_entrada_pizza = peso_2015
         break
     else:
         print('Valor incorreto. Por favor digite 2013, 2014 ou 2015')
 
 
-# ----------------------------------- TODO: Cai na fake news do caio -----------------------------------
-tabela_entrada_pizza = tabela_entrada_pizza.transpose()
-# O .transpose provavelmente nao é permitido. Mas sehundo o Mago de APC nao é necesssario fazer a mudanca de eixos. Eu nao consegui plotar a figura sem mudar os eixos entao esse cara vai ficar aqui ate eu a) fazer uma funcao pra substituir ou b) fazer funcionar sem a transposicao de eixos
-
-
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
 print('Produzindo gráfico...') # Feedback
 pizza = px.pie(tabela_entrada_pizza,
-                values = 1,
-                names = 0,
+                values = 'KG',
+                names = 'Tipo de peso',
                 hole = .4,
                 template = 'plotly_dark',
                 color_discrete_sequence = px.colors.qualitative.Prism,

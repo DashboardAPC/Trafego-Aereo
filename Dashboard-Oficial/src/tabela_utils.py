@@ -167,10 +167,31 @@ def soma_generica_colunas(tabela: pd.DataFrame) -> pd.DataFrame:
         for linha in range(len(tabela_valores)): # Fazendo uma repetição pra cada linha da coluna atual
             soma_coluna += tabela_valores[linha][coluna]    
         lista_somas.append(soma_coluna)
+    return pd.DataFrame([lista_somas], columns = tabela_cabecalho) 
 
-    resultado = [tabela_cabecalho, lista_somas]
-    return pd.DataFrame(resultado)
-    # TODO substituir por return pd.DataFrame(lista_somas, columns = tabela_cabecalho) 
+
+
+def transposicao_eixos(tabela: pd.DataFrame, novo_cabecalho: list) -> pd.DataFrame:
+    """Faz a transposição de uma matriz, as linhas viram colunas e as colunas linhas. Obs.: max 2 linhas de entrada
+
+    Args:
+        tabela (pd.DataFrame): Tabela a ser transposta
+        novo_cabecalho: (list): Cabeçalho que sera colocado na tabela nova
+    Returns:
+        pd.DataFrame: Dataframe com os colunas e linhas transpostas
+    """
+    antigo_cabecalho = tabela.columns.tolist() # Transformando o cabeçalho do dataframe pra lista
+    antigo_valores = tabela.values.tolist() # Transformando os valores do dataframe pra lista
+    lista_intermediaria = [antigo_cabecalho] + antigo_valores
+    novo_valores = []
+
+    for linha in range(len(lista_intermediaria[0])):
+        nova_linha = []
+        for coluna in range(len(lista_intermediaria)):
+            nova_linha.append(lista_intermediaria[coluna][linha])
+        novo_valores.append(nova_linha)
+
+    return pd.DataFrame(novo_valores, columns = novo_cabecalho) 
 
 
 
