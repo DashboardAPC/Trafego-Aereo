@@ -89,36 +89,61 @@ def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
 
 
 
-def soma_por_categoria(tabela: pd.DataFrame, cabecalho_categoria: str, cabecalho_a_somar: str) -> pd.DataFrame:
-    """Soma os valores da coluna 'cabecalho_a_somar' mantendo uma linha para cada categoria diferente em 'cabecalho_categoria'
+def soma_por_categoria(tabela: pd.DataFrame, categoria: str, soma: str) -> pd.DataFrame:
+    """
+    Efetua a operação de soma por categoria diferente em uma certa coluna
 
     Args:
-        tabela (pd.DataFrame): Tabela a ser operada
-        cabecalho_categoria (str): Cabeçalho onde estão as categorias
-        cabecalho_a_somar (str): Cabeçalho a ser calculada a soma
-    Returns:
-        pd.DataFrame: Dataframe com os dados calculados
-    """
-    tabela = tabela.to_dict()
-    tabela_resultado = {cabecalho_categoria: {}, cabecalho_a_somar: {}}
-    coluna_a_somar = tabela[cabecalho_a_somar]
-    coluna_categoria = tabela[cabecalho_categoria]
-    soma = {}
-    
-    for index in coluna_categoria:
-        valor_linha = coluna_categoria[index]
-        if valor_linha in soma:
-            soma[valor_linha] += coluna_a_somar[index]
-        else:
-            soma[valor_linha] = coluna_a_somar[index]
-    i = 1
-    
-    for categoria in soma:
-        tabela_resultado[cabecalho_categoria][i] = categoria
-        tabela_resultado[cabecalho_a_somar][i] = soma[categoria]
-        i += 1
+        tabela (pd.DataFrame): tabela de entrada
+        categoria (str): coluna onde estarão as categorias
+        soma (str): coluna onde serão somados os valores
 
-    return pd.DataFrame(tabela_resultado)
+    Returns:
+        pd.DataFrame: tabela com os valores agregados
+    """
+    linhas = tabela.values.tolist()
+    cabecalhos = tabela.columns.to_list()
+
+    #Pegar a posição do cabecalho de categoria e de soma
+    index_cat = cabecalhos.index(categoria)
+    index_sum = cabecalhos.index(soma)
+
+    #Criar duas listas representando os valores das duas colunas
+    #na tabela resultante(linhas com as somas, linhas com as categorias)
+    linhas_categoria = []
+    linhas_somas = []
+
+    for linha in linhas:
+        categoria_atual = linha[index_cat]
+        valor_atual = linha[index_sum]
+        if categoria_atual not in linhas_categoria:
+            #Se a categoria não estiver registrada
+            #simplesmente adicionar ela no final da tabela
+            linhas_categoria.append(categoria_atual)
+            linhas_somas.append(valor_atual)
+            #Pular o loop atual para que não seja adicionado o valor duas vezes
+            continue
+        # pegar a posição da linha com a categoria atual na tabela de resultado
+        linha_atual = linhas_categoria.index(categoria_atual)
+        # somar esse valor na lista com as linhas contendo as somas 
+        linhas_somas[linha_atual]+=valor_atual
+
+    #Montar a tabela através de um dicionário >:(
+    resultado={
+        categoria:linhas_categoria,
+        soma:linhas_somas
+    }
+
+    #Aqui como o dicionário representado a tabela final fica após todas as operações
+    #resultado = {
+    # 'AEROPORTO DE DESTINO (UF)': ['RJ', 'SP', 'DF', 'MG', 'AM', 'PE', 'BA', 'GO', 'PR', 'RS', 'CE', 'RN', 'AL', 'SC', 
+    # 'PA', 'MA', 'ES', 'MT', 'MS', 'RO', 'PI', 'TO', 'SE', 'PB', 'RR', 'AC', 'AP'],
+    #  'DECOLAGENS': [356716.0, 909099.0, 233553.0, 229449.0, 72948.0, 102120.0, 168258.0,
+    #  53200.0, 173128.0, 120609.0, 84549.0, 30719.0, 23870.0, 92419.0, 107787.0, 34581.0, 48608.0,
+    #  61407.0, 31413.0, 20458.0, 18008.0, 17019.0, 19312.0, 18772.0, 4372.0, 6850.0, 10188.0]
+    # }
+
+    return pd.DataFrame(resultado)
 
 
 
