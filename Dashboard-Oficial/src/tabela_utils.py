@@ -91,7 +91,7 @@ def retirar_nulos(tabela: pd.DataFrame) -> pd.DataFrame:
 
 def soma_por_categoria(tabela: pd.DataFrame, categoria: str, soma: str) -> pd.DataFrame:
     """
-    Efetua a operação de soma por categoria diferente em uma certa coluna
+    Efetua a operação de soma para cada categoria diferente em uma certa coluna
 
     Args:
         tabela (pd.DataFrame): tabela de entrada
