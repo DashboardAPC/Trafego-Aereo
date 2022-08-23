@@ -39,7 +39,8 @@ mapa = px.choropleth(dados,
                     range_color = (0, maximo_decolagens/4), # Resolve problema de SP ser o unico estado colorido
                     hover_data = ['AEROPORTO DE DESTINO (UF)'], 
                     scope = 'south america',
-                    color_continuous_scale = 'purp'
+                    color_continuous_scale = 'purp',
+                    title = 'Estados de destino mais escolhidos'
                     )
 
 

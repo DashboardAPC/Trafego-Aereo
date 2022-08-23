@@ -25,9 +25,9 @@ print('Retirando os nulos...') # Feedback
 sem_nulo = tabela_utils.retirar_nulos(filtrado)
 
 print('Separando anos...') # Feedback
-ano_1 = tabela_utils.fatiar(sem_nulo, 'ANO', 2013)
-ano_2 = tabela_utils.fatiar(sem_nulo, 'ANO', 2014)
-ano_3 = tabela_utils.fatiar(sem_nulo, 'ANO', 2015)
+ano_1 = tabela_utils.filtrar_linhas(sem_nulo, 'ANO', '2013.0')
+ano_2 = tabela_utils.filtrar_linhas(sem_nulo, 'ANO', '2014.0')
+ano_3 = tabela_utils.filtrar_linhas(sem_nulo, 'ANO', '2015.0')
 
 print('Fazendo mágica...') # Feedback
 ano_2013 = faztudo(ano_1)
@@ -38,7 +38,7 @@ ano_2015 = faztudo(ano_3)
 # --------------------------------------------- Criando Dataframe ---------------------------------------------
 ano_total = ano_2013 + ano_2014 + ano_2015
 meses = ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']*3
-anos = ['2013']*12 +['2014']*12 + ['2015']*12
+anos = ['2013']*12 + ['2014']*12 + ['2015']*12
 
 grafico = pd.DataFrame({
     "Mês": meses,

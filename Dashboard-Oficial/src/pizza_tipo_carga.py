@@ -20,7 +20,6 @@ print('Separando anos...') # Feedback
 peso_2013 = tabela_utils.filtrar_linhas(dados, 'ANO', ['2013.0'])
 peso_2014 = tabela_utils.filtrar_linhas(dados, 'ANO', ['2014.0'])
 peso_2015 = tabela_utils.filtrar_linhas(dados, 'ANO', ['2015.0'])
-# TODO Ver por que o retirar nulos esta transformando os numeros de ano em float
 
 print('Filtrando fora coluna ano...') # Feedback
 peso_2013 = tabela_utils.filtrar_colunas(peso_2013, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
