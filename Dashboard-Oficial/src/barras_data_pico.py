@@ -49,7 +49,7 @@ grafico = pd.DataFrame({
 
 # ----------------------------------------- Criando gráfico de barras -----------------------------------------
 print('Produzindo gráfico...') # Feedback
-fig = px.bar(grafico, 
+grafico_barras_data_pico = px.bar(grafico, 
             x = "Mês", 
             y = "Decolagens", 
             color = "Ano", 
@@ -59,7 +59,3 @@ fig = px.bar(grafico,
             range_y = [80000, 100000], 
             title = 'Total de decolagens por mês'
             )
-
-# ---------------------------------------- Mostrando gráfico de barras ----------------------------------------
-print('Mostrando gráfico...') # Feedback
-fig.show()

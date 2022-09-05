@@ -59,7 +59,7 @@ grafico = pd.DataFrame({
 
 # ----------------------------------------- Criando gráfico de barras -----------------------------------------
 print('Produzindo gráfico...') # Feedback
-fig = px.histogram(grafico, 
+grafico_barras_paises_origem = px.histogram(grafico, 
                     x = "Países", 
                     y = "Decolagens",
                     color = 'Ano', 
@@ -69,8 +69,3 @@ fig = px.histogram(grafico,
                     title = 'Países de origem dos voos no mês de Junho em 2013 e 2014',
                     template ='plotly_dark'
                     )
-
-
-# ---------------------------------------- Mostrando gráfico de barras ----------------------------------------
-print('Mostrando gráfico...') # Feedback
-fig.show()

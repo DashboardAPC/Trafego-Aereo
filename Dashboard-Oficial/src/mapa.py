@@ -31,7 +31,7 @@ maximo_decolagens = tabela_utils.maximo(dados, 'DECOLAGENS')
 
 # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
 print('Produzindo mapa...') # Feedback
-mapa = px.choropleth(dados,
+grafico_mapa = px.choropleth(dados,
                     template = 'plotly_dark',
                     geojson = estados_brasileiros, 
                     locations = 'AEROPORTO DE DESTINO (UF)', 
@@ -42,8 +42,3 @@ mapa = px.choropleth(dados,
                     color_continuous_scale = 'purp',
                     title = 'Estados de destino mais escolhidos'
                     )
-
-
-# ----------------------------------------- Mostrando gráfico de mapa -----------------------------------------
-print('Mostrando mapa...') # Feedback
-mapa.show()

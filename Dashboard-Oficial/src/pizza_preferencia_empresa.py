@@ -25,15 +25,10 @@ dados = tabela_utils.remover_insignificantes(dados, 'PASSAGEIROS PAGOS', 1500000
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
 print('Produzindo gráfico...') # Feedback
-setores = px.pie(dados, 
+grafico_pizza_preferencia_empresa = px.pie(dados, 
                 names = 'EMPRESA (NOME)',
                 values = 'PASSAGEIROS PAGOS', 
                 color_discrete_sequence = px.colors.qualitative.Prism, 
                 template = 'plotly_dark',
                 title = 'Empresas aéreas preferidas pelo consumidor'
                 )
-
-
-# ---------------------------------------- Mostrando gráfico de pizza ----------------------------------------
-print('Mostrando gráfico...') # Feedback
-setores.show()

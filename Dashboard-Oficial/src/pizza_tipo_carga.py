@@ -38,26 +38,28 @@ peso_2015 = tabela_utils.transposicao_eixos(peso_2015, ['Tipo de peso', 'KG'])
 # TODO transformar todas as funcoes a cima em uma unica que chama as outras
 
 
-# -------------------------------- Futuro dropdown do Dashboard (Substituir) --------------------------------
-print('De que ano gostaria de ver o grafico pizza? Digite 2013, 2014 ou 2015')
-while True:
-    ano_desejado = input()
-    if ano_desejado == '2013':
-        tabela_entrada_pizza = peso_2013
-        break
-    elif ano_desejado == '2014':
-        tabela_entrada_pizza = peso_2014
-        break
-    elif ano_desejado == '2015':
-        tabela_entrada_pizza = peso_2015
-        break
-    else:
-        print('Valor incorreto. Por favor digite 2013, 2014 ou 2015')
+# # -------------------------------- Futuro dropdown do Dashboard (Substituir) --------------------------------
+# print('De que ano gostaria de ver o grafico pizza? Digite 2013, 2014 ou 2015')
+# while True:
+#     ano_desejado = input()
+#     if ano_desejado == '2013':
+#         tabela_entrada_pizza = peso_2013
+#         break
+#     elif ano_desejado == '2014':
+#         tabela_entrada_pizza = peso_2014
+#         break
+#     elif ano_desejado == '2015':
+#         tabela_entrada_pizza = peso_2015
+#         break
+#     else:
+#         print('Valor incorreto. Por favor digite 2013, 2014 ou 2015')
 
+# ------------------------------------- Provisoriamente removendo while -------------------------------------
+tabela_entrada_pizza = peso_2013
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
 print('Produzindo gráfico...') # Feedback
-pizza = px.pie(tabela_entrada_pizza,
+grafico_pizza_tipo_carga = px.pie(tabela_entrada_pizza,
                 values = 'KG',
                 names = 'Tipo de peso',
                 hole = .4,
@@ -66,15 +68,10 @@ pizza = px.pie(tabela_entrada_pizza,
                 title = 'Percentual de peso transportado pelos aviões no Brasil em ' + ano_desejado
                 )
 
-pizza.update_traces(
+grafico_pizza_tipo_carga.update_traces(
         text =  ['CARGA PAGA', 'CARGA GRÁTIS', 'CORREIO', 'BAGAGEM'],
         textinfo = "text + percent", 
         textposition = 'outside',
         hovertemplate = '%{value} Kg',
         marker = dict(line = dict(color = 'rgb(17, 17, 17)', width = 3))
         )
-
-
-# ---------------------------------------- Mostrando gráfico de pizza ----------------------------------------
-print('Mostrando gráfico...') # Feedback
-pizza.show()
