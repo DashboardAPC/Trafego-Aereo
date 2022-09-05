@@ -64,8 +64,7 @@ grafico_pizza_tipo_carga = px.pie(tabela_entrada_pizza,
                 names = 'Tipo de peso',
                 hole = .4,
                 template = 'plotly_dark',
-                color_discrete_sequence = px.colors.qualitative.Prism,
-                title = 'Percentual de peso transportado pelos aviões no Brasil em ' + ano_desejado
+                color_discrete_sequence = px.colors.qualitative.Prism
                 )
 
 grafico_pizza_tipo_carga.update_traces(
