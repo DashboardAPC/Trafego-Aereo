@@ -6,33 +6,33 @@ import tabela_utils
 
 def cria_grafico_pizza_tipo_carga(anos):
         # ------------------------------------------ Lendo dataset ------------------------------------------
-        print('Lendo dataset...') # Feedback
+        print('5 - Lendo dataset...') # Feedback
         dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
         # ----------------------------------- Manipulando dados necessários-----------------------------------
-        print('Filtrando dados colunas necessarias do dataset...') # Feedback
+        print('5 - Filtrando dados colunas necessarias do dataset...') # Feedback
         dados = tabela_utils.filtrar_colunas(dados, ['ANO', 'CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
-        print('Removendo valores invalidos...') # Feedback
+        print('5 - Removendo valores invalidos...') # Feedback
         dados = tabela_utils.retirar_nulos(dados)
 
-        print('Separando anos...') # Feedback
-        peso_nos_anos = tabela_utils.filtrar_linhas(dados, 'ANO', anos)
+        print('5 - Separando anos...') # Feedback
+        dados = tabela_utils.filtrar_linhas(dados, 'ANO', anos) # Leva em consideração apenas linhas com 'anos' selecionados no Dropdown pelo usuario
 
-        print('Filtrando fora coluna ano...') # Feedback
-        peso_nos_anos = tabela_utils.filtrar_colunas(peso_nos_anos, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
+        print('5 - Filtrando fora coluna ano...') # Feedback
+        dados = tabela_utils.filtrar_colunas(dados, ['CARGA PAGA (KG)', 'CARGA GRÁTIS (KG)', 'CORREIO (KG)', 'BAGAGEM (KG)'])
 
-        print('Somando tudo...') # Feedback
-        peso_nos_anos = tabela_utils.soma_generica_colunas(peso_nos_anos)
+        print('5 - Somando tudo...') # Feedback
+        dados = tabela_utils.soma_generica_colunas(dados)
 
-        print('Transpondo tabelas...') # Feedback
-        peso_nos_anos = tabela_utils.transposicao_eixos(peso_nos_anos, ['Tipo de peso', 'KG'])
+        print('5 - Transpondo tabelas...') # Feedback
+        dados = tabela_utils.transposicao_eixos(dados, ['Tipo de peso', 'KG'])
 
 
         # ------------------------------------ Criando gráfico de pizza ------------------------------------
-        print('Produzindo gráfico...') # Feedback
-        grafico_pizza_tipo_carga = px.pie(peso_nos_anos,
+        print('5 - Produzindo gráfico...') # Feedback
+        grafico_pizza_tipo_carga = px.pie(dados,
                         values = 'KG',
                         names = 'Tipo de peso',
                         hole = .4,

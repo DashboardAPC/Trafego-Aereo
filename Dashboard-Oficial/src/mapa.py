@@ -6,31 +6,31 @@ import json
 
 
 # --------------------------------------- Criando geometria do Brasil ---------------------------------------
-print('Lendo geometria...') # Feedback
+print('3 - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-print('Lendo dataset...') # Feedback
+print('3 - Lendo dataset...') # Feedback
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-print('Filtrando colunas...') # Feedback
+print('3 - Filtrando colunas...') # Feedback
 dados = tabela_utils.filtrar_colunas(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
 
-print('Retirando valores nulos...') # Feedback
+print('3 - Retirando valores nulos...') # Feedback
 dados = tabela_utils.retirar_nulos(dados)
 
-print('Somando por categoria...') # Feedback
+print('3 - Somando por categoria...') # Feedback
 dados = tabela_utils.soma_por_categoria(dados, 'AEROPORTO DE DESTINO (UF)', 'DECOLAGENS')
 
-print('Calculando valor máximo...') # Feedback
+print('3 - Calculando valor máximo...') # Feedback
 maximo_decolagens = tabela_utils.maximo(dados, 'DECOLAGENS')
 
 
 # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
-print('Produzindo mapa...') # Feedback
+print('3 - Produzindo mapa...') # Feedback
 grafico_mapa = px.choropleth(dados,
                     template = 'plotly_dark',
                     geojson = estados_brasileiros, 

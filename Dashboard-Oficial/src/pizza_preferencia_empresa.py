@@ -5,26 +5,26 @@ import tabela_utils
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-print('Lendo dataset...') # Feedback
+print('4 - Lendo dataset...') # Feedback
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-print('Filtrando os dados...') # Feedback
+print('4 - Filtrando os dados...') # Feedback
 dados = tabela_utils.filtrar_colunas(dados, ['ANO', 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS'])
 
-print('Retirando os nulos...') # Feedback
+print('4 - Retirando os nulos...') # Feedback
 dados = tabela_utils.retirar_nulos(dados)
 
-print('Somando por categoria...') # Feedback
+print('4 - Somando por categoria...') # Feedback
 dados = tabela_utils.soma_por_categoria(dados, 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS')
 
-print('Separando empresas com contribuição ínfima...') # Feedback
+print('4 - Separando empresas com contribuição ínfima...') # Feedback
 dados = tabela_utils.remover_insignificantes(dados, 'PASSAGEIROS PAGOS', 1500000)
 
 
 # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
-print('Produzindo gráfico...') # Feedback
+print('4 - Produzindo gráfico...') # Feedback
 grafico_pizza_preferencia_empresa = px.pie(dados, 
                 names = 'EMPRESA (NOME)',
                 values = 'PASSAGEIROS PAGOS', 
