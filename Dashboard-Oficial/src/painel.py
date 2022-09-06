@@ -110,22 +110,19 @@ app.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col([
-            dbc.Row(bloco_g1, style = {'height': '50vh'}),
-            dbc.Row(bloco_g2, style = {'height': '50vh'})
-        ], md=4),
-        
-        dbc.Col([
             dbc.Row(bloco_g4, style = {'height': '50vh'}),
             dbc.Row(bloco_g5, style = {'height': '50vh'})
-        ], md=3),
-
+        ], md = 5),
         dbc.Col([
             dbc.Row(bloco_g3, style = {'height': '100vh'})
-        ], md=5)
+        ], md = 7),
+    ], className = "g-0"),
+        
+    dbc.Row(bloco_g1, style = {'height': '100vh'}),
+    
+    dbc.Row(bloco_g2, style = {'height': '100vh'})
 
-    ], className="g-0")
-
-], fluid=True)
+], fluid = True)
 
 
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
