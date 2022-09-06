@@ -1,5 +1,6 @@
 # ----------------------------------------- Importando bibliotecas -----------------------------------------
 from dash import Dash, html, dcc, Output, Input
+import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
 from barras_paises_origem import grafico_barras_paises_origem
@@ -9,144 +10,125 @@ from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
 
 # ---------------------------------------------- Criando dash ----------------------------------------------
-app = Dash(__name__)
+app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
 
-# ---------------------------------- Definindo constantes de customização ----------------------------------
-cores_texto = {
-    'fundo_texto': '#111111',
-    'texto': '#7FDBFF'
-}
+# --------------------------------------- Criando Bloco de Títulos ---------------------------------------
+bloco_titulo = [
+    html.H1(
+        children = 'Trafego Aéreo no Brasil',
+        style = {
+            'textAlign': 'center',
+            'fontSize': '150%',
+            'fontFamily': ['Brush Script MT', 'cursive']
+        }
+    ),
+
+    html.H2(
+        children = 'Os 5 graficos:',
+        style = {
+            'textAlign': 'center',
+            'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
+        }
+    )
+]
+
+# --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
+bloco_g1 = [
+    dcc.Graph(
+        id = 'grafico_barras_data_pico',
+        figure = grafico_barras_data_pico
+    )
+]
+
+# --------------------------------------- Criando Bloco do Gráfico 2 ---------------------------------------
+bloco_g2 = [
+    dcc.Graph(
+        id='grafico_barras_paises_origem',
+        figure = grafico_barras_paises_origem
+    )    
+]
+
+# --------------------------------------- Criando Bloco do Gráfico 3 ---------------------------------------
+bloco_g3 = [
+    dcc.Graph(
+        id = 'grafico_mapa',
+        figure = grafico_mapa
+    )
+]
+
+# --------------------------------------- Criando Bloco do Gráfico 4 ---------------------------------------
+bloco_g4 = [
+    dcc.Graph(
+        id = 'grafico_pizza_preferencia_empresa',
+        figure = grafico_pizza_preferencia_empresa
+    )
+]
+
+# --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
+bloco_g5 = [
+    html.H5(
+        children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
+        id = 'titulo_grafico_pizza_tipo_carga',
+        style = {
+            'textAlign': 'center',
+            'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+            'backgroundColor': '#111111'
+        }
+    ),
+
+    html.Label(
+        children = 'Selecione os anos que deseja analizar',
+        style = {
+            'fontFamily': ['Brush Script MT', 'cursive'],
+            'backgroundColor': '#111111'
+        }
+    ),
+
+    dcc.Dropdown(
+        id = 'filtro_ano',
+        options = ['2013', '2014', '2015'], 
+        value = ['2013', '2014', '2015'], 
+        multi = True,
+        style = {
+            'fontFamily': ['Brush Script MT', 'cursive'],
+            'backgroundColor': '#111111'
+        }
+    ),
+
+    dcc.Graph(
+        id = 'grafico_pizza_tipo_carga',
+        figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015'])
+    )
+]
 
 
 # --------------------------------------------- Criando layout ---------------------------------------------
-app.layout = html.Div([
+app.layout = dbc.Container([
 
-    # -------------------------- Titulos --------------------------
-    html.Div(
-        style = {'backgroundColor': cores_texto['fundo_texto']},
-        children = [
-            html.H1(
-                children = 'Trafego Aéreo no Brasil',
-                style = {
-                    'textAlign': 'center',
-                   ' fontSize': '150%',
-                    'fontFamily': ['Brush Script MT', 'cursive'],
-                    'color': cores_texto['texto']
-                }
-            ),
+    dbc.Row(bloco_titulo, style = {'height': '100vh'}),
 
-            html.H2(
-                children = 'Os 5 graficos:',
-                style = {
-                    'textAlign': 'center',
-                    'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
-                    'color': cores_texto['texto']
-                }
-            )
-        ]
-    ),
+    dbc.Row([
+        dbc.Col([
+            dbc.Row(bloco_g1, style = {'height': '50vh'}),
+            dbc.Row(bloco_g2, style = {'height': '50vh'})
+        ], md=4),
+        
+        dbc.Col([
+            dbc.Row(bloco_g4, style = {'height': '50vh'}),
+            dbc.Row(bloco_g5, style = {'height': '50vh'})
+        ], md=3),
 
-    # --------------------- Primeiro Grafico ---------------------
-    html.Div(
-        style = {
-            'width': '100%',
-            'padding': '0 20'
-        },
-        children = [
-            dcc.Graph(
-                id = 'grafico_mapa',
-                figure = grafico_mapa
-            )
-        ]
-    ),
-    
-    # --------------------- Segundo Grafico ---------------------
-    html.Div(
-        style = {
-            'width': '100%', 
-            'padding': '0 20'
-        },
-        children = [
-            dcc.Graph(
-                id='grafico_barras_paises_origem',
-                figure = grafico_barras_paises_origem
-            )
-        ]
-    ),
+        dbc.Col([
+            dbc.Row(bloco_g3, style = {'height': '100vh'})
+        ], md=5)
 
-    # --------------------- Terceiro Grafico ---------------------
-    html.Div(
-        style = {
-            'width': '100%', 
-            'padding': '0 20'
-        },
-        children = [
-            dcc.Graph(
-                id = 'grafico_barras_data_pico',
-                figure = grafico_barras_data_pico
-            )
-        ]
-    ),
-    
-    # --------------------- Quarto Grafico ---------------------
-    html.Div(
-        style = {
-            'width': '100%', 
-            'padding': '0 20'
-        },
-        children = [
-            dcc.Graph(
-                id = 'grafico_pizza_preferencia_empresa',
-                figure = grafico_pizza_preferencia_empresa
-            )
-        ]
-    ),
+    ], className="g-0")
 
-    # --------------------- Quinto Grafico ---------------------
-    html.Div(
-        style = {
-            'backgroundColor': cores_texto['fundo_texto'],
-            'width': '100%', 
-            'padding': '0 20'
-        },
-        children = [
-            html.H2(
-                children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
-                id = 'titulo_grafico_pizza_tipo_carga',
-                style = {
-                    'textAlign': 'center',
-                    'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
-                    'color': cores_texto['texto']
-                }
-            ),
-            html.Label(
-                children = 'Selecione os anos que deseja analizar',
-                style = {
-                    'fontFamily': ['Brush Script MT', 'cursive'],
-                    'color': cores_texto['texto'],
-                }
-            ),
-            dcc.Dropdown(
-                id = 'filtro_ano',
-                options = ['2013', '2014', '2015'], 
-                value = ['2013', '2014', '2015'], 
-                multi = True,
-                style = {
-                    'fontFamily': ['Brush Script MT', 'cursive'],
-                    'color': cores_texto['texto'],
-                }
-            ),
-            dcc.Graph(
-                id = 'grafico_pizza_tipo_carga',
-                figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015'])
-            )
-        ]
-    )
-])
+], fluid=True)
 
 
-# -------------------------------------- Interatividade Quinto Grafico --------------------------------------
+# ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
 @app.callback(
     Output(component_id = 'titulo_grafico_pizza_tipo_carga', component_property = 'children'),
     Input(component_id = 'filtro_ano', component_property = 'value')

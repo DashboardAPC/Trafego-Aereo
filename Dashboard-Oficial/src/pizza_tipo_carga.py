@@ -45,7 +45,8 @@ def cria_grafico_pizza_tipo_carga(anos):
                 textinfo = "text + percent", 
                 textposition = 'outside',
                 hovertemplate = '%{value} Kg',
-                marker = dict(line = dict(color = 'rgb(17, 17, 17)', width = 3))
+                marker = dict(line = dict(color = '#111111', width = 3)),
+                showlegend = False
                 )
         
 
