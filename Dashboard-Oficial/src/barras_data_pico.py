@@ -8,28 +8,28 @@ import tabela_utils
 def faztudo(tabela : pd.DataFrame):
     tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
     tabela = tabela_utils.filtrar_colunas(tabela, ['DECOLAGENS'])
-    tabela = (tabela['DECOLAGENS'].to_list())
+    tabela = (tabela['DECOLAGENS'].to_list()) # TODO: Isso é uma função do pandas!!! temos uma funcao prorpria que chega no mesmo resultado
     return tabela
 
 
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
-print('Lendo dataset...') # Feedback
+print('1 - Lendo dataset...') # Feedback
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------
-print('Filtrando os dados...') # Feedback
+print('1 - Filtrando os dados...') # Feedback
 filtrado = tabela_utils.filtrar_colunas(dados, ['ANO', 'MÊS', 'DECOLAGENS'])
 
-print('Retirando os nulos...') # Feedback
+print('1 - Retirando os nulos...') # Feedback
 sem_nulo = tabela_utils.retirar_nulos(filtrado)
 
-print('Separando anos...') # Feedback
+print('1 - Separando anos...') # Feedback
 ano_1 = tabela_utils.filtrar_linhas(sem_nulo, 'ANO', '2013.0')
 ano_2 = tabela_utils.filtrar_linhas(sem_nulo, 'ANO', '2014.0')
 ano_3 = tabela_utils.filtrar_linhas(sem_nulo, 'ANO', '2015.0')
 
-print('Fazendo mágica...') # Feedback
+print('1 - Fazendo mágica...') # Feedback
 ano_2013 = faztudo(ano_1)
 ano_2014 = faztudo(ano_2)
 ano_2015 = faztudo(ano_3)
@@ -48,8 +48,8 @@ grafico = pd.DataFrame({
 
 
 # ----------------------------------------- Criando gráfico de barras -----------------------------------------
-print('Produzindo gráfico...') # Feedback
-fig = px.bar(grafico, 
+print('1 - Produzindo gráfico...') # Feedback
+grafico_barras_data_pico = px.bar(grafico, 
             x = "Mês", 
             y = "Decolagens", 
             color = "Ano", 
@@ -59,7 +59,3 @@ fig = px.bar(grafico,
             range_y = [80000, 100000], 
             title = 'Total de decolagens por mês'
             )
-
-# ---------------------------------------- Mostrando gráfico de barras ----------------------------------------
-print('Mostrando gráfico...') # Feedback
-fig.show()
