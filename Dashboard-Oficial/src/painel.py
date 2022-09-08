@@ -33,6 +33,20 @@ bloco_titulo = [
     )
 ]
 
+
+# # --------------------------------------- Criando Barra de Navegação --------------------------------------- TODO WIP
+# barra_navegacao = dbc.Nav([
+#         dbc.NavItem(dbc.NavLink('ir começo', href = '#')),
+#         dbc.NavItem(dbc.NavLink('ir mapa e pizza', href = '#tela_1')),
+#         dbc.NavItem(dbc.NavLink('ir barra 1', href = '#tela_2')),
+#         dbc.NavItem(dbc.NavLink('ir barra 2', href = '#tela_3')),
+#     ],
+#     navbar_scroll=True,
+#     # vertical = 'md', 
+#     pills = True,
+# )
+
+
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
 bloco_g1 = [
     dcc.Graph(
@@ -105,8 +119,21 @@ bloco_g5 = [
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
+    # dbc.NavbarSimple( 
+    #     children = barra_navegacao,
+    #     color = 'secondary',
+    #     dark = True
+    #     ),TODO WIP
 
-    dbc.Row(bloco_titulo, style = {'height': '100vh'}),
+    dbc.Row(
+        children = bloco_titulo, 
+        style = {
+            'height': '100vh', 
+            'background': 'url("/assets/fundo_dash.jpg") no-repeat', 
+            'background-position': 'center', 
+            'background-size': 'cover'
+        }
+    ),
 
     dbc.Row([
         dbc.Col([
@@ -120,7 +147,7 @@ app.layout = dbc.Container([
         
     dbc.Row(bloco_g1, style = {'height': '100vh'}),
     
-    dbc.Row(bloco_g2, style = {'height': '100vh'})
+    dbc.Row(bloco_g2, style = {'height': '100vh', 'box-shadow' : '2px 2px 10px rgba(100, 9, 50, 0.10)','margin':'10px','padding':'10px'}) #TODO WIP
 
 ], fluid = True)
 
@@ -137,7 +164,7 @@ def interatividade_titulo_pizza_tipo_carga(value): # Muda os anos no titulo html
         anos = value[0]
     else:
         value = sorted(value)
-        anos = str(", ".join(value[:-1])) + ' e ' + str(value[-1])
+        anos = str(', '.join(value[:-1])) + ' e ' + str(value[-1])
     return f'Percentual de peso transportado pelos aviões no Brasil em {anos}'
 
 @app.callback(
