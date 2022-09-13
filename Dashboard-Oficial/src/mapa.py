@@ -4,13 +4,13 @@ import plotly.express as px
 import tabela_utils
 import json
 
-DF={'lat':-15.7975,'lon':-47.8919}
-
 print('mapa - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('mapa - Lendo dataset...') # Feedback
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
+print('mapa - Lendo coordenadas...')
+coords = pd.read_csv('Dashboard-Oficial\data\coord-estados.csv')
 
 def criar_mapa(ano='2013', estado='DF'):
     # --------------------------------------- Manipulando dados necessarios---------------------------------------
@@ -29,12 +29,14 @@ def criar_mapa(ano='2013', estado='DF'):
     print('mapa - Calculando valor máximo...') # Feedback
     maximo_decolagens = tabela_utils.maximo(mapa , 'DECOLAGENS')
 
+    coordenadas_estado = coords.to_dict()[estado]
+
     # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
     print('mapa - Produzindo mapa...') # Feedback
     grafico_mapa = px.choropleth_mapbox(mapa,
                         mapbox_style='carto-positron',
                         zoom=5,
-                        center=DF,
+                        center=coordenadas_estado,
                         geojson = estados_brasileiros, 
                         locations = 'AEROPORTO DE DESTINO (UF)', 
                         color = 'DECOLAGENS', 
