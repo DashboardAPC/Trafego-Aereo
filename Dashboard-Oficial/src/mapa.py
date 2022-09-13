@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import tabela_utils
 import json
-
+# Testes WSL
 
 # --------------------------------------- Criando geometria do Brasil ---------------------------------------
 print('mapa - Lendo geometria...') # Feedback
