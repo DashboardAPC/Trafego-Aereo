@@ -3,7 +3,7 @@ from dash import Dash, html, dcc, Output, Input
 import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
-from barras_paises_origem import grafico_barras_paises_origem
+from barras_paises_origem import cria_grafico_barras_paises_origem
 from mapa import grafico_mapa
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
@@ -45,7 +45,7 @@ bloco_g1 = [
 bloco_g2 = [
     dcc.Graph(
         id='grafico_barras_paises_origem',
-        figure = grafico_barras_paises_origem
+        figure = cria_grafico_barras_paises_origem(['2013', '2014'], ['7'], ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'CHILE', 'EMIRADOS ÁRABES UNIDOS'])
     )    
 ]
 
