@@ -5,6 +5,7 @@ import tabela_utils
 import json
 
 
+DF={'lat':-15.7975,'lon':-47.8919}
 # --------------------------------------- Criando geometria do Brasil ---------------------------------------
 print('mapa - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
@@ -15,7 +16,7 @@ dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', e
 def criar_mapa(ano='2013', estado='DF'):
     # --------------------------------------- Manipulando dados necessarios---------------------------------------
     print('mapa - filtrando linhas')
-    mapa = tabela_utils.filtrar_linhas(dados,[ano])
+    mapa = tabela_utils.filtrar_linhas(dados,'ANO',[ano])
 
     print('mapa - Filtrando colunas...') # Feedback
     mapa = tabela_utils.filtrar_colunas(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
@@ -31,14 +32,18 @@ def criar_mapa(ano='2013', estado='DF'):
 
     # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
     print('mapa - Produzindo mapa...') # Feedback
-    grafico_mapa = px.choropleth(dados,
-                        template = 'plotly_dark',
+    grafico_mapa = px.choropleth_mapbox(dados,
+                        mapbox_style='carto-positron',
+                        zoom=3,
+                        center=DF,
                         geojson = estados_brasileiros, 
                         locations = 'AEROPORTO DE DESTINO (UF)', 
                         color = 'DECOLAGENS', 
                         range_color = (0, maximo_decolagens/4), # Resolve problema de SP ser o unico estado colorido
                         hover_data = ['AEROPORTO DE DESTINO (UF)'], 
-                        scope = 'south america',
                         color_continuous_scale = 'purp',
                         title = 'Estados de destino mais escolhidos'
                         )
+    return grafico_mapa
+
+criar_mapa().show()
