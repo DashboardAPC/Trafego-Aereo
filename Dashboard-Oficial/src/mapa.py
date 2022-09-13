@@ -4,9 +4,7 @@ import plotly.express as px
 import tabela_utils
 import json
 
-
 DF={'lat':-15.7975,'lon':-47.8919}
-# --------------------------------------- Criando geometria do Brasil ---------------------------------------
 print('mapa - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
@@ -44,6 +42,9 @@ def criar_mapa(ano='2013', estado='DF'):
                         color_continuous_scale = 'purp',
                         title = 'Estados de destino mais escolhidos'
                         )
+<<<<<<< HEAD
     return grafico_mapa
 
 criar_mapa().show()
+=======
+>>>>>>> e3453a8923b8fb876b7aedc82d82d112b92e864d
