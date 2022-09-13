@@ -4,7 +4,7 @@ import plotly.express as px
 import tabela_utils
 import json
 # Testes WSL
-
+import http.server:
 # --------------------------------------- Criando geometria do Brasil ---------------------------------------
 print('mapa - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
