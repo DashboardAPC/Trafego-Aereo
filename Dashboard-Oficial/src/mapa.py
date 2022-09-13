@@ -5,6 +5,7 @@ import tabela_utils
 import json
 
 DF={'lat':-15.7975,'lon':-47.8919}
+
 print('mapa - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
@@ -17,7 +18,7 @@ def criar_mapa(ano='2013', estado='DF'):
     mapa = tabela_utils.filtrar_linhas(dados,'ANO',[ano])
 
     print('mapa - Filtrando colunas...') # Feedback
-    mapa = tabela_utils.filtrar_colunas(dados, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
+    mapa = tabela_utils.filtrar_colunas(mapa, ['AEROPORTO DE DESTINO (UF)', 'DECOLAGENS'])
 
     print('mapa - Retirando valores nulos...') # Feedback
     mapa = tabela_utils.retirar_nulos(mapa)
@@ -30,9 +31,9 @@ def criar_mapa(ano='2013', estado='DF'):
 
     # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
     print('mapa - Produzindo mapa...') # Feedback
-    grafico_mapa = px.choropleth_mapbox(dados,
+    grafico_mapa = px.choropleth_mapbox(mapa,
                         mapbox_style='carto-positron',
-                        zoom=3,
+                        zoom=5,
                         center=DF,
                         geojson = estados_brasileiros, 
                         locations = 'AEROPORTO DE DESTINO (UF)', 
@@ -40,11 +41,10 @@ def criar_mapa(ano='2013', estado='DF'):
                         range_color = (0, maximo_decolagens/4), # Resolve problema de SP ser o unico estado colorido
                         hover_data = ['AEROPORTO DE DESTINO (UF)'], 
                         color_continuous_scale = 'purp',
-                        title = 'Estados de destino mais escolhidos'
+                        title = 'Estados de destino mais escolhidos',
                         )
-<<<<<<< HEAD
     return grafico_mapa
 
-criar_mapa().show()
-=======
->>>>>>> e3453a8923b8fb876b7aedc82d82d112b92e864d
+if __name__=="__main__"
+    meu_mapa = criar_mapa()
+    meu_mapa.show()
