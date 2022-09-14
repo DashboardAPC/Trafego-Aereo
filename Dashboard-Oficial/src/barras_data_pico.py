@@ -15,7 +15,7 @@ def faztudo(tabela : pd.DataFrame):
 data = Path('Dashboard-Oficial/data')
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('1 - Lendo dataset...') # Feedback
-dados = pd.read_csv(data / 'ANAC20XX-13-14-15', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
+dados = pd.read_csv(data / 'ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 
 # --------------------------------------- Manipulando dados necessarios---------------------------------------

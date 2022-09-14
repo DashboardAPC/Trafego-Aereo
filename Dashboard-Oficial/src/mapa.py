@@ -3,15 +3,18 @@ import pandas as pd
 import plotly.express as px
 import tabela_utils
 import json
-import dash_bootstrap_components as dbc
+from pathlib import Path
 
+data = Path('Dashboard-Oficial/data/')
 print('mapa - Lendo geometria...') # Feedback
-estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
+estados_brasileiros = json.load(open(data / 'brasil_estados.json'))
+
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('mapa - Lendo dataset...') # Feedback
-dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
+dados = pd.read_csv(data / 'ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
+
 print('mapa - Lendo coordenadas...')
-coords = pd.read_csv('Dashboard-Oficial\data\coord-estados.csv')
+coords = pd.read_csv(data / 'coord-estados.csv')
 
 def criar_lista_dropdowns():
     resultado=[]
