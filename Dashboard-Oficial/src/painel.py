@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
 from barras_paises_origem import grafico_barras_paises_origem
-from mapa import grafico_mapa
+from mapa import criar_mapa, criar_lista_dropdowns
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
@@ -51,9 +51,15 @@ bloco_g2 = [
 
 # --------------------------------------- Criando Bloco do Gráfico 3 ---------------------------------------
 bloco_g3 = [
+    dbc.ButtonGroup(
+                 [dbc.Button("2013"),
+                  dbc.Button("2014"),
+                  dbc.Button("2015")]
+    ),
+    dcc.Dropdown(criar_lista_dropdowns(), 'DF', id='escolha-estado'),
     dcc.Graph(
         id = 'grafico_mapa',
-        figure = grafico_mapa
+        figure = criar_mapa()
     )
 ]
 

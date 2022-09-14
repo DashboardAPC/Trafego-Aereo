@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import tabela_utils
 import json
+import dash_bootstrap_components as dbc
 
 print('mapa - Lendo geometria...') # Feedback
 estados_brasileiros = json.load(open('Dashboard-Oficial/data/brasil_estados.json'))
@@ -11,6 +12,22 @@ print('mapa - Lendo dataset...') # Feedback
 dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 print('mapa - Lendo coordenadas...')
 coords = pd.read_csv('Dashboard-Oficial\data\coord-estados.csv')
+
+def criar_lista_dropdowns():
+    resultado=[]
+    valores_coordenadas=coords.values.tolist()
+    for linha in valores_coordenadas:
+        resultado.append(linha[0])
+    return sorted(resultado)
+
+def ler_coordenadas(tabela : pd.DataFrame, estado: str):
+    valores = tabela.values.tolist()
+    resultado = {'lat':0,'lon':0}
+    for linha in valores:
+        if linha[0]==estado:
+            resultado['lat']=linha[1]
+            resultado['lon']=linha[2]
+    return resultado
 
 def criar_mapa(ano='2013', estado='DF'):
     # --------------------------------------- Manipulando dados necessarios---------------------------------------
@@ -29,14 +46,12 @@ def criar_mapa(ano='2013', estado='DF'):
     print('mapa - Calculando valor máximo...') # Feedback
     maximo_decolagens = tabela_utils.maximo(mapa , 'DECOLAGENS')
 
-    coordenadas_estado = coords.to_dict()[estado]
-
     # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
     print('mapa - Produzindo mapa...') # Feedback
     grafico_mapa = px.choropleth_mapbox(mapa,
                         mapbox_style='carto-positron',
                         zoom=5,
-                        center=coordenadas_estado,
+                        center=ler_coordenadas(coords,estado),
                         geojson = estados_brasileiros, 
                         locations = 'AEROPORTO DE DESTINO (UF)', 
                         color = 'DECOLAGENS', 
@@ -45,8 +60,11 @@ def criar_mapa(ano='2013', estado='DF'):
                         color_continuous_scale = 'purp',
                         title = 'Estados de destino mais escolhidos',
                         )
+
+    grafico_mapa.update_layout(transition_duration=300)    
+
     return grafico_mapa
 
-if __name__=="__main__"
+if __name__=="__main__":
     meu_mapa = criar_mapa()
     meu_mapa.show()
