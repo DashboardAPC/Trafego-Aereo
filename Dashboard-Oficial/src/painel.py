@@ -56,7 +56,7 @@ bloco_g3 = [
                   dbc.Button("2014"),
                   dbc.Button("2015")]
     ),
-    dcc.Dropdown(criar_lista_dropdowns(), 'DF', id='escolha-estado'),
+    dbc.Input(placeholder="DF, BA, SP...",type="text",id='escolha-estado'),
     dcc.Graph(
         id = 'grafico_mapa',
         figure = criar_mapa()

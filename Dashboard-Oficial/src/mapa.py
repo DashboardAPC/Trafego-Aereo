@@ -61,8 +61,6 @@ def criar_mapa(ano='2013', estado='DF'):
                         title = 'Estados de destino mais escolhidos',
                         )
 
-    grafico_mapa.update_layout(transition_duration=300)    
-
     return grafico_mapa
 
 if __name__=="__main__":
