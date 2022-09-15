@@ -10,11 +10,14 @@ from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
 # ---------------------------------------------- Estilização ----------------------------------------------
 dicionario_estilo_blocos = {
-    'height': '100vh', 
     # 'box-shadow' : '2px 2px 10px rgba(100, 9, 50, 0.10)',
-    'margin':'10vh',
-    'padding':'10vh'
-}
+    'padding':'5vh',
+    'height': '100vh', 
+    # 'marginLeft': 10, 
+    # 'marginRight': 10, 
+    'marginTop': 15, 
+    'marginBottom': 15
+    }
 
 
 # ---------------------------------------------- Criando dash ----------------------------------------------
@@ -43,16 +46,16 @@ bloco_titulo = [
 
 
 # # --------------------------------------- Criando Barra de Navegação --------------------------------------- TODO WIP
-barra_navegacao = dbc.Nav([
-        dbc.NavItem(dbc.NavLink('ir começo', href = '#')),
-        dbc.NavItem(dbc.NavLink('ir mapa e pizza', href = '#tela_1')),
-        dbc.NavItem(dbc.NavLink('ir barra 1', href = '#tela_2')),
-        dbc.NavItem(dbc.NavLink('ir barra 2', href = '#tela_3')),
-    ],
-    navbar_scroll=True,
-    # vertical = 'md', 
-    pills = True,
-)
+# barra_navegacao = dbc.Nav([
+#         dbc.NavItem(dbc.NavLink('ir começo', href = '#')),
+#         dbc.NavItem(dbc.NavLink('ir mapa e pizza', href = '#tela_1')),
+#         dbc.NavItem(dbc.NavLink('ir barra 1', href = '#tela_2')),
+#         dbc.NavItem(dbc.NavLink('ir barra 2', href = '#tela_3')),
+#     ],
+#     navbar_scroll=True,
+#     # vertical = 'md', 
+#     pills = True,
+# )
 
 
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
@@ -93,16 +96,20 @@ bloco_g5 = [
         children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
         id = 'titulo_grafico_pizza_tipo_carga',
         style = {
+            'margin': '0px',
+            'fontSize': '150%',
+            # 'padding': '0px 0px',
             'textAlign': 'center',
             'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
             'backgroundColor': '#111111'
-            
         }
     ),
 
     html.Label(
         children = 'Selecione os anos que deseja analizar',
         style = {
+            'display': 'block',
+            # 'padding': '0px 0px',
             'fontFamily': ['Brush Script MT', 'cursive'],
             'backgroundColor': '#111111'
         }
@@ -115,26 +122,27 @@ bloco_g5 = [
         multi = True,
         style = {
             'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111'
+            'backgroundColor': '#111111',
         }
     ),
 
     dcc.Graph(
         id = 'grafico_pizza_tipo_carga',
-        figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015'])
+        figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']),
+        style = {'padding': '0px 0px'} # TODO Fazer isso para todos os graficos
     )
 ]
 
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
-    dbc.NavbarSimple( 
-        children = barra_navegacao,
-        color = 'primary',
-        dark = True, 
-        # fixed = 'top',
-        sticky = 'top'
-        ),#TODO WIP
+    # dbc.NavbarSimple( 
+    #     children = barra_navegacao,
+    #     color = 'primary',
+    #     dark = True, 
+    #     # fixed = 'top',
+    #     sticky = 'top'
+    #     ),#TODO WIP
 
     dbc.Row(
         children = bloco_titulo, 
@@ -148,17 +156,23 @@ app.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col([
-            dbc.Row(bloco_g4, style = {'height': '50vh', 'margin':'5vh'}),
-            dbc.Row(bloco_g5, style = {'height': '50vh', 'margin':'5vh'})
+            dbc.Row(bloco_g1, style = dicionario_estilo_blocos)
         ], md = 5),
         dbc.Col([
-            dbc.Row(bloco_g3, style = {'height': '100vh', 'margin':'5vh'})
+            dbc.Row(bloco_g3, style = dicionario_estilo_blocos)
         ], md = 7),
-    ], className = "g-0"),
+    ], className = 'g-0'),
         
-    dbc.Row(bloco_g1, style = dicionario_estilo_blocos),
-    
-    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, id='tela_1')
+    dbc.Row([
+        dbc.Col([
+            dbc.Row(bloco_g5, style = dicionario_estilo_blocos),
+        ], md = 5),
+        dbc.Col([
+            dbc.Row(bloco_g4, style = dicionario_estilo_blocos)
+        ], md = 7),
+    ], className = 'g-0'),
+
+    dbc.Row(bloco_g2, style = dicionario_estilo_blocos)
 
 ], fluid = True)
 
@@ -183,9 +197,9 @@ def interatividade_titulo_pizza_tipo_carga(value): # Muda os anos no titulo html
     Input(component_id = 'filtro_ano', component_property = 'value')
 )
 def interatividade_grafico_pizza_tipo_carga(value): # Muda os valores que serão considerados na criação do gráfico
-    anos = [float(item) for item in value] # TODO: Essa adaptacao horrivel pode ser removida se descobrirmos pq filtrar nulos esta transformando os numeros em float
+    anos = [float(item) for item in value] # Adaptação é necessaria pra corrigir os valores de entrada que devem ser no formato 2013.0 e não 2013
     anos = [str(item) for item in anos]
-    if value == []: # No caso especifico do usuario limpar o Dropdown deve mostrar por padrao de todos os anos
+    if value == []: # No caso especifico do usuario limpar o Dropdown deve mostrar por padrao todos os anos
         anos = ['2013.0', '2014.0', '2015.0']
     return cria_grafico_pizza_tipo_carga(anos)
 
