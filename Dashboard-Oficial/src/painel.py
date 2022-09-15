@@ -43,9 +43,12 @@ bloco_g1 = [
 
 # --------------------------------------- Criando Bloco do Gráfico 2 ---------------------------------------
 bloco_g2 = [
+
+
+    
     dcc.Graph(
         id='grafico_barras_paises_origem',
-        figure = cria_grafico_barras_paises_origem(['2013', '2014'], ['7'], ['ESTADOS UNIDOS DA AMÉRICA', 'MÉXICO', 'ARGENTINA', 'CHILE', 'EMIRADOS ÁRABES UNIDOS'])
+        figure = cria_grafico_barras_paises_origem(['2015'], ['2'], ['FRANÇA', 'ITÁLIA', 'PORTUGAL', 'PANAMÁ', 'BOLÍVIA'])
     )    
 ]
 
@@ -127,6 +130,7 @@ app.layout = dbc.Container([
 
 ], fluid=True)
 
+# ----------------------------------- Interatividade Bloco do Gráfico 2 -----------------------------------
 
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
 @app.callback(
