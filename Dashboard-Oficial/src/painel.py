@@ -8,6 +8,14 @@ from mapa import grafico_mapa
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
+# ---------------------------------------------- Estilização ----------------------------------------------
+dicionario_estilo_blocos = {
+    'height': '100vh', 
+    # 'box-shadow' : '2px 2px 10px rgba(100, 9, 50, 0.10)',
+    'margin':'10vh',
+    'padding':'10vh'
+}
+
 
 # ---------------------------------------------- Criando dash ----------------------------------------------
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
@@ -35,16 +43,16 @@ bloco_titulo = [
 
 
 # # --------------------------------------- Criando Barra de Navegação --------------------------------------- TODO WIP
-# barra_navegacao = dbc.Nav([
-#         dbc.NavItem(dbc.NavLink('ir começo', href = '#')),
-#         dbc.NavItem(dbc.NavLink('ir mapa e pizza', href = '#tela_1')),
-#         dbc.NavItem(dbc.NavLink('ir barra 1', href = '#tela_2')),
-#         dbc.NavItem(dbc.NavLink('ir barra 2', href = '#tela_3')),
-#     ],
-#     navbar_scroll=True,
-#     # vertical = 'md', 
-#     pills = True,
-# )
+barra_navegacao = dbc.Nav([
+        dbc.NavItem(dbc.NavLink('ir começo', href = '#')),
+        dbc.NavItem(dbc.NavLink('ir mapa e pizza', href = '#tela_1')),
+        dbc.NavItem(dbc.NavLink('ir barra 1', href = '#tela_2')),
+        dbc.NavItem(dbc.NavLink('ir barra 2', href = '#tela_3')),
+    ],
+    navbar_scroll=True,
+    # vertical = 'md', 
+    pills = True,
+)
 
 
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
@@ -81,13 +89,14 @@ bloco_g4 = [
 
 # --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
 bloco_g5 = [
-    html.H5(
+    html.H6(
         children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
         id = 'titulo_grafico_pizza_tipo_carga',
         style = {
             'textAlign': 'center',
             'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
             'backgroundColor': '#111111'
+            
         }
     ),
 
@@ -101,7 +110,7 @@ bloco_g5 = [
 
     dcc.Dropdown(
         id = 'filtro_ano',
-        options = ['2013', '2014', '2015'], 
+        options = ['2013', '2014', '2015'], # TODO como obter anos lendo o dataset
         value = ['2013', '2014', '2015'], 
         multi = True,
         style = {
@@ -119,11 +128,13 @@ bloco_g5 = [
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
-    # dbc.NavbarSimple( 
-    #     children = barra_navegacao,
-    #     color = 'secondary',
-    #     dark = True
-    #     ),TODO WIP
+    dbc.NavbarSimple( 
+        children = barra_navegacao,
+        color = 'primary',
+        dark = True, 
+        # fixed = 'top',
+        sticky = 'top'
+        ),#TODO WIP
 
     dbc.Row(
         children = bloco_titulo, 
@@ -137,17 +148,17 @@ app.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col([
-            dbc.Row(bloco_g4, style = {'height': '50vh'}),
-            dbc.Row(bloco_g5, style = {'height': '50vh'})
+            dbc.Row(bloco_g4, style = {'height': '50vh', 'margin':'5vh'}),
+            dbc.Row(bloco_g5, style = {'height': '50vh', 'margin':'5vh'})
         ], md = 5),
         dbc.Col([
-            dbc.Row(bloco_g3, style = {'height': '100vh'})
+            dbc.Row(bloco_g3, style = {'height': '100vh', 'margin':'5vh'})
         ], md = 7),
     ], className = "g-0"),
         
-    dbc.Row(bloco_g1, style = {'height': '100vh'}),
+    dbc.Row(bloco_g1, style = dicionario_estilo_blocos),
     
-    dbc.Row(bloco_g2, style = {'height': '100vh', 'box-shadow' : '2px 2px 10px rgba(100, 9, 50, 0.10)','margin':'10px','padding':'10px'}) #TODO WIP
+    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, id='tela_1')
 
 ], fluid = True)
 
