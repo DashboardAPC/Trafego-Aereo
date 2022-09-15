@@ -35,7 +35,7 @@ def cria_grafico_barras_paises_origem(anos, mes, paises):
                         x = "AEROPORTO DE ORIGEM (PAÍS)",
                         color_discrete_sequence = px.colors.qualitative.Prism,
                         barmode = 'group',
-                        title = 'Países de origem dos voos no mês de Junho em 2013 e 2014',
+                        # title = 'Países de origem dos voos no mês de Junho em 2013 e 2014',
                         template ='plotly_dark'
                         )
     return grafico_barras_paises_origem
