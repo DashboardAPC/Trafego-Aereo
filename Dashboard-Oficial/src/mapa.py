@@ -68,7 +68,7 @@ def criar_mapa(ano='2013', estado='DF'):
                         color_continuous_scale = 'purp',
                         title = 'Estados de destino mais escolhidos',
                         )
-
+    grafico_mapa.update_layout(autosize=True)
     return grafico_mapa
 
 if __name__=="__main__":

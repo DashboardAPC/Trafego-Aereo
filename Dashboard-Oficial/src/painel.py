@@ -52,7 +52,7 @@ bloco_g2 = [
 # --------------------------------------- Criando Bloco do Gráfico 3 ---------------------------------------
 bloco_g3 = [
     dcc.Graph(
-        id = 'grafico-mapa',
+        id = 'grafico-mapa',style={'height':'100vh'}
     )
 ]
 
@@ -144,9 +144,8 @@ app.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col(controles, md=4),
-        dbc.Col(bloco_g3, md=8, style = {'height' : '100vh'})
-        ], align='center', style = {'height' : '100vh'}
-    )
+        dbc.Col(bloco_g3, md=8),
+        ], align='center', style = {'height':'100vh', 'width':'100vh'}),
 
 ], fluid=True)
 
