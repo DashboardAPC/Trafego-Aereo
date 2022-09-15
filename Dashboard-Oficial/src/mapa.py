@@ -16,6 +16,11 @@ dados = pd.read_csv(data / 'ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin
 print('mapa - Lendo coordenadas...')
 coords = pd.read_csv(data / 'coord-estados.csv')
 
+def dados_validos(estado):
+    valores = coords.values.tolist()
+    estados = [linha[0] for linha in valores]
+    return estado in estados
+
 def criar_lista_dropdowns():
     resultado=[]
     valores_coordenadas=coords.values.tolist()

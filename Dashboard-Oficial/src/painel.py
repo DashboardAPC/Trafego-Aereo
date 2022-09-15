@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
 from barras_paises_origem import grafico_barras_paises_origem
-from mapa import criar_mapa, criar_lista_dropdowns
+from mapa import criar_mapa, criar_lista_dropdowns, dados_validos
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
@@ -51,17 +51,33 @@ bloco_g2 = [
 
 # --------------------------------------- Criando Bloco do Gráfico 3 ---------------------------------------
 bloco_g3 = [
-    dbc.ButtonGroup(
-                 [dbc.Button("2013"),
-                  dbc.Button("2014"),
-                  dbc.Button("2015")]
-    ),
-    dbc.Input(placeholder="DF, BA, SP...",type="text",id='escolha-estado'),
     dcc.Graph(
-        id = 'grafico_mapa',
-        figure = criar_mapa()
+        id = 'grafico-mapa',
     )
 ]
+
+controles = dbc.Card([
+    html.Div([
+        dbc.Label('Escolha um ano'),
+        dbc.RadioItems(
+            options=[
+                {'label':'2013','value':'2013'},
+                {'label':'2014','value':'2014'},
+                {'label':'2015','value':'2015'},
+            ],
+            value='2013',
+            id='escolha-ano-mapa',
+            inline=True
+            )
+        ]
+    ),
+    html.Div([  
+        dbc.Label('Digite uma Unidade Federativa e pressione enter'),
+        dbc.Input(value='DF',type='text',id='escolha-estado-mapa', debounce=True)
+        ]
+    )
+], body=True
+)
 
 # --------------------------------------- Criando Bloco do Gráfico 4 ---------------------------------------
 bloco_g4 = [
@@ -124,12 +140,13 @@ app.layout = dbc.Container([
             dbc.Row(bloco_g4, style = {'height': '50vh'}),
             dbc.Row(bloco_g5, style = {'height': '50vh'})
         ], md=3),
+    ], className='g-0'),
 
-        dbc.Col([
-            dbc.Row(bloco_g3, style = {'height': '100vh'})
-        ], md=5)
-
-    ], className="g-0")
+    dbc.Row([
+        dbc.Col(controles, md=4),
+        dbc.Col(bloco_g3, md=8, style = {'height' : '100vh'})
+        ], align='center', style = {'height' : '100vh'}
+    )
 
 ], fluid=True)
 
@@ -146,7 +163,7 @@ def interatividade_titulo_pizza_tipo_carga(value): # Muda os anos no titulo html
         anos = value[0]
     else:
         value = sorted(value)
-        anos = str(", ".join(value[:-1])) + ' e ' + str(value[-1])
+        anos = str(', '.join(value[:-1])) + ' e ' + str(value[-1])
     return f'Percentual de peso transportado pelos aviões no Brasil em {anos}'
 
 @app.callback(
@@ -160,7 +177,28 @@ def interatividade_grafico_pizza_tipo_carga(value): # Muda os valores que serão
         anos = ['2013.0', '2014.0', '2015.0']
     return cria_grafico_pizza_tipo_carga(anos)
 
+@app.callback(
+        Output(component_id='grafico-mapa', component_property='figure'),
+        Input(component_id='escolha-ano-mapa', component_property='value'),
+        Input(component_id='escolha-estado-mapa', component_property='value')
+        )
+def parametrizar_mapa(ano,estado):
+    figure = 0
+    if not dados_validos(estado):
+        figure = criar_mapa(ano)
+    else:
+        figure = criar_mapa(ano,estado)
+    return figure
 
+@app.callback(
+        Output(component_id='escolha-estado-mapa', component_property='invalid'),
+        Input(component_id='escolha-estado-mapa', component_property='value')
+        )
+def entrada_valida(estado):
+    resultado=False
+    if not dados_validos(estado):
+        resultado=True
+    return resultado
 # ------------------------------------------ Colocando dash no ar ------------------------------------------
 if __name__ == '__main__':
     app.run_server(debug=True)
