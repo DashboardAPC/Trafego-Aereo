@@ -15,7 +15,7 @@ dicionario_estilo_blocos = {
     'height': '100vh', 
     # 'marginLeft': 10, 
     # 'marginRight': 10, 
-    'marginTop': 15, 
+    'marginTop': 15,
     'marginBottom': 15
     }
 
@@ -25,24 +25,35 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
 
 # --------------------------------------- Criando Bloco de Títulos ---------------------------------------
-bloco_titulo = [
-    html.H1(
-        children = 'Trafego Aéreo no Brasil',
-        style = {
-            'textAlign': 'center',
-            'fontSize': '150%',
-            'fontFamily': ['Brush Script MT', 'cursive']
-        }
-    ),
+bloco_titulo = dbc.Card(
+    children = [
+        html.H1(
+            children = 'Trafego Aéreo no Brasil',
+            style = {
+                'textAlign': 'center',
+                'fontSize': '200%',
+                # 'fontFamily': ['Brush Script MT', 'cursive']
+            }
+        ),
 
-    html.H2(
-        children = 'Os 5 graficos:',
-        style = {
-            'textAlign': 'center',
-            'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
-        }
-    )
-]
+        html.H5(
+            children = '    Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
+            style = {
+                'padding':'2vh',
+                # 'textAlign': 'center',
+                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+            }
+        )
+],
+    style = {
+        'height': '40vh', 
+        'marginTop': '60vh',
+        'marginLeft': 20, 
+        'width': '800px',
+        'backgroundColor': '#060606',
+        'box-shadow' : '5px 5px 10px rgba(100, 9, 50, 0.10)',
+    }
+)
 
 
 # # --------------------------------------- Criando Barra de Navegação --------------------------------------- TODO WIP
