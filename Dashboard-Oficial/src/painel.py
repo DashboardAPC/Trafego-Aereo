@@ -22,46 +22,32 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
 
 # --------------------------------------- Criando Bloco de Títulos ---------------------------------------
-bloco_titulo = dbc.Card(
-    children = [
-        html.H1(
+bloco_titulo = dbc.Card([
+    dbc.CardHeader(
+        html.H2(
             children = 'Trafego Aéreo no Brasil',
-            style = {
-                'textAlign': 'center',
-                'fontSize': '200%',
-                # 'fontFamily': ['Brush Script MT', 'cursive']
-            }
-        ),
-
-        html.H5(
-            children = '    Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
-            style = {
-                'padding':'2vh',
-                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
-            }
+            # style = {
+            #     'textAlign': 'center',
+            #     'fontSize': '200%',
+            #     # 'fontFamily': ['Brush Script MT', 'cursive']
+            # }
         )
+    ),
+    dbc.CardBody(
+        html.P(
+            children = '    Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
+            className = 'card-text',
+        )
+    )
 ],
     style = {
         'height': '40vh', 
         'marginTop': '60vh',
-        'marginLeft': 20, 
-        'width': '800px',
+        'marginLeft': '5vh', 
+        'width': '40rem',
         'backgroundColor': '#060606',
     }
 )
-
-
-# # --------------------------------------- Criando Barra de Navegação --------------------------------------- TODO WIP
-# barra_navegacao = dbc.Nav([
-#         dbc.NavItem(dbc.NavLink('ir começo', href = '#')),
-#         dbc.NavItem(dbc.NavLink('ir mapa e pizza', href = '#tela_1')),
-#         dbc.NavItem(dbc.NavLink('ir barra 1', href = '#tela_2')),
-#         dbc.NavItem(dbc.NavLink('ir barra 2', href = '#tela_3')),
-#     ],
-#     navbar_scroll=True,
-#     # vertical = 'md', 
-#     pills = True,
-# )
 
 
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
@@ -118,7 +104,7 @@ bloco_g5 = dbc.Card(
 
         dcc.Dropdown(
             id = 'filtro_ano',
-            options = ['2013', '2014', '2015'], # TODO como obter anos lendo o dataset
+            options = ['2013', '2014', '2015'],
             value = ['2013', '2014', '2015'], 
             multi = True,
             style = {
@@ -138,20 +124,12 @@ bloco_g5 = dbc.Card(
     style = {
         'backgroundColor': '#111111',
         'box-shadow' : '5px 5px 10px rgba(255, 146, 4, 0.80)',
-        'padding':'0px',
+        'padding':'0px'
     }
 )
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
-    # dbc.NavbarSimple( 
-    #     children = barra_navegacao,
-    #     color = 'primary',
-    #     dark = True, 
-    #     # fixed = 'top',
-    #     sticky = 'top'
-    #     ),#TODO WIP
-
     dbc.Row(
         children = bloco_titulo, 
         style = {
@@ -168,17 +146,17 @@ app.layout = dbc.Container([
         ], md = 5),
         dbc.Col([
             dbc.Row(bloco_g3, style = dicionario_estilo_blocos)
-        ], md = 7),
-    ], className = 'g-0'),
+        ], md = 7)
+    ], align = 'center', className = 'g-0'),
         
     dbc.Row([
         dbc.Col([
-            dbc.Row(bloco_g5, style = dicionario_estilo_blocos),
+            dbc.Row(bloco_g5, style = dicionario_estilo_blocos)
         ], md = 5),
         dbc.Col([
             dbc.Row(bloco_g4, style = dicionario_estilo_blocos)
-        ], md = 7),
-    ], className = 'g-0'),
+        ], md = 7)
+    ], align = 'center', className = 'g-0'),
 
     dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center', className = 'g-0')
 
@@ -214,4 +192,4 @@ def interatividade_grafico_pizza_tipo_carga(value): # Muda os valores que serão
 
 # ------------------------------------------ Colocando dash no ar ------------------------------------------
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug = True)
