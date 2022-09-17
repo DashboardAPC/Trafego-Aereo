@@ -100,12 +100,12 @@ bloco_g4 = [
 bloco_g5 = dbc.Card(
     children = [
         html.H6(
-            children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
+            # children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
             id = 'titulo_grafico_pizza_tipo_carga',
             style = {
                 'fontSize': '150%',
                 'textAlign': 'center',
-                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
+                # 'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
             }
         ),
 
