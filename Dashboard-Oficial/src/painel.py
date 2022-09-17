@@ -10,11 +10,8 @@ from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
 # ---------------------------------------------- Estilização ----------------------------------------------
 dicionario_estilo_blocos = {
-    # 'box-shadow' : '2px 2px 10px rgba(100, 9, 50, 0.10)',
-    'padding':'5vh',
     'height': '100vh', 
-    # 'marginLeft': 10, 
-    # 'marginRight': 10, 
+    'padding':'5vh',
     'marginTop': 10,
     'marginBottom': 10
     }
@@ -40,8 +37,7 @@ bloco_titulo = dbc.Card(
             children = '    Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
             style = {
                 'padding':'2vh',
-                # 'textAlign': 'center',
-                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
             }
         )
 ],
@@ -51,7 +47,6 @@ bloco_titulo = dbc.Card(
         'marginLeft': 20, 
         'width': '800px',
         'backgroundColor': '#060606',
-        # 'box-shadow' : '5px 5px 10px rgba(100, 9, 50, 0.10)',
     }
 )
 
@@ -108,23 +103,16 @@ bloco_g5 = dbc.Card(
             children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
             id = 'titulo_grafico_pizza_tipo_carga',
             style = {
-                # 'margin': '0px',
-                # 'padding': '0px',
                 'fontSize': '150%',
                 'textAlign': 'center',
-                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
-                # 'backgroundColor': '#111111'
+                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
             }
         ),
 
         html.Label(
             children = 'Selecione os anos que deseja analizar',
             style = {
-                # 'margin': '0px',
-                # 'padding': '0px',
-                'display': 'block',
                 'fontFamily': ['Brush Script MT', 'cursive'],
-                # 'backgroundColor': '#111111'
             }
         ),
 
@@ -134,8 +122,6 @@ bloco_g5 = dbc.Card(
             value = ['2013', '2014', '2015'], 
             multi = True,
             style = {
-                # 'margin': '0px',
-                # 'padding': '0px',
                 'fontFamily': ['Brush Script MT', 'cursive'],
                 'backgroundColor': '#111111'
             }
@@ -146,7 +132,6 @@ bloco_g5 = dbc.Card(
             children = dcc.Graph(
                 id = 'grafico_pizza_tipo_carga',
                 # figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']),
-                # style = {'padding': '0px'} # TODO Fazer isso para todos os graficos
                 )
         )
     ],
@@ -154,7 +139,6 @@ bloco_g5 = dbc.Card(
         'backgroundColor': '#111111',
         'box-shadow' : '5px 5px 10px rgba(255, 146, 4, 0.80)',
         'padding':'0px',
-        # 'marginLeft': '16px', 
     }
 )
 
