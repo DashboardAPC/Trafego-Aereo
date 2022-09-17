@@ -11,9 +11,9 @@ from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 # ---------------------------------------------- Estilização ----------------------------------------------
 dicionario_estilo_blocos = {
     'height': '100vh', 
-    'padding':'5vh',
-    'marginTop': 10,
-    'marginBottom': 10
+    'margin': '10px',
+    'paddingTop': '10vh',
+    'paddingBottom': '10vh'
     }
 
 
@@ -22,29 +22,30 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
 
 # --------------------------------------- Criando Bloco de Títulos ---------------------------------------
-bloco_titulo = dbc.Card([
-    dbc.CardHeader(
-        html.H2(
-            children = 'Trafego Aéreo no Brasil',
-            # style = {
-            #     'textAlign': 'center',
-            #     'fontSize': '200%',
-            #     # 'fontFamily': ['Brush Script MT', 'cursive']
-            # }
+bloco_titulo = dbc.Card(
+    children = [
+        dbc.CardHeader(
+            html.H2(
+                children = 'Trafego Aéreo no Brasil',
+                # style = {
+                #     'textAlign': 'center',
+                #     'fontSize': '200%',
+                #     # 'fontFamily': ['Brush Script MT', 'cursive']
+                # }
+            )
+        ),
+        dbc.CardBody(
+            html.P(
+                children = 'Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
+                className = 'cardText',
+            )
         )
-    ),
-    dbc.CardBody(
-        html.P(
-            children = '    Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
-            className = 'card-text',
-        )
-    )
-],
+    ],
     style = {
         'height': '40vh', 
         'marginTop': '60vh',
-        'marginLeft': '5vh', 
-        'width': '40rem',
+        'marginLeft': '10vh', 
+        'width': '45rem',
         'backgroundColor': '#060606',
     }
 )
@@ -86,7 +87,7 @@ bloco_g4 = [
 bloco_g5 = dbc.Card(
     children = [
         html.H6(
-            # children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
+            # children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX', # TODO: não é necessario, remover
             id = 'titulo_grafico_pizza_tipo_carga',
             style = {
                 'fontSize': '150%',
@@ -117,13 +118,13 @@ bloco_g5 = dbc.Card(
             type = 'default',
             children = dcc.Graph(
                 id = 'grafico_pizza_tipo_carga',
-                # figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']),
+                # figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']), # TODO: não é necessario, remover
                 )
         )
     ],
     style = {
         'backgroundColor': '#111111',
-        'box-shadow' : '5px 5px 10px rgba(255, 146, 4, 0.80)',
+        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
         'padding':'0px'
     }
 )
@@ -135,8 +136,8 @@ app.layout = dbc.Container([
         style = {
             'height': '100vh', 
             'background': 'url("/assets/fundo_dash.jpg") no-repeat', 
-            'background-position': 'center', 
-            'background-size': 'cover'
+            'backgroundPosition': 'center', 
+            'backgroundSize': 'cover'
         }
     ),
 
@@ -147,7 +148,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Row(bloco_g3, style = dicionario_estilo_blocos)
         ], md = 7)
-    ], align = 'center', className = 'g-0'),
+    ], align = 'center', className = 'mb-20'),
         
     dbc.Row([
         dbc.Col([
@@ -156,9 +157,9 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Row(bloco_g4, style = dicionario_estilo_blocos)
         ], md = 7)
-    ], align = 'center', className = 'g-0'),
+    ], align = 'center', className = 'mb-20'),
 
-    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center', className = 'g-0')
+    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center', className = 'mb-20')
 
 ], fluid = True)
 
@@ -182,8 +183,8 @@ def interatividade_titulo_pizza_tipo_carga(value): # Muda os anos no titulo html
     Output(component_id = 'grafico_pizza_tipo_carga', component_property = 'figure'),
     Input(component_id = 'filtro_ano', component_property = 'value')
 )
-def interatividade_grafico_pizza_tipo_carga(value): # Muda os valores que serão considerados na criação do gráfico
-    anos = [float(item) for item in value] # Adaptação é necessaria pra corrigir os valores de entrada que devem ser no formato 2013.0 e não 2013
+def interatividade_grafico_pizza_tipo_carga(value): # Muda os anos que serão usados na criação do gráfico
+    anos = [float(item) for item in value] # Corrigindo os valores de entrada que devem ser no formato 2013.0 e não 2013
     anos = [str(item) for item in anos]
     if value == []: # No caso especifico do usuario limpar o Dropdown deve mostrar por padrao todos os anos
         anos = ['2013.0', '2014.0', '2015.0']
