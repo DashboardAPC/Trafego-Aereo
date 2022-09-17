@@ -15,8 +15,8 @@ dicionario_estilo_blocos = {
     'height': '100vh', 
     # 'marginLeft': 10, 
     # 'marginRight': 10, 
-    'marginTop': 15,
-    'marginBottom': 15
+    'marginTop': 10,
+    'marginBottom': 10
     }
 
 
@@ -51,7 +51,7 @@ bloco_titulo = dbc.Card(
         'marginLeft': 20, 
         'width': '800px',
         'backgroundColor': '#060606',
-        'box-shadow' : '5px 5px 10px rgba(100, 9, 50, 0.10)',
+        # 'box-shadow' : '5px 5px 10px rgba(100, 9, 50, 0.10)',
     }
 )
 
@@ -102,48 +102,61 @@ bloco_g4 = [
 ]
 
 # --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
-bloco_g5 = [
-    html.H6(
-        children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
-        id = 'titulo_grafico_pizza_tipo_carga',
-        style = {
-            'margin': '0px',
-            'fontSize': '150%',
-            # 'padding': '0px 0px',
-            'textAlign': 'center',
-            'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
-            'backgroundColor': '#111111'
-        }
-    ),
+bloco_g5 = dbc.Card(
+    children = [
+        html.H6(
+            children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
+            id = 'titulo_grafico_pizza_tipo_carga',
+            style = {
+                # 'margin': '0px',
+                # 'padding': '0px',
+                'fontSize': '150%',
+                'textAlign': 'center',
+                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+                # 'backgroundColor': '#111111'
+            }
+        ),
 
-    html.Label(
-        children = 'Selecione os anos que deseja analizar',
-        style = {
-            'display': 'block',
-            # 'padding': '0px 0px',
-            'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111'
-        }
-    ),
+        html.Label(
+            children = 'Selecione os anos que deseja analizar',
+            style = {
+                # 'margin': '0px',
+                # 'padding': '0px',
+                'display': 'block',
+                'fontFamily': ['Brush Script MT', 'cursive'],
+                # 'backgroundColor': '#111111'
+            }
+        ),
 
-    dcc.Dropdown(
-        id = 'filtro_ano',
-        options = ['2013', '2014', '2015'], # TODO como obter anos lendo o dataset
-        value = ['2013', '2014', '2015'], 
-        multi = True,
-        style = {
-            'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111',
-        }
-    ),
-
-    dcc.Graph(
-        id = 'grafico_pizza_tipo_carga',
-        figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']),
-        style = {'padding': '0px 0px'} # TODO Fazer isso para todos os graficos
-    )
-]
-
+        dcc.Dropdown(
+            id = 'filtro_ano',
+            options = ['2013', '2014', '2015'], # TODO como obter anos lendo o dataset
+            value = ['2013', '2014', '2015'], 
+            multi = True,
+            style = {
+                # 'margin': '0px',
+                # 'padding': '0px',
+                'fontFamily': ['Brush Script MT', 'cursive'],
+                'backgroundColor': '#111111'
+            }
+        ),
+        
+        dcc.Loading(
+            type = 'default',
+            children = dcc.Graph(
+                id = 'grafico_pizza_tipo_carga',
+                # figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']),
+                # style = {'padding': '0px'} # TODO Fazer isso para todos os graficos
+                )
+        )
+    ],
+    style = {
+        'backgroundColor': '#111111',
+        'box-shadow' : '5px 5px 10px rgba(255, 146, 4, 0.80)',
+        'padding':'0px',
+        # 'marginLeft': '16px', 
+    }
+)
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
@@ -183,7 +196,7 @@ app.layout = dbc.Container([
         ], md = 7),
     ], className = 'g-0'),
 
-    dbc.Row(bloco_g2, style = dicionario_estilo_blocos)
+    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center', className = 'g-0')
 
 ], fluid = True)
 
