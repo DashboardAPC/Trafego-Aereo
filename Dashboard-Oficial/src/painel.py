@@ -54,7 +54,7 @@ bloco_g2 = [
     ),
 
     html.Label(
-        children = 'Selecione os anos que deseja analizar',
+        children = 'Selecione o ano que deseja analisar',
         style = {
             'fontFamily': ['Brush Script MT', 'cursive'],
             'backgroundColor': '#111111'
@@ -65,13 +65,30 @@ bloco_g2 = [
         id = 'filtro_anos',
         options = ['2013', '2014', '2015'], 
         value = ['2013', '2014', '2015'], 
-        multi = True,
+        multi = False,
         style = {
             'fontFamily': ['Brush Script MT', 'cursive'],
             'backgroundColor': '#111111'
         }
     ),
-    
+   html.Label(
+        children = 'Selecione o mese que deseja analisar',
+        style = {
+            'fontFamily' : ['Brush Script MT', 'cursive'],
+            'backgroundColor' : '#111111'       
+        }
+    ),
+
+    dcc.Dropdown(
+        id = 'filtro_mes',
+        options = ['1','2','3','4','5','6','7','8','9','10','11','12'], 
+        value = ['1'], 
+        multi = False,
+        style = {
+            'fontFamily': ['Brush Script MT', 'cursive'],
+            'backgroundColor': '#111111'
+        }
+    ),
     dcc.Graph(
         id='grafico_barras_paises_origem',
         figure = cria_grafico_barras_paises_origem(['2013','2014','2015'], ['2'], ['FRANÇA', 'ITÁLIA', 'PORTUGAL', 'PANAMÁ', 'BOLÍVIA'])
@@ -107,7 +124,7 @@ bloco_g5 = [
     ),
 
     html.Label(
-        children = 'Selecione os anos que deseja analizar',
+        children = 'Selecione os anos que deseja analisar',
         style = {
             'fontFamily': ['Brush Script MT', 'cursive'],
             'backgroundColor': '#111111'
@@ -124,7 +141,7 @@ bloco_g5 = [
             'backgroundColor': '#111111'
         }
     ),
-
+    
     dcc.Graph(
         id = 'grafico_pizza_tipo_carga',
         figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015'])
@@ -181,6 +198,7 @@ def interatividade_grafico_barras_paises_origem(value):
     if value == []:
         anos ['2013.0', '2014.0', '2015.0']
     return cria_grafico_barras_paises_origem
+    
 
 
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
