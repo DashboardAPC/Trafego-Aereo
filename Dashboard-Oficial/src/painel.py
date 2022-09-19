@@ -87,9 +87,6 @@ bloco_g1 = dbc.Card(
     children = [
          html.Label(
             children = 'Escolha o ano',
-            style = {
-                'fontFamily': ['Brush Script MT', 'cursive'],
-            }
         ),
 
         dcc.Dropdown(
@@ -103,9 +100,6 @@ bloco_g1 = dbc.Card(
 
         html.Label(
             children ='Escolha o mês',
-            style = {
-                'fontFamily': ['Brush Script MT', 'cursive'],
-            }
         ),
 
         dcc.Dropdown(
