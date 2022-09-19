@@ -89,6 +89,7 @@ bloco_g2 = [
             'backgroundColor': '#111111'
         }
     ),
+    
     dcc.Graph(
         id='grafico_barras_paises_origem',
         figure = cria_grafico_barras_paises_origem(['2013','2014','2015'], ['2'], ['FRANÇA', 'ITÁLIA', 'PORTUGAL', 'PANAMÁ', 'BOLÍVIA'])
@@ -189,15 +190,17 @@ def interatividade_titulo_barras_paises_origem(value):
     return f'Países de origem dos voos no mes de X em {anos}'
 
 @app.callback(
-    Output(component_id = 'grafico_barras_paises_origem', component_property = 'children'),
-    Input(component_id = 'filtro_anos', component_property = 'value')
+    Output(component_id = 'grafico_barras_paises_origem', component_property = 'figure'),
+    Input(component_id = 'filtro_anos', component_property = 'value'),
+    Input(component_id="filtro_mes", component_property="value"),
 )
-def interatividade_grafico_barras_paises_origem(value):
-    anos = [float(item) for item in value]
+def interatividade_grafico_barras_paises_origem(ano, mes):
+    anos = [int(item) for item in [ano]]
     anos = [str(item) for item in anos]
-    if value == []:
-        anos ['2013.0', '2014.0', '2015.0']
-    return cria_grafico_barras_paises_origem
+    if ano == []:
+        anos = ['2013.0', '2014.0', '2015.0']
+    print(anos)
+    return cria_grafico_barras_paises_origem(anos, mes, ["BRASIL"])
     
 
 
