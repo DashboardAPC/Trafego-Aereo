@@ -143,8 +143,8 @@ app.layout = dbc.Container([
     ], className='g-0'),
 
     dbc.Row([
-        dbc.Col(controles, md=4),
-        dbc.Col(bloco_g3, md=8),
+        dbc.Col(controles, md=4, style={'width':'50vh'}),
+        dbc.Col(bloco_g3, md=8, style={'width':'50vh'}),
         ], align='center', style = {'height':'100vh', 'width':'100vh'}),
 
 ], fluid=True)
