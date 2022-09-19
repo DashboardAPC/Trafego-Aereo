@@ -2,10 +2,13 @@
 import pandas as pd
 import plotly.express as px
 import tabela_utils
+from pathlib import Path
 
 
+data = Path('Dashboard-Oficial/data')
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('4 - Lendo dataset...') # Feedback
+
 csv = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
 def criar_setores(ano='2013',minimo=1500000):
