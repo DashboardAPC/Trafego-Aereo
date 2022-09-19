@@ -3,12 +3,12 @@ import pandas as pd
 import plotly.express as px
 import tabela_utils
 
+
 def cria_grafico_barras_paises_origem(anos, mes, paises):
 
     # ---------------------------------------------- Lendo dataset ----------------------------------------------
     print('2 - Lendo dataset...') # Feedback
     dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
-
 
     # --------------------------------------- Manipulando dados necessarios---------------------------------------
     print('2 - Filtrando colunas...') # Feedback
