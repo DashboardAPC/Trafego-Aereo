@@ -50,12 +50,12 @@ grafico = pd.DataFrame({
 # ----------------------------------------- Criando gráfico de barras -----------------------------------------
 print('1 - Produzindo gráfico...') # Feedback
 grafico_barras_data_pico = px.bar(grafico, 
-            x = "Mês", 
-            y = "Decolagens", 
+            y = "Mês", 
+            x = "Decolagens", 
             color = "Ano", 
             barmode = "group", 
             color_discrete_sequence = px.colors.qualitative.Prism, 
             template = 'plotly_dark', 
-            range_y = [80000, 100000], 
+            range_x = [80000, 100000], 
             title = 'Total de decolagens por mês'
             )
