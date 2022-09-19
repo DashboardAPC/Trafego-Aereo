@@ -1,5 +1,5 @@
 # ----------------------------------------- Importando bibliotecas -----------------------------------------
-from dash import Dash, html, dcc, Output, Input
+from dash import Dash, html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
@@ -14,12 +14,44 @@ dicionario_estilo_blocos = {
     'margin': '10px',
     'paddingTop': '10vh',
     'paddingBottom': '10vh'
-    }
+}
 
 
 # ---------------------------------------------- Criando dash ----------------------------------------------
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
+
+# ------------------------------------------ Criando Bloco Membros ------------------------------------------
+cabecalho_membros = [html.Thead(html.Tr([html.Th('Matricula'), html.Th('Nome')]))
+]
+
+membro1 = html.Tr([html.Td('221007626'), html.Td('Ana Luisa Santana Dantas')])
+membro2 = html.Tr([html.Td('221007813'), html.Td('Andre Emanuel Bispo da Silva')])
+membro3 = html.Tr([html.Td('221038776'), html.Td('Andre Luis Bispo Galvao de Souza')])
+membro4 = html.Tr([html.Td('221007887'), html.Td('Bernardo Barros Blanco')])
+membro5 = html.Tr([html.Td('221007949'), html.Td('Camile Barbosa Gonzaga de Oliveira')])
+membro6 = html.Tr([html.Td('221008070'), html.Td('Guilherme Resende Carmona')])
+membro7 = html.Tr([html.Td('221008150'), html.Td('Joao Antonio Ginuino Carvalho')])
+membro8 = html.Tr([html.Td('221007653'), html.Td('Luciano Ricardo da Silva Júnior')])
+membro9 = html.Tr([html.Td('211062277'), html.Td('Matheus Duarte da Silva')])
+membro10 = html.Tr([html.Td('221035068'), html.Td('Paulo Renato Medrado Roque')])
+
+corpo_membros = [html.Tbody([membro1, membro2, membro3, membro4, membro5, membro6, membro7, membro8, membro9, membro10])]
+tabela_membros = dbc.Table(cabecalho_membros + corpo_membros, size = 'sm', style = {'backgroundColor': '#060606'}) # TODO: Melhorar a estilizacao da tabela com os membros
+
+bloco_membros = dbc.Fade(
+    id = 'fade',
+    children = tabela_membros,
+    style = {
+        'height': '40vh', 
+        'marginTop': '10vh',
+        'marginLeft': '5rem', 
+        'width': '45rem',
+    },
+    is_in = False,
+    appear = False,
+)
+        
 
 # --------------------------------------- Criando Bloco de Títulos ---------------------------------------
 bloco_titulo = dbc.Card(
@@ -34,17 +66,17 @@ bloco_titulo = dbc.Card(
                 # }
             )
         ),
-        dbc.CardBody(
+        dbc.CardBody([
             html.P(
                 children = 'Dashborad sobre o Trafego Aéreo no Brasil, desenvolvido pelos estudantes da disciplina de Algoritimos e Programação de Computadores como Trabalho Final', # TODO colocar nomes dos integrantes pra aparecer ao clicar em um botão
-                className = 'cardText',
-            )
-        )
+            ),
+            dbc.Button('Mostrar membros', color = 'primary', id = 'grupo', n_clicks = 0)
+        ])
     ],
     style = {
         'height': '40vh', 
-        'marginTop': '60vh',
-        'marginLeft': '10vh', 
+        'marginTop': '20vh',
+        'marginLeft': '5rem', 
         'width': '45rem',
         'backgroundColor': '#060606',
     }
@@ -132,7 +164,7 @@ bloco_g5 = dbc.Card(
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
     dbc.Row(
-        children = bloco_titulo, 
+        children = [bloco_membros, bloco_titulo], 
         style = {
             'height': '100vh', 
             'background': 'url("/assets/fundo_dash.jpg") no-repeat', 
@@ -148,7 +180,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Row(bloco_g3, style = dicionario_estilo_blocos)
         ], md = 7)
-    ], align = 'center', className = 'mb-20'),
+    ], align = 'center'),
         
     dbc.Row([
         dbc.Col([
@@ -157,11 +189,23 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Row(bloco_g4, style = dicionario_estilo_blocos)
         ], md = 7)
-    ], align = 'center', className = 'mb-20'),
+    ], align = 'center'),
 
-    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center', className = 'mb-20')
+    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center')
 
 ], fluid = True)
+
+
+# -------------------------------------- Interatividade Bloco Membros --------------------------------------
+@app.callback(
+    Output(component_id = 'fade', component_property = 'is_in'),
+    [Input(component_id = 'grupo', component_property = 'n_clicks')],
+    [State(component_id = 'fade', component_property = 'is_in')],
+)
+def interatividade_membros(n, is_in):
+    if not n:
+        return False
+    return not is_in
 
 
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
