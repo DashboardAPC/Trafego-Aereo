@@ -10,7 +10,7 @@ def faztudo(tabela : pd.DataFrame):
         tabela = (tabela['DECOLAGENS'].to_list()) # TODO: Isso é uma função do pandas!!! temos uma funcao prorpria que chega no mesmo resultado
         return tabela
 
-def criar_grafico_barras_data_pico(Ano_selecionado, Mes_selecionado ):
+def criar_grafico_barras_data_pico(Ano_selecionado='2013', Mes_selecionado='6' ):
 
 
     # ---------------------------------------------- Lendo dataset ----------------------------------------------

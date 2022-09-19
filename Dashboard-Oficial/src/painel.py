@@ -288,7 +288,8 @@ bloco_g4 = dbc.Card(
             marks={i: str(i/1000000)+"M" for i in range(0,15000000,1000000)},
             value=15000000
         )
-    ]
+    ],
+    style = dicionario_estilo_cards
 )
 
 # --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
