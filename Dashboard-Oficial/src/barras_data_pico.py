@@ -69,8 +69,7 @@ def criar_grafico_barras_data_pico(Ano_selecionado, Mes_selecionado ):
             barmode = "group", 
             color_discrete_sequence = px.colors.qualitative.Prism, 
             template = 'plotly_dark', 
-            range_x = [80000, 100000], 
-            title = 'Total de decolagens por mês'
+            range_y = [80000, 100000]
             )
 
     return grafico_barras_data_pico
