@@ -64,7 +64,7 @@ bloco_g2 = [
     dcc.Dropdown(
         id = 'filtro_anos',
         options = ['2013', '2014', '2015'], 
-        value = ['1'], 
+        value = ['2014'], 
         multi = False,
         style = {
             'fontFamily': ['Brush Script MT', 'cursive'],
@@ -72,7 +72,7 @@ bloco_g2 = [
         }
     ),
    html.Label(
-        children = 'Selecione o mese que deseja analisar',
+        children = 'Selecione o mês que deseja analisar',
         style = {
             'fontFamily' : ['Brush Script MT', 'cursive'],
             'backgroundColor' : '#111111'       
