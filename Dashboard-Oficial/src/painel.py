@@ -44,7 +44,7 @@ bloco_g1 = [
 # --------------------------------------- Criando Bloco do Gráfico 2 ---------------------------------------
 bloco_g2 = [
     html.H5(
-        children = 'Países de origem dos voos no mes de X em 20XX',
+        children = 'Números de decolagem por países',
         id = 'titulo_grafico_barras_paises_origem',
         style = {
             'textAlign': 'center',
@@ -89,10 +89,28 @@ bloco_g2 = [
             'backgroundColor': '#111111'
         }
     ),
-    
+    html.Label(
+        children = 'Selecione o país que deseja analisar',
+        style = {
+            'fontFamily' : ['Brush Script MT', 'cursive'],
+            'backgroundColor' : '#111111'       
+        }
+    ),
+
+    dcc.Dropdown(
+        id = 'filtro_paises',
+        options = ['ÁFRICA DO SUL','ARGENTINA','COLÔMBIA','ESTADOS UNIDOS DA AMÉRICA','EMIRADOS ÁRABES UNIDOS','FRANÇA','ITÁLIA','PANAMÁ','PORTUGAL','REINO UNIDO'], 
+        value = ['ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'FRANÇA'], 
+        multi = True,
+        style = {
+            'fontFamily': ['Brush Script MT', 'cursive'],
+            'backgroundColor': '#111111'
+        }
+    ),
+
     dcc.Graph(
         id='grafico_barras_paises_origem',
-        figure = cria_grafico_barras_paises_origem(['2013','2014','2015'], ['2'], ['FRANÇA', 'ITÁLIA', 'PORTUGAL', 'PANAMÁ', 'BOLÍVIA'])
+        figure = cria_grafico_barras_paises_origem(['2013','2014','2015'], ['2'], ['ESTADOS UNIDOS DA AMÉRICA'])
     )    
 ]
 
@@ -174,33 +192,20 @@ app.layout = dbc.Container([
 
 ], fluid=True)
 
-# ----------------------------------- Interatividade Bloco do Gráfico 2 -----------------------------------
-# @app.callback(
-#     Output(component_id = 'titulo_grafico_barras_paises_origem', component_property = 'children'),
-#     Input(component_id = 'filtro_anos', component_property = 'value')
-# )
-# def interatividade_titulo_barras_paises_origem(value):
-#     if value == []:
-#         ano = '2013, 2014 e 2015'
-#     elif len(value) == 1:
-#         anos = value[0]
-#     else:
-#         value = sorted(value)
-#         anos = str(", ".join(value[:-1])) + ' e ' + str(value[-1])
-#     return f'Países de origem dos voos no mes de X em {anos}'
+# ----------------------------------- Interatividade Bloco do Gráfico 2 ----------------------------------
 
 @app.callback(
     Output(component_id = 'grafico_barras_paises_origem', component_property = 'figure'),
     Input(component_id = 'filtro_anos', component_property = 'value'),
     Input(component_id="filtro_mes", component_property="value"),
+    Input(component_id='filtro_paises', component_property='value')
 )
-def interatividade_grafico_barras_paises_origem(ano, mes):
+def interatividade_grafico_barras_paises_origem(ano, mes, paises):
     anos = [str(item) for item in [ano]]
     anos = [str(item) for item in anos]
     if ano == []:
         anos = ['2013.0', '2014.0', '2015.0']
-    # print(anos)
-    return cria_grafico_barras_paises_origem(anos, mes, ["ARGENTINA"])
+    return cria_grafico_barras_paises_origem(anos, mes, paises)
 
 
     
