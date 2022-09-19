@@ -3,15 +3,11 @@ from dash import Dash, html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
-
 from barras_paises_origem import cria_grafico_barras_paises_origem
-from mapa import grafico_mapa
-
-from barras_paises_origem import grafico_barras_paises_origem
 from mapa import criar_mapa, criar_lista_dropdowns, dados_validos
-
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
+
 
 # ---------------------------------------------- Estilização ----------------------------------------------
 dicionario_estilo_blocos = {
@@ -22,8 +18,10 @@ dicionario_estilo_blocos = {
 }
 
 
+
 # ---------------------------------------------- Criando dash ----------------------------------------------
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+
 
 
 # ------------------------------------------ Criando Bloco Membros ------------------------------------------
@@ -56,7 +54,8 @@ bloco_membros = dbc.Fade(
     is_in = False,
     appear = False,
 )
-        
+
+
 
 # --------------------------------------- Criando Bloco de Títulos ---------------------------------------
 bloco_titulo = dbc.Card(
@@ -88,6 +87,7 @@ bloco_titulo = dbc.Card(
 )
 
 
+
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
 bloco_g1 = [
     dcc.Graph(
@@ -96,78 +96,92 @@ bloco_g1 = [
     )
 ]
 
+
+
 # --------------------------------------- Criando Bloco do Gráfico 2 ---------------------------------------
-bloco_g2 = [
-    html.H5(
-        children = 'Números de decolagem por países',
-        id = 'titulo_grafico_barras_paises_origem',
-        style = {
-            'textAlign': 'center',
-            'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
-            'backgroundColor': '#111111'
-        }
-    ),
+bloco_g2 = dbc.Card(
+    children = [
+        html.H5(
+            children = 'Números de decolagem por países',
+            id = 'titulo_grafico_barras_paises_origem',
+            style = {
+                'textAlign': 'center',
+                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+                'backgroundColor': '#111111'
+            }
+        ),
 
-    html.Label(
-        children = 'Selecione o ano que deseja analisar',
-        style = {
-            'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111'
-        }
-    ),
+        html.Label(
+            children = 'Selecione o ano que deseja analisar',
+            style = {
+                'fontFamily': ['Brush Script MT', 'cursive'],
+                'backgroundColor': '#111111'
+            }
+        ),
 
-    dcc.Dropdown(
-        id = 'filtro_anos',
-        options = ['2013', '2014', '2015'], 
-        value = ['2014'], 
-        multi = False,
-        style = {
-            'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111'
-        }
-    ),
-   html.Label(
-        children = 'Selecione o mês que deseja analisar',
-        style = {
-            'fontFamily' : ['Brush Script MT', 'cursive'],
-            'backgroundColor' : '#111111'       
-        }
-    ),
+        dcc.Dropdown(
+            id = 'filtro_anos',
+            options = ['2013', '2014', '2015'], 
+            value = ['2014'], 
+            multi = False,
+            style = {
+                'fontFamily': ['Brush Script MT', 'cursive'],
+                'backgroundColor': '#111111'
+            }
+        ),
+        html.Label(
+            children = 'Selecione o mês que deseja analisar',
+            style = {
+                'fontFamily' : ['Brush Script MT', 'cursive'],
+                'backgroundColor' : '#111111'       
+            }
+        ),
 
-    dcc.Dropdown(
-        id = 'filtro_mes',
-        options = ['1','2','3','4','5','6','7','8','9','10','11','12'], 
-        value = ['1'], 
-        multi = False,
-        style = {
-            'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111'
-        }
-    ),
-    html.Label(
-        children = 'Selecione o país que deseja analisar',
-        style = {
-            'fontFamily' : ['Brush Script MT', 'cursive'],
-            'backgroundColor' : '#111111'       
-        }
-    ),
+        dcc.Dropdown(
+            id = 'filtro_mes',
+            options = ['1','2','3','4','5','6','7','8','9','10','11','12'], 
+            value = ['1'], 
+            multi = False,
+            style = {
+                'fontFamily': ['Brush Script MT', 'cursive'],
+                'backgroundColor': '#111111'
+            }
+        ),
 
-    dcc.Dropdown(
-        id = 'filtro_paises',
-        options = ['ÁFRICA DO SUL','ARGENTINA','COLÔMBIA','ESTADOS UNIDOS DA AMÉRICA','EMIRADOS ÁRABES UNIDOS','FRANÇA','ITÁLIA','PANAMÁ','PORTUGAL','REINO UNIDO'], 
-        value = ['ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'FRANÇA'], 
-        multi = True,
-        style = {
-            'fontFamily': ['Brush Script MT', 'cursive'],
-            'backgroundColor': '#111111'
-        }
-    ),
+        html.Label(
+            children = 'Selecione o país que deseja analisar',
+            style = {
+                'fontFamily' : ['Brush Script MT', 'cursive'],
+                'backgroundColor' : '#111111'       
+            }
+        ),
 
-    dcc.Graph(
-        id='grafico_barras_paises_origem',
-        figure = cria_grafico_barras_paises_origem(['2013','2014','2015'], ['2'], ['ESTADOS UNIDOS DA AMÉRICA'])
-    )    
-]
+        dcc.Dropdown(
+            id = 'filtro_paises',
+            options = ['ÁFRICA DO SUL','ARGENTINA','COLÔMBIA','ESTADOS UNIDOS DA AMÉRICA','EMIRADOS ÁRABES UNIDOS','FRANÇA','ITÁLIA','PANAMÁ','PORTUGAL','REINO UNIDO'], 
+            value = ['ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'FRANÇA'], 
+            multi = True,
+            style = {
+                'fontFamily': ['Brush Script MT', 'cursive'],
+                'backgroundColor': '#111111'
+            }
+        ),
+        dcc.Loading(
+            type = 'default',
+            children = dcc.Graph(
+                id = 'grafico_barras_paises_origem',
+                # figure = cria_grafico_barras_paises_origem(['2013','2014','2015'], ['2'], ['ESTADOS UNIDOS DA AMÉRICA'])
+            )
+        )
+    ],
+    style = {
+        'backgroundColor': '#111111',
+        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
+        'padding':'0px'
+    }
+)
+
+
 
 # --------------------------------------- Criando Bloco do Gráfico 3 ---------------------------------------
 bloco_g3 = dbc.Card(
@@ -222,6 +236,7 @@ bloco_g3 = dbc.Card(
         'padding':'0px'
     }
 )
+
 
 
 # --------------------------------------- Criando Bloco do Gráfico 4 ---------------------------------------
@@ -329,37 +344,13 @@ def interatividade_membros(n, is_in):
     return not is_in
 
 
-# ----------------------------------- Interatividade Bloco do Gráfico 3 -----------------------------------
-@app.callback(
-        Output(component_id='grafico-mapa', component_property='figure'),
-        Input(component_id='escolha-ano-mapa', component_property='value'),
-        Input(component_id='escolha-estado-mapa', component_property='value')
-        )
-def parametrizar_mapa(ano,estado):
-    figure = 0
-    if not dados_validos(estado):
-        figure = criar_mapa(ano)
-    else:
-        figure = criar_mapa(ano,estado)
-    return figure
-
-@app.callback(
-        Output(component_id='escolha-estado-mapa', component_property='invalid'),
-        Input(component_id='escolha-estado-mapa', component_property='value')
-        )
-def entrada_valida(estado):
-    resultado=False
-    if not dados_validos(estado):
-        resultado=True
-    return resultado
 
 # ----------------------------------- Interatividade Bloco do Gráfico 2 ----------------------------------
-
 @app.callback(
     Output(component_id = 'grafico_barras_paises_origem', component_property = 'figure'),
     Input(component_id = 'filtro_anos', component_property = 'value'),
-    Input(component_id="filtro_mes", component_property="value"),
-    Input(component_id='filtro_paises', component_property='value')
+    Input(component_id = 'filtro_mes', component_property = 'value'),
+    Input(component_id = 'filtro_paises', component_property = 'value')
 )
 def interatividade_grafico_barras_paises_origem(ano, mes, paises):
     anos = [str(item) for item in [ano]]
@@ -369,7 +360,31 @@ def interatividade_grafico_barras_paises_origem(ano, mes, paises):
     return cria_grafico_barras_paises_origem(anos, mes, paises)
 
 
-    
+
+# ----------------------------------- Interatividade Bloco do Gráfico 3 -----------------------------------
+@app.callback(
+        Output(component_id = 'grafico-mapa', component_property = 'figure'),
+        Input(component_id = 'escolha-ano-mapa', component_property = 'value'),
+        Input(component_id = 'escolha-estado-mapa', component_property = 'value')
+        )
+def parametrizar_mapa(ano, estado):
+    figure = 0
+    if not dados_validos(estado):
+        figure = criar_mapa(ano)
+    else:
+        figure = criar_mapa(ano, estado)
+    return figure
+
+@app.callback(
+        Output(component_id = 'escolha-estado-mapa', component_property = 'invalid'),
+        Input(component_id = 'escolha-estado-mapa', component_property = 'value')
+        )
+def entrada_valida(estado):
+    resultado = False
+    if not dados_validos(estado):
+        resultado = True
+    return resultado
+
 
 
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
@@ -398,7 +413,8 @@ def interatividade_grafico_pizza_tipo_carga(value): # Muda os anos que serão us
         anos = ['2013.0', '2014.0', '2015.0']
     return cria_grafico_pizza_tipo_carga(anos)
 
+
+
 # ------------------------------------------ Colocando dash no ar ------------------------------------------
 if __name__ == '__main__':
     app.run_server(debug=True)
-
