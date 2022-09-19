@@ -100,34 +100,59 @@ bloco_g2 = [
 ]
 
 # --------------------------------------- Criando Bloco do Gráfico 3 ---------------------------------------
-bloco_g3 = [
-    dcc.Graph(
-        id = 'grafico-mapa',style={'height':'100vh'}
-    )
-]
-
-controles = dbc.Card([
-    html.Div([
-        dbc.Label('Escolha um ano'),
-        dbc.RadioItems(
-            options=[
-                {'label':'2013','value':'2013'},
-                {'label':'2014','value':'2014'},
-                {'label':'2015','value':'2015'},
-            ],
-            value='2013',
-            id='escolha-ano-mapa',
-            inline=True
+bloco_g3 = dbc.Card(
+    children = [
+        html.H6(
+            children = 'Estados de destino mais escolhidos',
+            style = {
+                'fontSize': '150%',
+                'textAlign': 'center',
+                # 'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
+            }
+        ),
+        html.Div([
+            dbc.Label('Escolha um ano'),
+            dbc.RadioItems(
+                options = [
+                    {'label':'2013','value':'2013'},
+                    {'label':'2014','value':'2014'},
+                    {'label':'2015','value':'2015'},
+                ],
+                value = '2013',
+                id = 'escolha-ano-mapa',
+                inline = True
+                )
+            ]
+        ),
+        html.Div([  
+            dbc.Label('Digite uma Unidade Federativa e pressione enter'),
+            dbc.Input(
+                value = 'DF',
+                type = 'text',
+                id = 'escolha-estado-mapa',
+                debounce = True,
+                style = {
+                    # 'fontFamily': ['Brush Script MT', 'cursive'],
+                    'backgroundColor': '#111111'
+                }
             )
         ]
-    ),
-    html.Div([  
-        dbc.Label('Digite uma Unidade Federativa e pressione enter'),
-        dbc.Input(value='DF',type='text',id='escolha-estado-mapa', debounce=True)
-        ]
-    )
-], body=True
+        ),
+        dcc.Loading(
+                type = 'default',
+                children = dcc.Graph(
+                    id = 'grafico-mapa',
+                )
+            )
+        ], 
+    body = True,
+    style = {
+        'backgroundColor': '#111111',
+        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
+        'padding':'0px'
+    }
 )
+
 
 # --------------------------------------- Criando Bloco do Gráfico 4 ---------------------------------------
 bloco_g4 = [
@@ -136,6 +161,7 @@ bloco_g4 = [
         figure = grafico_pizza_preferencia_empresa
     )
 ]
+
 
 # --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
 bloco_g5 = dbc.Card(
@@ -182,6 +208,7 @@ bloco_g5 = dbc.Card(
         'padding':'0px'
     }
 )
+
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
@@ -230,6 +257,31 @@ def interatividade_membros(n, is_in):
     return not is_in
 
 
+# ----------------------------------- Interatividade Bloco do Gráfico 3 -----------------------------------
+@app.callback(
+        Output(component_id='grafico-mapa', component_property='figure'),
+        Input(component_id='escolha-ano-mapa', component_property='value'),
+        Input(component_id='escolha-estado-mapa', component_property='value')
+        )
+def parametrizar_mapa(ano,estado):
+    figure = 0
+    if not dados_validos(estado):
+        figure = criar_mapa(ano)
+    else:
+        figure = criar_mapa(ano,estado)
+    return figure
+
+@app.callback(
+        Output(component_id='escolha-estado-mapa', component_property='invalid'),
+        Input(component_id='escolha-estado-mapa', component_property='value')
+        )
+def entrada_valida(estado):
+    resultado=False
+    if not dados_validos(estado):
+        resultado=True
+    return resultado
+
+
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
 @app.callback(
     Output(component_id = 'titulo_grafico_pizza_tipo_carga', component_property = 'children'),
@@ -256,28 +308,6 @@ def interatividade_grafico_pizza_tipo_carga(value): # Muda os anos que serão us
         anos = ['2013.0', '2014.0', '2015.0']
     return cria_grafico_pizza_tipo_carga(anos)
 
-@app.callback(
-        Output(component_id='grafico-mapa', component_property='figure'),
-        Input(component_id='escolha-ano-mapa', component_property='value'),
-        Input(component_id='escolha-estado-mapa', component_property='value')
-        )
-def parametrizar_mapa(ano,estado):
-    figure = 0
-    if not dados_validos(estado):
-        figure = criar_mapa(ano)
-    else:
-        figure = criar_mapa(ano,estado)
-    return figure
-
-@app.callback(
-        Output(component_id='escolha-estado-mapa', component_property='invalid'),
-        Input(component_id='escolha-estado-mapa', component_property='value')
-        )
-def entrada_valida(estado):
-    resultado=False
-    if not dados_validos(estado):
-        resultado=True
-    return resultado
 # ------------------------------------------ Colocando dash no ar ------------------------------------------
 if __name__ == '__main__':
     app.run_server(debug=True)

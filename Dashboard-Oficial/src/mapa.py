@@ -23,7 +23,7 @@ def dados_validos(estado):
 
 def criar_lista_dropdowns():
     resultado=[]
-    valores_coordenadas=coords.values.tolist()
+    valores_coordenadas = coords.values.tolist()
     for linha in valores_coordenadas:
         resultado.append(linha[0])
     return sorted(resultado)
@@ -57,16 +57,16 @@ def criar_mapa(ano='2013', estado='DF'):
     # ------------------------------------------ Criando gráfico de mapa ------------------------------------------
     print('mapa - Produzindo mapa...') # Feedback
     grafico_mapa = px.choropleth_mapbox(mapa,
-                        mapbox_style='carto-positron',
-                        zoom=5,
-                        center=ler_coordenadas(coords,estado),
+                        mapbox_style = 'carto-positron',
+                        zoom = 5,
+                        center = ler_coordenadas(coords,estado),
                         geojson = estados_brasileiros, 
                         locations = 'AEROPORTO DE DESTINO (UF)', 
                         color = 'DECOLAGENS', 
                         range_color = (0, maximo_decolagens/4), # Resolve problema de SP ser o unico estado colorido
                         hover_data = ['AEROPORTO DE DESTINO (UF)'], 
                         color_continuous_scale = 'purp',
-                        title = 'Estados de destino mais escolhidos',
+                        template = 'plotly_dark'
                         )
     grafico_mapa.update_layout(autosize=True)
     return grafico_mapa
