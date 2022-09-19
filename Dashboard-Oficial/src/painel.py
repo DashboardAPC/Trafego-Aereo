@@ -16,8 +16,21 @@ dicionario_estilo_blocos = {
     'paddingTop': '10vh',
     'paddingBottom': '10vh'
 }
+dicionario_estilo_titulos_graficos = {
+    'textAlign': 'center',
+    'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+    'backgroundColor': '#111111'
+}
 
-
+dicionario_estilo_cards = {
+        'backgroundColor': '#111111',
+        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
+        'padding':'0px'
+    }
+dicionario_estilo_label = {
+    'fontFamily' : ['Brush Script MT', 'cursive'],
+    'backgroundColor' : '#111111'       
+}
 # ---------------------------------------------- Criando dash ----------------------------------------------
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
@@ -85,11 +98,13 @@ bloco_titulo = dbc.Card(
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
 bloco_g1 = dbc.Card(
     children = [
-         html.Label(
+        html.H6(
+            children = 'Total de decolagens por mês',
+            style = dicionario_estilo_titulos_graficos
+        ),
+        html.Label(
             children = 'Escolha o ano',
-            style = {
-                'fontFamily': ['Brush Script MT', 'cursive'],
-            }
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
@@ -103,9 +118,7 @@ bloco_g1 = dbc.Card(
 
         html.Label(
             children ='Escolha o mês',
-            style = {
-                'fontFamily': ['Brush Script MT', 'cursive'],
-            }
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
@@ -124,29 +137,24 @@ bloco_g1 = dbc.Card(
                 figure = criar_grafico_barras_data_pico(['2013', '2014', '2015'], ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'])
             )
         )
-    ]
+    ],
+    style = dicionario_estilo_cards
 )
 
 
 # --------------------------------------- Criando Bloco do Gráfico 2 ---------------------------------------
+
+
 bloco_g2 = dbc.Card(
     children = [
-        html.H5(
+        html.H6(
             children = 'Números de decolagem por países',
-            id = 'titulo_grafico_barras_paises_origem',
-            style = {
-                'textAlign': 'center',
-                'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
-                'backgroundColor': '#111111'
-            }
+            style = dicionario_estilo_titulos_graficos
         ),
 
         html.Label(
             children = 'Selecione o ano que deseja analisar',
-            style = {
-                'fontFamily': ['Brush Script MT', 'cursive'],
-                'backgroundColor': '#111111'
-            }
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
@@ -162,10 +170,7 @@ bloco_g2 = dbc.Card(
 
         html.Label(
             children = 'Selecione o mês que deseja analisar',
-            style = {
-                'fontFamily' : ['Brush Script MT', 'cursive'],
-                'backgroundColor' : '#111111'       
-            }
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
@@ -181,10 +186,7 @@ bloco_g2 = dbc.Card(
 
         html.Label(
             children = 'Selecione o país que deseja analisar',
-            style = {
-                'fontFamily' : ['Brush Script MT', 'cursive'],
-                'backgroundColor' : '#111111'       
-            }
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
@@ -205,11 +207,7 @@ bloco_g2 = dbc.Card(
             )
         )
     ],
-    style = {
-        'backgroundColor': '#111111',
-        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
-        'padding':'0px'
-    }
+    style = dicionario_estilo_cards
 )
 
 
@@ -219,11 +217,7 @@ bloco_g3 = dbc.Card(
     children = [
         html.H6(
             children = 'Estados de destino mais escolhidos',
-            style = {
-                'fontSize': '150%',
-                'textAlign': 'center',
-                # 'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
-            }
+            style = dicionario_estilo_titulos_graficos
         ),
         html.Div([
             dbc.Label('Escolha um ano'),
@@ -247,7 +241,6 @@ bloco_g3 = dbc.Card(
                 id = 'escolha-estado-mapa',
                 debounce = True,
                 style = {
-                    # 'fontFamily': ['Brush Script MT', 'cursive'],
                     'backgroundColor': '#111111'
                 }
             )
@@ -261,43 +254,42 @@ bloco_g3 = dbc.Card(
             )
         ], 
     body = True,
-    style = {
-        'backgroundColor': '#111111',
-        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
-        'padding':'0px'
-    }
+    style = dicionario_estilo_cards
 )
 
 
 
 # --------------------------------------- Criando Bloco do Gráfico 4 ---------------------------------------
-bloco_g4 = [
-    dcc.Graph(
-        id = 'grafico_pizza_preferencia_empresa',
-        figure = grafico_pizza_preferencia_empresa
-    )
-]
+bloco_g4 = dbc.Card(
+    children = [
+        html.H6(
+            children = 'Empresas aéreas preferidas pelo consumidor',
+            style = dicionario_estilo_titulos_graficos
+        ),
 
-
+        dcc.Loading(
+            type = 'default',
+            children = dcc.Graph(
+                figure = grafico_pizza_preferencia_empresa,
+                id = 'grafico_pizza_preferencia_empresa',
+            )
+        )    
+    ]
+)
 
 # --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
+
+
 bloco_g5 = dbc.Card(
     children = [
         html.H6(
-            # children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX', # TODO: não é necessario, remover
             id = 'titulo_grafico_pizza_tipo_carga',
-            style = {
-                'fontSize': '150%',
-                'textAlign': 'center',
-                # 'fontFamily': ['Copperplate', 'Papyrus', 'fantasy']
-            }
+            style = dicionario_estilo_titulos_graficos
         ),
 
         html.Label(
             children = 'Selecione os anos que deseja analizar',
-            style = {
-                'fontFamily': ['Brush Script MT', 'cursive'],
-            }
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
@@ -314,16 +306,11 @@ bloco_g5 = dbc.Card(
         dcc.Loading(
             type = 'default',
             children = dcc.Graph(
-                id = 'grafico_pizza_tipo_carga',
-                # figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015']), # TODO: não é necessario, remover
-                )
+                id = 'grafico_pizza_tipo_carga'
+            )
         )
     ],
-    style = {
-        'backgroundColor': '#111111',
-        'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
-        'padding':'0px'
-    }
+    style = dicionario_estilo_cards
 )
 
 
