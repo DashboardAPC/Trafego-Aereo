@@ -2,7 +2,7 @@
 import pandas as pd
 import plotly.express as px
 import tabela_utils
-
+from pathlib import Path
 
 def faztudo(tabela : pd.DataFrame):
         tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
@@ -12,7 +12,9 @@ def faztudo(tabela : pd.DataFrame):
 
 def criar_grafico_barras_data_pico(Ano_selecionado, Mes_selecionado ):
 
+
     # ---------------------------------------------- Lendo dataset ----------------------------------------------
+
 
     print('1 - Lendo dataset...') # Feedback
     dados = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
@@ -48,7 +50,8 @@ def criar_grafico_barras_data_pico(Ano_selecionado, Mes_selecionado ):
         "Ano": anos
     })
 
-    
+
+
     grafico = tabela_utils.filtrar_linhas(grafico, 'Ano', (Ano_selecionado))
 
     graficofinal = tabela_utils.filtrar_linhas(grafico, 'Mês', (Mes_selecionado))
@@ -61,11 +64,12 @@ def criar_grafico_barras_data_pico(Ano_selecionado, Mes_selecionado ):
     grafico_barras_data_pico = px.bar(graficofinal, 
             x = "Mês", 
             y = "Decolagens", 
+
             color = "Ano", 
             barmode = "group", 
             color_discrete_sequence = px.colors.qualitative.Prism, 
             template = 'plotly_dark', 
-            range_y = [80000, 100000], 
+            range_x = [80000, 100000], 
             title = 'Total de decolagens por mês'
             )
 
