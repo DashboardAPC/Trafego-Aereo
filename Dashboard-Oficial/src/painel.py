@@ -105,6 +105,7 @@ bloco_g1 = dbc.Card(
         html.Label(
             children = 'Escolha o ano',
             style = dicionario_estilo_label
+
         ),
 
         dcc.Dropdown(
@@ -119,6 +120,7 @@ bloco_g1 = dbc.Card(
         html.Label(
             children ='Escolha o mês',
             style = dicionario_estilo_label
+
         ),
 
         dcc.Dropdown(
