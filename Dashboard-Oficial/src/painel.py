@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 from barras_data_pico import criar_grafico_barras_data_pico
 from barras_paises_origem import cria_grafico_barras_paises_origem
 from mapa import criar_mapa, dados_validos
-from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
+from pizza_preferencia_empresa import criar_setores
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
 
@@ -27,6 +27,7 @@ dicionario_estilo_cards = {
         'boxShadow' : '5px 5px 10px rgba(28, 147, 255, 0.80)',
         'padding':'0px'
     }
+
 dicionario_estilo_label = {
     'fontFamily' : ['Brush Script MT', 'cursive'],
     'backgroundColor' : '#111111'       
@@ -268,14 +269,25 @@ bloco_g4 = dbc.Card(
             children = 'Empresas aéreas preferidas pelo consumidor',
             style = dicionario_estilo_titulos_graficos
         ),
-
         dcc.Loading(
             type = 'default',
             children = dcc.Graph(
-                figure = grafico_pizza_preferencia_empresa,
-                id = 'grafico_pizza_preferencia_empresa',
+                id = 'grafico_pizza_companhias',
             )
-        )    
+        ),  
+        dcc.Dropdown(
+            id = 'filtro_ano4s',
+            options = ['2013', '2014', '2015'], 
+            value ='2013',
+            style = {
+                'backgroundColor': '#111111'
+            }
+        ),
+         dcc.Slider(
+            id="slidermassa", min=0, max=15000000,
+            marks={i: str(i/1000000)+"M" for i in range(0,15000000,1000000)},
+            value=15000000
+        )
     ]
 )
 
@@ -416,6 +428,15 @@ def entrada_valida(estado):
     return resultado
 
 
+# ----------------------------------- Interatividade Bloco do Gráfico 4 -----------------------------------
+@app.callback(
+    Output(component_id = 'grafico_pizza_companhias', component_property = 'figure'),
+    Input(component_id = 'filtro_ano4s', component_property = 'value'),
+    Input(component_id = 'slidermassa', component_property = 'value')
+)
+
+def interacao_setores(ano,minimo):
+    return  criar_setores(ano,minimo)
 
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
 @app.callback(
