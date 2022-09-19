@@ -64,7 +64,7 @@ bloco_g2 = [
     dcc.Dropdown(
         id = 'filtro_anos',
         options = ['2013', '2014', '2015'], 
-        value = ['2013', '2014', '2015'], 
+        value = ['1'], 
         multi = False,
         style = {
             'fontFamily': ['Brush Script MT', 'cursive'],
