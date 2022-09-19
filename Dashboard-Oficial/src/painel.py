@@ -3,9 +3,15 @@ from dash import Dash, html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 
 from barras_data_pico import grafico_barras_data_pico
+
+from barras_paises_origem import grafico_barras_paises_origem
+from mapa import grafico_mapa
+from pizza_preferencia_empresa import criar_setores
+
 from barras_paises_origem import cria_grafico_barras_paises_origem
 from mapa import criar_mapa, criar_lista_dropdowns, dados_validos
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
+
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
 
 
@@ -242,6 +248,25 @@ bloco_g3 = dbc.Card(
 # --------------------------------------- Criando Bloco do Gráfico 4 ---------------------------------------
 bloco_g4 = [
     dcc.Graph(
+
+        id = 'grafico_pizza_companhias',
+        figure = criar_setores()
+    ),
+     dcc.Dropdown(
+        id = 'filtro_ano4s',
+        options = ['2013', '2014', '2015'], 
+        value ='2013',
+        style = {
+            'backgroundColor': '#111111'
+        }
+    ),
+     dcc.Slider(
+            id="slidermassa", min=0, max=15000000,
+            marks={i: str(i/1000000)+"M" for i in range(0,15000000,1000000)},
+            value=15000000
+        ),
+]
+
         id = 'grafico_pizza_preferencia_empresa',
         figure = grafico_pizza_preferencia_empresa
     )
@@ -296,9 +321,47 @@ bloco_g5 = dbc.Card(
 )
 
 
+# --------------------------------------- Criando Bloco do Gráfico 5 ---------------------------------------
+# bloco_g5 = [
+#     html.H5(
+#         children = 'Percentual de peso transportado pelos avioes no Brasil em 20XX',
+#         id = 'titulo_grafico_pizza_tipo_carga',
+#         style = {
+#             'textAlign': 'center',
+#             'fontFamily': ['Copperplate', 'Papyrus', 'fantasy'],
+#             'backgroundColor': '#111111'
+#         }
+#     ),
+
+#     html.Label(
+#         children = 'Selecione os anos que deseja analizar',
+#         style = {
+#             'fontFamily': ['Brush Script MT', 'cursive'],
+#             'backgroundColor': '#111111'
+#         }
+#     ),
+
+#     dcc.Dropdown(
+#         id = 'filtro_ano',
+#         options = ['2013', '2014', '2015'], 
+#         value = ['2013', '2014', '2015'], 
+#         multi = True,
+#         style = {
+#             'fontFamily': ['Brush Script MT', 'cursive'],
+#             'backgroundColor': '#111111'
+#         }
+#     ),
+
+#     dcc.Graph(
+#         id = 'grafico_pizza_tipo_carga',
+#         figure = cria_grafico_pizza_tipo_carga(['2013', '2014', '2015'])
+#     )
+# ]
+
 
 # --------------------------------------------- Criando layout ---------------------------------------------
 app.layout = dbc.Container([
+
     dbc.Row(
         children = [bloco_membros, bloco_titulo], 
         style = {
@@ -387,6 +450,7 @@ def entrada_valida(estado):
 
 
 
+
 # ----------------------------------- Interatividade Bloco do Gráfico 5 -----------------------------------
 @app.callback(
     Output(component_id = 'titulo_grafico_pizza_tipo_carga', component_property = 'children'),
@@ -402,16 +466,24 @@ def interatividade_titulo_pizza_tipo_carga(value): # Muda os anos no titulo html
         anos = str(', '.join(value[:-1])) + ' e ' + str(value[-1])
     return f'Percentual de peso transportado pelos aviões no Brasil em {anos}'
 
+
 @app.callback(
-    Output(component_id = 'grafico_pizza_tipo_carga', component_property = 'figure'),
-    Input(component_id = 'filtro_ano', component_property = 'value')
+    Output(component_id = 'grafico_pizza_companhias', component_property = 'figure'),
+    Input(component_id = 'filtro_ano4s', component_property = 'value'),
+    Input(component_id = 'slidermassa', component_property = 'value')
 )
+
+def interacao_setores(ano,minimo):
+    return  criar_setores(ano,minimo)
+
+
 def interatividade_grafico_pizza_tipo_carga(value): # Muda os anos que serão usados na criação do gráfico
     anos = [float(item) for item in value] # Corrigindo os valores de entrada que devem ser no formato 2013.0 e não 2013
     anos = [str(item) for item in anos]
     if value == []: # No caso especifico do usuario limpar o Dropdown deve mostrar por padrao todos os anos
         anos = ['2013.0', '2014.0', '2015.0']
     return cria_grafico_pizza_tipo_carga(anos)
+
 
 
 
