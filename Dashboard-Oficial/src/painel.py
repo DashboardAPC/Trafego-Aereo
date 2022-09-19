@@ -1,23 +1,12 @@
 # ----------------------------------------- Importando bibliotecas -----------------------------------------
-
-
-from dash import Dash, html, dcc, Output, Input
-import dash_bootstrap_components as dbc
-
-from barras_paises_origem import grafico_barras_paises_origem
-from mapa import grafico_mapa
-
 from dash import Dash, html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 
-from barras_data_pico import grafico_barras_data_pico
+from barras_data_pico import criar_grafico_barras_data_pico
 from barras_paises_origem import cria_grafico_barras_paises_origem
-from mapa import criar_mapa, criar_lista_dropdowns, dados_validos
-
+from mapa import criar_mapa, dados_validos
 from pizza_preferencia_empresa import grafico_pizza_preferencia_empresa
 from pizza_tipo_carga import cria_grafico_pizza_tipo_carga
-
-from barras_data_pico import criar_grafico_barras_data_pico
 
 
 # ---------------------------------------------- Estilização ----------------------------------------------
@@ -27,7 +16,6 @@ dicionario_estilo_blocos = {
     'paddingTop': '10vh',
     'paddingBottom': '10vh'
 }
-
 
 
 # ---------------------------------------------- Criando dash ----------------------------------------------
@@ -74,11 +62,6 @@ bloco_titulo = dbc.Card(
         dbc.CardHeader(
             html.H2(
                 children = 'Trafego Aéreo no Brasil',
-                # style = {
-                #     'textAlign': 'center',
-                #     'fontSize': '200%',
-                #     # 'fontFamily': ['Brush Script MT', 'cursive']
-                # }
             )
         ),
         dbc.CardBody([
@@ -100,34 +83,49 @@ bloco_titulo = dbc.Card(
 
 
 # --------------------------------------- Criando Bloco do Gráfico 1 ---------------------------------------
-bloco_g1 = [
-    html.H1(children= 'Escolha o ano'),
-    dcc.Dropdown(
-    options= ['2013', '2014', '2015'],
-    id='Ano_data_pico',
-    multi= True,
-    placeholder= 'Escolha o Ano',
-    optionHeight= 20,
-    value='Todos os Anos',
-    ),
+bloco_g1 = dbc.Card(
+    children = [
+         html.Label(
+            children = 'Escolha o ano',
+            style = {
+                'fontFamily': ['Brush Script MT', 'cursive'],
+            }
+        ),
 
-    html.H2(children= 'Escolha o mês',
-    ),
-    dcc.Dropdown(
-    options= ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    id='Mes_data_pico',
-    multi= True,
-    placeholder= 'Escolha o Mês',
-    optionHeight= 20,
-    value= 'Todos os Meses',
-    ),
+        dcc.Dropdown(
+            options = ['2013', '2014', '2015'],
+            id = 'Ano_data_pico',
+            multi = True,
+            placeholder = 'Escolha o Ano',
+            optionHeight = 20,
+            value = 'Todos os Anos',
+        ),
 
-    dcc.Graph(
-        id='grafico_data_pico',
-        figure= criar_grafico_barras_data_pico(['2013', '2014', '2015'], ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'])
-    ),
-]
+        html.Label(
+            children ='Escolha o mês',
+            style = {
+                'fontFamily': ['Brush Script MT', 'cursive'],
+            }
+        ),
 
+        dcc.Dropdown(
+            options = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            id = 'Mes_data_pico',
+            multi = True,
+            placeholder = 'Escolha o Mês',
+            optionHeight = 20,
+            value = 'Todos os Meses',
+        ),
+
+        dcc.Loading(
+            type = 'default',
+            children = dcc.Graph(
+                id = 'grafico_data_pico',
+                figure = criar_grafico_barras_data_pico(['2013', '2014', '2015'], ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'])
+            )
+        )
+    ]
+)
 
 
 # --------------------------------------- Criando Bloco do Gráfico 2 ---------------------------------------
@@ -161,6 +159,7 @@ bloco_g2 = dbc.Card(
                 'backgroundColor': '#111111'
             }
         ),
+
         html.Label(
             children = 'Selecione o mês que deseja analisar',
             style = {
@@ -375,6 +374,16 @@ def interatividade_membros(n, is_in):
         return False
     return not is_in
 
+#-----------------------------------------------I nteratividade Bloco do Gráfico 1 ---------------------------------------------------
+@app.callback(
+    Output(component_id='grafico_data_pico', component_property= 'figure'),
+    Input(component_id='Ano_data_pico', component_property='value'),
+    Input(component_id='Mes_data_pico', component_property='value'),
+)
+def atualizar(ano_value, mes_value):
+    mes = mes_value
+    ano = ano_value
+    return criar_grafico_barras_data_pico((ano), (mes))
 
 
 # ----------------------------------- Interatividade Bloco do Gráfico 2 ----------------------------------
@@ -444,19 +453,6 @@ def interatividade_grafico_pizza_tipo_carga(value): # Muda os anos que serão us
     if value == []: # No caso especifico do usuario limpar o Dropdown deve mostrar por padrao todos os anos
         anos = ['2013.0', '2014.0', '2015.0']
     return cria_grafico_pizza_tipo_carga(anos)
-
-#-----------------------------------------------Grafico 1---------------------------------------------------
-
-@app.callback(
-    Output(component_id='grafico_data_pico', component_property= 'figure'),
-    Input(component_id='Ano_data_pico', component_property='value'),
-    Input(component_id='Mes_data_pico', component_property='value'),
-)
-def atualizar(ano_value, mes_value):
-    mes = mes_value
-    ano = ano_value
-    return criar_grafico_barras_data_pico((ano), (mes))
-
 
 
 # ------------------------------------------ Colocando dash no ar ------------------------------------------
