@@ -4,10 +4,10 @@ import plotly.express as px
 import tabela_utils
 
 def faztudo(tabela : pd.DataFrame):
-        tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
-        tabela = tabela_utils.filtrar_colunas(tabela, ['DECOLAGENS'])
-        tabela = (tabela['DECOLAGENS'].to_list())
-        return tabela
+    tabela = tabela_utils.soma_por_categoria(tabela, 'MÊS', 'DECOLAGENS')
+    tabela = tabela_utils.filtrar_colunas(tabela, ['DECOLAGENS'])
+    tabela = (tabela['DECOLAGENS'].to_list())
+    return tabela
 
 def criar_grafico_barras_data_pico(Ano_selecionado, Mes_selecionado):
     # ---------------------------------------------- Lendo dataset ----------------------------------------------

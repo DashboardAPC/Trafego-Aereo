@@ -41,7 +41,7 @@ def ler_coordenadas(tabela : pd.DataFrame, estado: str):
 def criar_mapa(ano = '2013', estado = 'DF'):
 
     # --------------------------------------- Manipulando dados necessarios---------------------------------------
-    print('3 - filtrando linhas')
+    print('3 - filtrando linhas') # Feedback
     mapa = tabela_utils.filtrar_linhas(dados,'ANO',[ano])
 
     print('3 - Filtrando colunas...') # Feedback
@@ -70,10 +70,5 @@ def criar_mapa(ano = '2013', estado = 'DF'):
         color_continuous_scale = 'purp',
         template = 'plotly_dark'
         )
-    grafico_mapa.update_layout(autosize = True)
     
     return grafico_mapa
-
-if __name__=="__main__":
-    meu_mapa = criar_mapa()
-    meu_mapa.show()

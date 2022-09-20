@@ -8,11 +8,12 @@ from pathlib import Path
 data = Path('Dashboard-Oficial/data')
 # ---------------------------------------------- Lendo dataset ----------------------------------------------
 print('4 - Lendo dataset...') # Feedback
-
 csv = pd.read_csv('Dashboard-Oficial\data\ANAC20XX-13-14-15.csv', sep = ';', encoding = 'latin') # Encoding resolve problema da acentuação
 
-def criar_setores(ano='2013',minimo=1500000):
-    dados = tabela_utils.filtrar_linhas(csv,'ANO',[ano])
+
+def criar_setores(ano = '2013', minimo = 1500000):
+    dados = tabela_utils.filtrar_linhas(csv, 'ANO', [ano])
+    
     # --------------------------------------- Manipulando dados necessarios---------------------------------------
     print('4 - Filtrando os dados...') # Feedback
     dados = tabela_utils.filtrar_colunas(dados, ['ANO', 'EMPRESA (NOME)', 'PASSAGEIROS PAGOS'])
@@ -30,10 +31,9 @@ def criar_setores(ano='2013',minimo=1500000):
     # ----------------------------------------- Criando gráfico de pizza -----------------------------------------
     print('4 - Produzindo gráfico...') # Feedback
     grafico_pizza_preferencia_empresa = px.pie(dados, 
-                    names = 'EMPRESA (NOME)',
-                    values = 'PASSAGEIROS PAGOS', 
-                    color_discrete_sequence = px.colors.qualitative.Prism, 
-                    template = 'plotly_dark',
-                    title = 'Empresas aéreas preferidas pelo consumidor'
-                    )
+        names = 'EMPRESA (NOME)',
+        values = 'PASSAGEIROS PAGOS', 
+        color_discrete_sequence = px.colors.qualitative.Prism, 
+        template = 'plotly_dark'
+        )
     return grafico_pizza_preferencia_empresa

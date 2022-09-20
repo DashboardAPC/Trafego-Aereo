@@ -33,13 +33,12 @@ dicionario_estilo_label = {
     'backgroundColor' : '#111111'       
 }
 
-dicionario_estilo_dropdown = {
-    'fontFamily': ['Brush Script MT', 'cursive'],
+dicionario_estilo_fundo = {
     'backgroundColor': '#111111'
 }
 
 # ---------------------------------------------- Criando dash ----------------------------------------------
-app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+app = Dash(__name__, external_stylesheets = [dbc.themes.CYBORG])
 
 
 # ------------------------------------------ Criando Bloco Membros ------------------------------------------
@@ -57,7 +56,7 @@ membro9 = html.Tr([html.Td('211062277'), html.Td('Matheus Duarte da Silva')])
 membro10 = html.Tr([html.Td('221035068'), html.Td('Paulo Renato Medrado Roque')])
 
 corpo_membros = [html.Tbody([membro1, membro2, membro3, membro4, membro5, membro6, membro7, membro8, membro9, membro10])]
-tabela_membros = dbc.Table(cabecalho_membros + corpo_membros, size = 'sm', style = {'backgroundColor': '#060606'}) # TODO: Melhorar a estilizacao da tabela com os membros
+tabela_membros = dbc.Table(cabecalho_membros + corpo_membros, size = 'sm', style = dicionario_estilo_fundo)
 
 bloco_membros = dbc.Fade(
     id = 'fade',
@@ -108,18 +107,17 @@ bloco_g1 = dbc.Card(
 
         html.Label(
             children = 'Escolha o ano',
-            # style = dicionario_estilo_label
-
+            style = dicionario_estilo_label
         ),
 
         dcc.Dropdown(
-            options = ['2013', '2014', '2015'],
             id = 'Ano_data_pico',
+            options = ['2013', '2014', '2015'],
+            value = ['2013', '2014', '2015'],
             multi = True,
             placeholder = 'Escolha o Ano',
             optionHeight = 20,
-            value = ['2013', '2014', '2015'],
-            # style = dicionario_estilo_dropdown
+            style = dicionario_estilo_fundo
         ),
 
         html.Label(
@@ -129,20 +127,20 @@ bloco_g1 = dbc.Card(
         ),
 
         dcc.Dropdown(
-            options = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
             id = 'Mes_data_pico',
+            options = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            value = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
             multi = True,
             placeholder = 'Escolha o Mês',
             optionHeight = 20,
-            # styles = dicionario_estilo_dropdown,
-            value = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+            style = dicionario_estilo_fundo
         ),
 
         dcc.Loading(
             type = 'default',
             children = dcc.Graph(
                 id = 'grafico_data_pico',
-                figure = criar_grafico_barras_data_pico(['2013', '2014', '2015'], ["Janeiro", 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'])
+                figure = criar_grafico_barras_data_pico(['2013', '2014', '2015'], ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'])
             )
         )
     ],
@@ -166,9 +164,9 @@ bloco_g2 = dbc.Card(
         dcc.Dropdown(
             id = 'filtro_anos',
             options = ['2013', '2014', '2015'], 
-            value = ['2014'], 
+            value = '2014', 
             multi = False,
-            style = dicionario_estilo_dropdown
+            style = dicionario_estilo_fundo
         ),
 
         html.Label(
@@ -179,9 +177,9 @@ bloco_g2 = dbc.Card(
         dcc.Dropdown(
             id = 'filtro_mes',
             options = ['1','2','3','4','5','6','7','8','9','10','11','12'], 
-            value = ['1'], 
+            value = '6', 
             multi = False,
-            style = dicionario_estilo_dropdown
+            style = dicionario_estilo_fundo
         ),
 
         html.Label(
@@ -194,7 +192,7 @@ bloco_g2 = dbc.Card(
             options = ['ÁFRICA DO SUL','ARGENTINA','COLÔMBIA','ESTADOS UNIDOS DA AMÉRICA','EMIRADOS ÁRABES UNIDOS','FRANÇA','ITÁLIA','PANAMÁ','PORTUGAL','REINO UNIDO'], 
             value = ['ESTADOS UNIDOS DA AMÉRICA', 'ARGENTINA', 'FRANÇA'], 
             multi = True,
-            style = dicionario_estilo_dropdown
+            style = dicionario_estilo_fundo
         ),
 
         dcc.Loading(
@@ -215,44 +213,45 @@ bloco_g3 = dbc.Card(
             children = 'Estados de destino mais escolhidos',
             style = dicionario_estilo_titulos_graficos
         ),
-
-        html.Div([
-            dbc.Label('Escolha um ano'),
-            dbc.RadioItems(
-                options = [
-                    {'label':'2013','value':'2013'},
-                    {'label':'2014','value':'2014'},
-                    {'label':'2015','value':'2015'},
-                ],
-                value = '2013',
-                id = 'escolha-ano-mapa',
-                inline = True
-                )
-            ]
+        
+        html.Label(
+            children = 'Escolha um ano',
+            style = dicionario_estilo_label
+        ),
+        
+        dbc.RadioItems(
+            id = 'escolha_ano_mapa',
+            options = [
+                {'label':'2013','value':'2013'},
+                {'label':'2014','value':'2014'},
+                {'label':'2015','value':'2015'},
+            ],
+            value = '2013',
+            inline = True,
+            style = dicionario_estilo_fundo
         ),
 
-        html.Div([  
-            dbc.Label('Digite uma Unidade Federativa e pressione enter'),
-            dbc.Input(
-                value = 'DF',
-                type = 'text',
-                id = 'escolha-estado-mapa',
-                debounce = True, # Apenas aceita o input quando aperta enter
-                style = {
-                    'backgroundColor': '#111111'
-                }
-            )
-        ]
+        html.Label(
+            children = 'Digite uma Unidade Federativa e pressione enter',
+            style = dicionario_estilo_label
+        ),
+
+        dbc.Input(
+            id = 'escolha_estado_mapa',
+            value = 'DF',
+            type = 'text',
+            debounce = True, # Apenas aceita o input quando aperta enter
+            style = dicionario_estilo_fundo
+
         ),
 
         dcc.Loading(
                 type = 'default',
                 children = dcc.Graph(
-                    id = 'grafico-mapa',
+                    id = 'grafico_mapa',
                 )
             )
         ], 
-    body = True,
     style = dicionario_estilo_cards
 )
 
@@ -271,12 +270,22 @@ bloco_g4 = dbc.Card(
                 id = 'grafico_pizza_companhias',
             )
         ),  
+        
+        html.Label(
+            children = 'Escolha um ano',
+            style = dicionario_estilo_label
+        ),
 
         dcc.Dropdown(
             id = 'filtro_ano4s',
             options = ['2013', '2014', '2015'], 
             value ='2013',
-            style = dicionario_estilo_dropdown
+            style = dicionario_estilo_fundo
+        ),
+
+        html.Label(
+            children = 'Escolha o número minimo de passageiros totais a ser considerado',
+            style = dicionario_estilo_label
         ),
 
         dcc.Slider(
@@ -307,7 +316,7 @@ bloco_g5 = dbc.Card(
             options = ['2013', '2014', '2015'],
             value = ['2013', '2014', '2015'], 
             multi = True,
-            style = dicionario_estilo_dropdown
+            style = dicionario_estilo_fundo
         ),
         
         dcc.Loading(
@@ -335,7 +344,7 @@ app.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col([
-            dbc.Row(bloco_g1, style = dicionario_estilo_blocos)
+            dbc.Row(bloco_g2, style = dicionario_estilo_blocos)
         ], md = 5),
         dbc.Col([
             dbc.Row(bloco_g3, style = dicionario_estilo_blocos)
@@ -351,7 +360,7 @@ app.layout = dbc.Container([
         ], md = 7)
     ], align = 'center'),
 
-    dbc.Row(bloco_g2, style = dicionario_estilo_blocos, align = 'center')
+    dbc.Row(bloco_g1, style = dicionario_estilo_blocos, align = 'center')
 
 ], fluid = True)
 
@@ -397,9 +406,9 @@ def interatividade_grafico_barras_paises_origem(ano, mes, paises):
 
 # ----------------------------------- Interatividade Bloco do Gráfico 3 -----------------------------------
 @app.callback(
-    Output(component_id = 'grafico-mapa', component_property = 'figure'),
-    Input(component_id = 'escolha-ano-mapa', component_property = 'value'),
-    Input(component_id = 'escolha-estado-mapa', component_property = 'value')
+    Output(component_id = 'grafico_mapa', component_property = 'figure'),
+    Input(component_id = 'escolha_ano_mapa', component_property = 'value'),
+    Input(component_id = 'escolha_estado_mapa', component_property = 'value')
     )
 def parametrizar_mapa(ano, estado):
     figure = 0
@@ -410,8 +419,8 @@ def parametrizar_mapa(ano, estado):
     return figure
 
 @app.callback(
-    Output(component_id = 'escolha-estado-mapa', component_property = 'invalid'),
-    Input(component_id = 'escolha-estado-mapa', component_property = 'value')
+    Output(component_id = 'escolha_estado_mapa', component_property = 'invalid'),
+    Input(component_id = 'escolha_estado_mapa', component_property = 'value')
     )
 def entrada_valida(estado):
     resultado = False
