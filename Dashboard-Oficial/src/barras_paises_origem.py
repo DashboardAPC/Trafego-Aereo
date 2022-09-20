@@ -26,18 +26,16 @@ def cria_grafico_barras_paises_origem(anos, mes, paises):
     print('2 - Filtrando países...') # Feedback
     dados_paises = tabela_utils.filtrar_linhas(mes_6, 'AEROPORTO DE ORIGEM (PAÍS)', paises )
 
-    soma_2013 = tabela_utils.soma_por_categoria(dados_paises, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
+    soma_escolhidos = tabela_utils.soma_por_categoria(dados_paises, 'AEROPORTO DE ORIGEM (PAÍS)', 'DECOLAGENS')
 
     # ----------------------------------------- Criando gráfico de barras -----------------------------------------
     print('2 - Produzindo gráfico...') # Feedback
-    grafico_barras_paises_origem = px.histogram(soma_2013, 
-                        y = "DECOLAGENS", 
-                        x = "AEROPORTO DE ORIGEM (PAÍS)",
-                        color_discrete_sequence = px.colors.qualitative.Prism,
-                        barmode = 'group',
-                        # title = 'Países de origem dos voos no mês de Junho em 2013 e 2014',
-                        template ='plotly_dark'
-                        )
+    grafico_barras_paises_origem = px.histogram(soma_escolhidos, 
+        y = "DECOLAGENS", 
+        x = "AEROPORTO DE ORIGEM (PAÍS)",
+        color_discrete_sequence = px.colors.qualitative.Prism,
+        barmode = 'group',
+        template ='plotly_dark'
+        )
+        
     return grafico_barras_paises_origem
-
-cria_grafico_barras_paises_origem
