@@ -22,13 +22,6 @@ def dados_validos(estado):
     estados = [linha[0] for linha in valores]
     return estado in estados
 
-def criar_lista_dropdowns():
-    resultado = []
-    valores_coordenadas = coords.values.tolist()
-    for linha in valores_coordenadas:
-        resultado.append(linha[0])
-    return sorted(resultado)
-
 def ler_coordenadas(tabela : pd.DataFrame, estado: str):
     valores = tabela.values.tolist()
     resultado = {'lat':0, 'lon':0}
